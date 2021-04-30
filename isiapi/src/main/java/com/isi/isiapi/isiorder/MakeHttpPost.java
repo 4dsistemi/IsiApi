@@ -2,9 +2,8 @@ package com.isi.isiapi.isiorder;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import com.google.gson.JsonObject;
-import com.isi.isiapilibrary.API.general.HttpData;
+import com.isi.isiapi.general.HttpData;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

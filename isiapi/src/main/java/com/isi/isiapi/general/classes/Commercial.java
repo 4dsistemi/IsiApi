@@ -21,9 +21,9 @@ public class Commercial {
     @SerializedName("Longitude")
     private final float longitude;
     @SerializedName("Logo")
-    private final float logo;
+    private final String logo;
 
-    public Commercial(String local_id, String activation, String description, String last_activation, int points, int promo_24_week, float latitude, float longitude, float logo) {
+    public Commercial(String local_id, String activation, String description, String last_activation, int points, int promo_24_week, float latitude, float longitude, String logo) {
         this.local_id = local_id;
         this.activation = activation;
         this.description = description;
@@ -67,7 +67,7 @@ public class Commercial {
         return longitude;
     }
 
-    public float getLogo() {
+    public String getLogo() {
         return logo;
     }
 }

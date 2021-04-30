@@ -1,7 +1,6 @@
 package com.isi.isiapi.general.classes;
 
 import com.google.gson.annotations.SerializedName;
-import com.isi.isiapilibrary.API.general.classes.ElementData;
 
 import java.util.ArrayList;
 

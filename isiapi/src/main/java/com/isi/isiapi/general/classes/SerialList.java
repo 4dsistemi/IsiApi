@@ -1,15 +1,26 @@
 package com.isi.isiapi.general.classes;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SerialList {
 
+    @SerializedName("Id")
     private final int id;
+    @SerializedName("SerialValue")
     private final String serial_value;
+    @SerializedName("CommercialLocalId")
     private final String commercial_local_id;
+    @SerializedName("OrderActivated")
     private final int order_activated;
+    @SerializedName("OrderLastUpdate")
     private final String order_last_update;
+    @SerializedName("OrderGuestActive")
     private final int order_guest_active;
+    @SerializedName("ReservationActive")
     private final int reservation_active;
+    @SerializedName("ChatActive")
     private final int chat_active;
+    @SerializedName("ServerVersion")
     private final int server_version;
 
     public SerialList(int id, String serial_value, String commercial_local_id, int order_activated, String order_last_update, int order_guest_active, int reservation_active, int chat_active, int server_version) {

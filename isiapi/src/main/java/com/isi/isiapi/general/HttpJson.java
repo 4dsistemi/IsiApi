@@ -13,11 +13,17 @@ public class HttpJson {
 
     public void addData(String name, Object variable){
 
-        if(variable instanceof JsonElement){
-            json.add(name, (JsonElement)variable);
+        if(variable == null){
+            json.add(name, null);
         }else{
-            json.addProperty(name, variable.toString());
+            if(variable instanceof JsonElement){
+                json.add(name, (JsonElement)variable);
+            }else{
+                json.addProperty(name, variable.toString());
+            }
         }
+
+
     }
 
     public JsonObject getData(){

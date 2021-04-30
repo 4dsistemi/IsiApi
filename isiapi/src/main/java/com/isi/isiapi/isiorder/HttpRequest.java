@@ -1,15 +1,16 @@
 package com.isi.isiapi.isiorder;
 
-import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.isi.isiapilibrary.API.general.HttpJson;
-import com.isi.isiapilibrary.API.general.classes.Commercial;
-import com.isi.isiapilibrary.API.general.classes.SerialList;
-import com.isi.isiapilibrary.API.isiorder.MakeHttpPost;
-import com.isi.isiapilibrary.API.isiorder.PaymentError;
+import com.google.gson.reflect.TypeToken;
+import com.isi.isiapi.general.HttpJson;
+import com.isi.isiapi.general.classes.Commercial;
+import com.isi.isiapi.general.classes.OrderGuest;
+import com.isi.isiapi.general.classes.SerialList;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -18,10 +19,13 @@ public class HttpRequest {
 
     private final String apiKey;
 
-    private MakeHttpPost postRequest;
-
-    @SuppressLint("HardwareIds")
+    @Deprecated
     public HttpRequest(String serial, String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+
+    public HttpRequest(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -84,7 +88,7 @@ public class HttpRequest {
             }else if(response.trim().equals("notEnoughMoney")){
                 returned.put(PaymentError.PAYMENT_ERROR.NOT_ENOUGHT_MONEY, 0);
             }else{
-                returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.split(":")[1]));
+                returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.trim().split(":")[1]));
             }
 
             return returned;
@@ -118,7 +122,7 @@ public class HttpRequest {
             }else if(response.trim().equals("notEnoughMoney")){
                 returned.put(PaymentError.PAYMENT_ERROR.NOT_ENOUGHT_MONEY, 0);
             }else{
-                returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.split(":")[1]));
+                returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.trim().split(":")[1]));
             }
 
             return returned;
@@ -155,7 +159,7 @@ public class HttpRequest {
                     returned.put(PaymentError.PAYMENT_ERROR.DEACTIVATION_SUCCESS, 0);
                     break;
                 default:
-                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.split(":")[1]));
+                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.trim().split(":")[1]));
                     break;
             }
 
@@ -193,7 +197,7 @@ public class HttpRequest {
                     returned.put(PaymentError.PAYMENT_ERROR.DEACTIVATION_SUCCESS, 0);
                     break;
                 default:
-                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.split(":")[1]));
+                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.trim().split(":")[1]));
                     break;
             }
 
@@ -231,7 +235,7 @@ public class HttpRequest {
                     returned.put(PaymentError.PAYMENT_ERROR.DEACTIVATION_SUCCESS, 0);
                     break;
                 default:
-                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.split(":")[1]));
+                    returned.put(PaymentError.PAYMENT_ERROR.OK, Integer.parseInt(response.trim().split(":")[1]));
                     break;
             }
 
@@ -253,7 +257,7 @@ public class HttpRequest {
         json.addData("table_name", tableName);
         json.addData("upload", upload);
 
-        MakeHttpPost post = new MakeHttpPost("activateChat", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost("insertAllDao", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
@@ -284,6 +288,133 @@ public class HttpRequest {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        return "";
+
+    }
+
+    public String getCategoryPic(){
+        HttpJson json = new HttpJson();
+        json.addData("", "");
+
+        MakeHttpPost post = new MakeHttpPost("categoryPics", json.getData(), apiKey);
+
+        try {
+
+            return post.execute().get();
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public String getProductPic(){
+        HttpJson json = new HttpJson();
+        json.addData("", "");
+
+        MakeHttpPost post = new MakeHttpPost("productPics", json.getData(), apiKey);
+
+        try {
+
+            return post.execute().get();
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public void sendMail(String message, String to){
+        HttpJson json = new HttpJson();
+        json.addData("message", message);
+        json.addData("to", to);
+
+
+        MakeHttpPost post = new MakeHttpPost("sendMail", json.getData(), apiKey);
+
+        try {
+
+            post.execute().get();
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ArrayList<OrderGuest> getOrderGuest(String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+
+        MakeHttpPost post = new MakeHttpPost("getOrderGuest", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+
+            Log.e("TAG", "getOrderGuest: " + result);
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<OrderGuest>>(){}.getType());
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return null;
+
+
+    }
+
+    public boolean approveOrderGuest(int id){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+
+
+        MakeHttpPost post = new MakeHttpPost("approveOrderGuest", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+            return result.trim().equals("ok");
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return false;
+
+    }
+
+    public boolean cancelorderGuest(int id){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+
+
+        MakeHttpPost post = new MakeHttpPost("cancelOrderGuest", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+            return result.trim().equals("ok");
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return false;
+
+    }
+
+    public String updateDatabaseVersion(String serial, int version){
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("version", version);
+
+        MakeHttpPost post = new MakeHttpPost("updateDatabaseVersion", json.getData(), apiKey);
+
+        try{
+
+            return post.execute().get();
+
+        }catch (Exception e){e.printStackTrace();}
 
         return "";
 

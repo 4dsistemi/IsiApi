@@ -1,7 +1,6 @@
 package com.isi.isiapi.general.classes;
 
 import com.google.gson.annotations.SerializedName;
-import com.isi.isicashierlibrary.product.product.BillProduct;
 
 public class MyBillProduct extends BillProduct{
 
@@ -11,7 +10,7 @@ public class MyBillProduct extends BillProduct{
     private int id;
 
     public MyBillProduct(String name, float price, int rep) {
-        super(name, price, rep);
+        super(0, name, price, rep);
     }
 
     public void setNumber(int barcode) {
@@ -26,7 +25,7 @@ public class MyBillProduct extends BillProduct{
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 }

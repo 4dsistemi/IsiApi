@@ -1,9 +1,13 @@
 package com.isi.isiapi.general.classes;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Discount {
 
-    private DISCOUNT_TYPE type;
-    private float valor;
+    @SerializedName("DiscountType")
+    private final DISCOUNT_TYPE type;
+    @SerializedName("Valor")
+    private final float valor;
 
     public Discount(DISCOUNT_TYPE type, float valor) {
         this.type = type;
