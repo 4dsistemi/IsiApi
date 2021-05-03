@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.Forniture;
-import com.isi.isiapi.general.classes.MagaProduct;
 import com.isi.isiapi.general.classes.OrderForniture;
 import com.isi.isiapi.general.classes.OrderForniturePropel;
 
@@ -126,6 +125,26 @@ public class HttpRequest {
             String response = post.execute().get();
 
             Log.e("TAG", "updateForniture: " + response);
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean confirmOrder(OrderForniturePropel order){
+        HttpJson json = new HttpJson();
+        json.addData("order", new Gson().toJsonTree(order));
+
+        MakeHttpPost post = new MakeHttpPost("confirmOrder", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "confirmOrder: " + response);
 
             return response.trim().equals("ok");
 
