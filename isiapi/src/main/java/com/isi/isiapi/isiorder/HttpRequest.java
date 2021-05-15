@@ -262,6 +262,8 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
+            Log.e("TAG", "insertAllDao: " + response);
+
             if(response.trim().equals("endTrasition")){
                 return true;
             }
