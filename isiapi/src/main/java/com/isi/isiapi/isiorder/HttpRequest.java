@@ -422,6 +422,25 @@ public class HttpRequest {
 
     }
 
+    public boolean uploadProduct(String serial, String jsonIn){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("json", jsonIn);
+
+
+        MakeHttpPost post = new MakeHttpPost("updateProduct", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+            return result.trim().equals("ok");
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return false;
+
+    }
+
 
 }
 
