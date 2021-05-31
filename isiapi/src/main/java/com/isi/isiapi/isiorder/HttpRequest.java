@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.Commercial;
@@ -422,7 +423,7 @@ public class HttpRequest {
 
     }
 
-    public boolean uploadProduct(String serial, String jsonIn){
+    public boolean uploadProduct(String serial, JsonElement jsonIn){
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
