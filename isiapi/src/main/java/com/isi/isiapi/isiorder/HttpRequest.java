@@ -433,6 +433,9 @@ public class HttpRequest {
 
         try{
             String result = post.execute().get();
+
+            Log.e("TAG", "uploadProduct: " + result);
+
             return result.trim().equals("ok");
 
         }catch (Exception e){e.printStackTrace();}
