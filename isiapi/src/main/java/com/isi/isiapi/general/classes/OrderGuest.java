@@ -22,6 +22,8 @@ public class OrderGuest {
     private final String commercial_id;
     @SerializedName("GuestOrderElements")
     private final ArrayList<OrderGuestElement> elements;
+    @SerializedName("Account")
+    public Account account;
 
     public OrderGuest(int id, String timestamp, int account_id, int table_id, int status, int payment, String commercial_id, ArrayList<OrderGuestElement> elements) {
         this.id = id;
