@@ -45,7 +45,7 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
             urlConnection.setDoInput(true);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("content-type", "application/json");
+            urlConnection.setRequestProperty("content-type", "application/json; charset=utf-8");
             urlConnection.setRequestProperty("authorization", apiKey);
 
             HttpData data = new HttpData(intent, this.data);
