@@ -7,13 +7,13 @@ public class Account {
     @SerializedName("Id")
     public int Id;
     @SerializedName("Name")
-    public int Name;
+    public String Name;
     @SerializedName("Surname")
-    public int Surname;
+    public String Surname;
     @SerializedName("Email")
-    public int Email;
+    public String Email;
     @SerializedName("Telephone")
-    public int Telephone;
+    public String Telephone;
 
 
 }
