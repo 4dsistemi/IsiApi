@@ -445,6 +445,28 @@ public class HttpRequest {
 
     }
 
+    public boolean uploadCategories(String serial, JsonElement jsonIn){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("json", jsonIn);
+
+
+        MakeHttpPost post = new MakeHttpPost("uploadCategories", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+
+            Log.e("TAG", "uploadCategories: " + result);
+
+            return result.trim().equals("ok");
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return false;
+
+    }
+
 
 }
 
