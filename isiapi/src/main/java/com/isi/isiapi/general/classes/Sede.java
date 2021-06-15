@@ -46,6 +46,15 @@ public class Sede{
 
     }
 
+    public Sede(String nome, String indirizzo, String citta, String zip, String stato, String country) {
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.citta = citta;
+        this.zip = zip;
+        this.stato = stato;
+        this.country = country;
+    }
+
     public int getId() {
         return id;
     }

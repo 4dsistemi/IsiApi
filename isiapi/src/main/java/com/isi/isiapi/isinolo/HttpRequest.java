@@ -201,6 +201,33 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean addSede(Sede sedea, String serial){
+        HttpJson json = new HttpJson();
+        json.addData("nome" , sedea.nome);
+        json.addData("city", sedea.citta);
+        json.addData("address", sedea.indirizzo);
+        json.addData( "zip" , sedea.zip);
+        json.addData("stato" , sedea.stato);
+        json.addData("country" , sedea.country);
+        json.addData("serial", serial);
+
+
+        MakeHttpPost post = new MakeHttpPost("addSede", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            if(response.trim().equals("ok")){
+                return true;
+            }
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }
 
