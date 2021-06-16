@@ -14,6 +14,7 @@ import com.isi.isiapi.general.classes.Fattura;
 import com.isi.isiapi.general.classes.InformationAboutCommercial;
 import com.isi.isiapi.general.classes.MagaProduct;
 import com.isi.isiapi.general.classes.Operator;
+import com.isi.isiapi.general.classes.Prenotazione;
 import com.isi.isiapi.general.classes.Printer;
 import com.isi.isiapi.general.classes.Product;
 import com.isi.isiapi.general.classes.Report;
@@ -736,6 +737,34 @@ public class HttpRequest {
             e.printStackTrace();
         }
 
+
+        return false;
+
+    }
+
+ //function httpreq thats passes all from class Prenotazione as prenotazione
+    public boolean addReservationApi(String serial, Prenotazione prenotazione){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("DateStart", prenotazione.dateStart);
+        json.addData("Duration" , prenotazione.duration);
+        json.addData("DateEnd" , prenotazione.dateEnd);
+        json.addData("IsinoloBicyclesId" , prenotazione.isNoloBicyclesId);
+        json.addData("CustomerId" , prenotazione.customerId);
+
+
+
+        MakeHttpPost post = new MakeHttpPost("addReservationApi", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return false;
 
