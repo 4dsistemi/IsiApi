@@ -229,6 +229,40 @@ public class HttpRequest {
 
     }
 
+    public boolean modifyCustomer(Customer customer){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", customer.getId());
+        json.addData("name", customer.getName());
+        json.addData("surname", customer.getSurname());
+        json.addData("iva", customer.getIva());
+        json.addData("email", customer.getEmail());
+        json.addData("address", customer.getAddress());
+        json.addData("city", customer.getCity());
+        json.addData("province", customer.getProvince());
+        json.addData("zip", customer.getZip());
+        json.addData("country", customer.getCountry());
+        json.addData("phone", customer.getPhone());
+        json.addData("pec", customer.getPec());
+        json.addData("ae_code", customer.getAeCode());
+        json.addData("society", customer.getSociety());
+        json.addData("fiscal", customer.getFiscal());
+
+        MakeHttpPost post = new MakeHttpPost("modifyCustomer", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public ArrayList<Product> getProducts(String serial){
 
         HttpJson json = new HttpJson();
