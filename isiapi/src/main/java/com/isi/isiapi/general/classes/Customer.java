@@ -137,4 +137,68 @@ public class Customer {
     public String getFiscal() {
         return fiscal;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setIva(String iva) {
+        this.iva = iva;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPec(String pec) {
+        this.pec = pec;
+    }
+
+    public void setAeCode(String aeCode) {
+        this.aeCode = aeCode;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setSociety(String society) {
+        this.society = society;
+    }
+
+    public void setFiscal(String fiscal) {
+        this.fiscal = fiscal;
+    }
 }
