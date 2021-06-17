@@ -242,12 +242,12 @@ public class HttpRequest {
         json.addData("IsinoloBicyclesId" , prenotazione.isNoloBicyclesId);
         json.addData("CustomerId" , prenotazione.customerId);
 
-
-
         com.isi.isiapi.isicashier.MakeHttpPost post = new com.isi.isiapi.isicashier.MakeHttpPost("addReservationApi", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
+
+            Log.e("TAG", "addReservationApi: " + response);
 
             return response.trim().equals("ok");
 
