@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.Bike;
+import com.isi.isiapi.general.classes.Customer;
 import com.isi.isiapi.general.classes.Prenotazione;
 import com.isi.isiapi.general.classes.Sede;
 
@@ -46,6 +47,8 @@ public class HttpRequest {
 
         return new ArrayList<>();
     }
+
+
 
     public boolean deleteBike(int id){
         HttpJson json = new HttpJson();

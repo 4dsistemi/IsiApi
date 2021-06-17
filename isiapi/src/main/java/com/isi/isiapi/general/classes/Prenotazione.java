@@ -20,15 +20,15 @@ public class Prenotazione{
     public boolean isActive;
 
     @SerializedName("IsinoloBicyclesId")
-    public String isNoloBicyclesId;
+    public int isNoloBicyclesId;
 
     @SerializedName("CustomerId")
-    public String customerId;
+    public int customerId;
 
     @SerializedName("CommercialLocalId")
     public String commercial;
 
-    public Prenotazione(int id, String dateStart, int duration , String dateEnd, boolean isActive, String isNoloBicyclesId , String customerId , String commercial  ){
+    public Prenotazione(int id, String dateStart, int duration , String dateEnd, boolean isActive, int isNoloBicyclesId , int customerId , String commercial  ){
         this.id = id;
         this.dateStart = dateStart;
         this.duration = duration;
@@ -62,11 +62,11 @@ public class Prenotazione{
         return isActive;
     }
 
-    public String getIsNoloBicyclesId(){
+    public int getIsNoloBicyclesId(){
         return isNoloBicyclesId;
     }
 
-    public String getCustomerId(){
+    public int getCustomerId(){
         return customerId;
     }
     public String getCommercial(){
