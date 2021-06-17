@@ -201,4 +201,9 @@ public class Customer {
     public void setFiscal(String fiscal) {
         this.fiscal = fiscal;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + surname;
+    }
 }

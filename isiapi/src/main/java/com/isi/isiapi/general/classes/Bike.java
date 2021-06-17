@@ -46,4 +46,9 @@ public class Bike {
     public String getCommercial() {
         return commercial;
     }
+
+    @Override
+    public String toString() {
+        return matricNumber;
+    }
 }

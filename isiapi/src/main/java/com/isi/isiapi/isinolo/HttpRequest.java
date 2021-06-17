@@ -228,6 +228,34 @@ public class HttpRequest {
         return false;
     }
 
+    //function httpreq thats passes all from class Prenotazione as prenotazione
+    public boolean addReservationApi(String serial, Prenotazione prenotazione){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("DateStart", prenotazione.dateStart);
+        json.addData("Duration" , prenotazione.duration);
+        json.addData("DateEnd" , prenotazione.dateEnd);
+        json.addData("IsinoloBicyclesId" , prenotazione.isNoloBicyclesId);
+        json.addData("CustomerId" , prenotazione.customerId);
+
+
+
+        com.isi.isiapi.isicashier.MakeHttpPost post = new com.isi.isiapi.isicashier.MakeHttpPost("addReservationApi", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 
 }
 
