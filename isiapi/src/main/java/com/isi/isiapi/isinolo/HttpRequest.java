@@ -285,6 +285,28 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean stopReservation(int id){
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+
+        MakeHttpPost post = new MakeHttpPost("stopReservation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            if(response.trim().equals("ok")){
+                return true;
+            }
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+
 
 }
 
