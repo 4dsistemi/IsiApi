@@ -259,6 +259,32 @@ public class HttpRequest {
 
     }
 
+    public boolean modifyPrenotazione(int id , Prenotazione prenotazione){
+        HttpJson json = new HttpJson();
+        json.addData("id", prenotazione.id);
+        json.addData("dateStart" , prenotazione.dateStart);
+        json.addData("duration" , prenotazione.duration);
+        json.addData("dateEnd" , prenotazione.dateEnd);
+        json.addData("isNoloBicyclesId" , prenotazione.isNoloBicyclesId);
+        json.addData("customerId" , prenotazione.customerId);
+
+
+        MakeHttpPost post = new MakeHttpPost("modifyPrenotazione", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            if(response.trim().equals("ok")){
+                return true;
+            }
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }
 
