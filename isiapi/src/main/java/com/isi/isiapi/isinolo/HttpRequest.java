@@ -258,7 +258,7 @@ public class HttpRequest {
         return false;
 
     }
-
+ //modifypreno function
     public boolean modifyPrenotazione(int id , Prenotazione prenotazione){
         HttpJson json = new HttpJson();
         json.addData("id", prenotazione.id);
