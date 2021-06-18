@@ -259,7 +259,7 @@ public class HttpRequest {
 
     }
  //modifypreno function
-    public boolean modifyPrenotazione(int id , Prenotazione prenotazione){
+    public boolean modifyPrenotazione(Prenotazione prenotazione){
         HttpJson json = new HttpJson();
         json.addData("id", prenotazione.id);
         json.addData("dateStart" , prenotazione.dateStart);
