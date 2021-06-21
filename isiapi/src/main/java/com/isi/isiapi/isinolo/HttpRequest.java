@@ -132,6 +132,26 @@ public class HttpRequest {
 
         return new ArrayList<>();
     }
+ // agguingi getcustomer
+    public ArrayList<Customer> getCustomer (String serial){
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("getCustomer", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "getCustomer: " + response);
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
 
 
     //this is the function on getsede that we passed in http request must have details below
