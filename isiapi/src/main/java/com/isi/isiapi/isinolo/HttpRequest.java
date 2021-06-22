@@ -251,7 +251,7 @@ public class HttpRequest {
         return false;
     }
 
-    //function httpreq thats passes all from class Prenotazione as prenotazione
+    //function httpreq thats passes all from class Prenotazione as prenotazioneapi
     public boolean addReservationApi(String serial, Prenotazione prenotazione){
 
         HttpJson json = new HttpJson();
