@@ -18,6 +18,7 @@ public class Bike {
 
     @SerializedName("CommercialLocalId")
     public String commercial;
+    public Object serial;
 
     public Bike(int id, String matricNumber, String model, boolean reserved, String commercial) {
         this.id = id;
