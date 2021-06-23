@@ -325,7 +325,7 @@ public class HttpRequest {
         return false;
     }
 
-    //agguingi biciclettes
+    //agguingi biciclettes ser
     public boolean addBiciclette(String serial, Bike bikes){
         HttpJson json = new HttpJson();
         json.addData("serial" , bikes.serial);
