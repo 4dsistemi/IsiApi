@@ -183,6 +183,7 @@ public class HttpRequest {
         json.addData("id", sedea.id);
         json.addData("nome" , sedea.nome);
         json.addData("city", sedea.citta);
+        json.addData("stato", sedea.stato);
         json.addData("address", sedea.indirizzo);
         json.addData( "zip" , sedea.zip);
         json.addData("country" , sedea.country);
