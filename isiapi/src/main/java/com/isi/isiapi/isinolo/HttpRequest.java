@@ -325,6 +325,30 @@ public class HttpRequest {
         return false;
     }
 
+    //agguingi biciclettes
+    public boolean addBiciclette(int id , Bike bikes){
+        HttpJson json = new HttpJson();
+        json.addData("matricola" , bikes.matricNumber);
+        json.addData("model", bikes.model);
+
+
+
+        MakeHttpPost post = new MakeHttpPost("addBiciclette", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            if(response.trim().equals("ok")){
+                return true;
+            }
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 
 
