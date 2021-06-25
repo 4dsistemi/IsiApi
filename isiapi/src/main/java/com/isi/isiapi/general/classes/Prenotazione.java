@@ -2,6 +2,8 @@ package com.isi.isiapi.general.classes;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class Prenotazione{
 
     @SerializedName("Id")
@@ -19,8 +21,9 @@ public class Prenotazione{
     @SerializedName("IsActive")
     public boolean isActive;
 
-    @SerializedName("IsinoloBicyclesId")
-    public int isNoloBicyclesId;
+    //changes from a string to array
+    @SerializedName("Bikes")
+    public ArrayList<Integer> bikesIds;
 
     @SerializedName("CustomerId")
     public int customerId;
@@ -28,19 +31,12 @@ public class Prenotazione{
     @SerializedName("CommercialLocalId")
     public String commercial;
 
-    public Prenotazione(int id, String dateStart, int duration , String dateEnd, boolean isActive, int isNoloBicyclesId , int customerId , String commercial  ){
-        this.id = id;
+    public Prenotazione(String dateStart, int duration, ArrayList<Integer> bikesIds, int customerId) {
         this.dateStart = dateStart;
         this.duration = duration;
-        this.dateEnd = dateEnd;
-        this.isActive = isActive;
-        this.isNoloBicyclesId = isNoloBicyclesId;
+        this.bikesIds = bikesIds;
         this.customerId = customerId;
-        this.commercial = commercial;
     }
-
-
-
 
     public int getId() {
         return id;
@@ -62,8 +58,8 @@ public class Prenotazione{
         return isActive;
     }
 
-    public int getIsNoloBicyclesId(){
-        return isNoloBicyclesId;
+    public ArrayList<Integer> getBikesIds() {
+        return bikesIds;
     }
 
     public int getCustomerId(){
