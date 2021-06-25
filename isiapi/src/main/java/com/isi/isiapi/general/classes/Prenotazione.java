@@ -24,7 +24,7 @@ public class Prenotazione{
     @SerializedName("Bikes")
     public ArrayList<Integer> bikesIds;
 
-    //new function public added
+    //new function added now
     @SerializedName("IsinoloBikeReservations")
     public ArrayList<IsiNoloBikeReservation> reservations;
 
