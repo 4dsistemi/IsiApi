@@ -260,7 +260,7 @@ public class HttpRequest {
         json.addData("DateStart", prenotazione.dateStart);
         json.addData("Duration" , prenotazione.duration);
         json.addData("DateEnd" , prenotazione.dateEnd);
-        json.addData("IsinoloBicyclesId"  , prenotazione.isNoloBicyclesId);
+        json.addData("Bikes"  , prenotazione.bikesIds);
         json.addData("CustomerId" , prenotazione.customerId);
 
         MakeHttpPost post = new MakeHttpPost("addReservationApi", json.getData(), apiKey);
@@ -286,7 +286,7 @@ public class HttpRequest {
         json.addData("dateStart" , prenotazione.dateStart);
         json.addData("duration" , prenotazione.duration);
         json.addData("dateEnd" , prenotazione.dateEnd);
-        json.addData("isNoloBicyclesId" , prenotazione.isNoloBicyclesId);
+        json.addData("Bikes" , prenotazione.bikesIds);
         json.addData("customerId" , prenotazione.customerId);
 
 
