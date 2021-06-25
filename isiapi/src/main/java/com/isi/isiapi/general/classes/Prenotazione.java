@@ -21,7 +21,7 @@ public class Prenotazione{
     @SerializedName("IsActive")
     public boolean isActive;
 
-    //changes from a string to arraylist
+    //changes from a string to arraylist>list
     @SerializedName("Bikes")
     public ArrayList<Integer> bikesIds;
 
