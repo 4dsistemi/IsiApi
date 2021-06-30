@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.isi.isiapi.general.HttpData;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.Bike;
 import com.isi.isiapi.general.classes.Customer;
@@ -288,6 +289,9 @@ public class HttpRequest {
         json.addData("dateEnd" , prenotazione.dateEnd);
         json.addData("Bikes" , prenotazione.bikesIds);
         json.addData("customerId" , prenotazione.customerId);
+
+        HttpData data = new HttpData("modifyPrenotazione", json.getData());
+        Log.e("TAG", "modifyPrenotazione: " + data.generateJson(data));
 
 
         MakeHttpPost post = new MakeHttpPost("modifyPrenotazione", json.getData(), apiKey);
