@@ -3,6 +3,7 @@ package com.isi.isiapi.isinolo;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpData;
 import com.isi.isiapi.general.HttpJson;
@@ -282,12 +283,19 @@ public class HttpRequest {
     }
  //modifypreno function
     public boolean modifyPrenotazione(Prenotazione prenotazione){
+
+        JsonArray array = new JsonArray();
+
+        for (Integer id: prenotazione.bikesIds) {
+            array.add(id);
+        }
+
         HttpJson json = new HttpJson();
         json.addData("id", prenotazione.id);
         json.addData("dateStart" , prenotazione.dateStart);
         json.addData("duration" , prenotazione.duration);
         json.addData("dateEnd" , prenotazione.dateEnd);
-        json.addData("Bikes" , prenotazione.bikesIds);
+        json.addData("Bikes" , array);
         json.addData("customerId" , prenotazione.customerId);
 
         HttpData data = new HttpData("modifyPrenotazione", json.getData());
