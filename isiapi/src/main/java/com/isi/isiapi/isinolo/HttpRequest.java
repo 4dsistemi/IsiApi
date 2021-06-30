@@ -295,6 +295,8 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
+            Log.e("TAG",   response);
+
             if(response.trim().equals("ok")){
                 return true;
             }
