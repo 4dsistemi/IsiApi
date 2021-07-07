@@ -31,7 +31,7 @@ public class Prenotazione{
     @SerializedName("CustomerId")
     public int customerId;
 
-    @SerializedName("customer")
+    @SerializedName("Customer")
     public Customer customer;
 
     @SerializedName("CommercialLocalId")
