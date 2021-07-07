@@ -114,7 +114,7 @@ public class HttpRequest {
         return false;
     }
 
-
+//preno
     public ArrayList<Prenotazione> getPreno (String serial){
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
