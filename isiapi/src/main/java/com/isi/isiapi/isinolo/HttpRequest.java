@@ -257,12 +257,18 @@ public class HttpRequest {
     //function httpreq thats passes all from class Prenotazione as prenotazioneapiii
     public boolean addReservationApi(String serial, Prenotazione prenotazione){
 
+        JsonArray array = new JsonArray();
+
+        for (Integer id: prenotazione.bikesIds) {
+            array.add(id);
+        }
+
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
         json.addData("DateStart", prenotazione.dateStart);
         json.addData("Duration" , prenotazione.duration);
         json.addData("DateEnd" , prenotazione.dateEnd);
-        json.addData("Bikes"  , prenotazione.bikesIds);
+        json.addData("Bikes"  , array);
         json.addData("CustomerId" , prenotazione.customerId);
 
         MakeHttpPost post = new MakeHttpPost("addReservationApi", json.getData(), apiKey);
