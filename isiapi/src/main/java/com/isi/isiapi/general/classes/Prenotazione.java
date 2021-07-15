@@ -37,11 +37,19 @@ public class Prenotazione{
     @SerializedName("CommercialLocalId")
     public String commercial;
 
-    public Prenotazione(String dateStart, int duration, ArrayList<Integer> bikesIds, int customerId) {
+    @SerializedName("credit_card_num")
+    public String credit_card_num;
+
+    @SerializedName("credit_card_exp")
+    public int credit_card_exp;
+
+    public Prenotazione(String dateStart, int duration, ArrayList<Integer> bikesIds, int customerId , String credit_card_num , int credit_card_exp) {
         this.dateStart = dateStart;
         this.duration = duration;
         this.bikesIds = bikesIds;
         this.customerId = customerId;
+        this.credit_card_num = credit_card_num;
+        this.credit_card_exp = credit_card_exp;
     }
 
     public int getId() {
@@ -74,6 +82,9 @@ public class Prenotazione{
     public String getCommercial(){
         return commercial;
     }
+
+    public String getCredit_card_num(){return  credit_card_num;}
+    public int getCredit_card_exp(){ return  credit_card_exp;}
 }
 
 

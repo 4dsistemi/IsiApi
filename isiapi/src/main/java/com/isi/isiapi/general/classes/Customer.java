@@ -49,6 +49,9 @@ public class Customer {
     @SerializedName("DocExpire")
     private String docExpire;
 
+
+
+
     public Customer(String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal) {
         this.name = name;
         this.surname = surname;
