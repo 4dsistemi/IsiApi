@@ -51,7 +51,7 @@ public class Prenotazione{
         this.credit_card_num = credit_card_num;
         this.credit_card_exp = credit_card_exp;
     }
-
+  //added
     public int getId() {
         return id;
     }
