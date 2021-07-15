@@ -36,6 +36,18 @@ public class Customer {
     private String society;
     @SerializedName("Fiscal")
     private String fiscal;
+    @SerializedName("Birthplace")
+    private String birthplace;
+    @SerializedName("Gender")
+    private int gender;
+    @SerializedName("DocType")
+    private String docType;
+    @SerializedName("DocSerial")
+    private String docSerial;
+    @SerializedName("DocRelease")
+    private String docRelease;
+    @SerializedName("DocExpire")
+    private String docExpire;
 
     public Customer(String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal) {
         this.name = name;
@@ -200,6 +212,54 @@ public class Customer {
 
     public void setFiscal(String fiscal) {
         this.fiscal = fiscal;
+    }
+
+    public String getBirthplace() {
+        return birthplace;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public String getDocSerial() {
+        return docSerial;
+    }
+
+    public String getDocRelease() {
+        return docRelease;
+    }
+
+    public String getDocExpire() {
+        return docExpire;
+    }
+
+    public void setBirthplace(String birthplace) {
+        this.birthplace = birthplace;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public void setDocSerial(String docSerial) {
+        this.docSerial = docSerial;
+    }
+
+    public void setDocRelease(String docRelease) {
+        this.docRelease = docRelease;
+    }
+
+    public void setDocExpire(String docExpire) {
+        this.docExpire = docExpire;
     }
 
     @Override
