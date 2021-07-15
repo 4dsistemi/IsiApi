@@ -214,6 +214,10 @@ public class HttpRequest {
         json.addData("ae_code", customer.getAeCode());
         json.addData("society", customer.getSociety());
         json.addData("fiscal", customer.getFiscal());
+        json.addData("doc_type", customer.getDocType());
+        json.addData("doc_serial" , customer.getDocSerial());
+        json.addData("doc_release" , customer.getDocRelease());
+        json.addData("doc_expire", customer.getDocExpire());
 
         MakeHttpPost post = new MakeHttpPost("addCustomer", json.getData(), apiKey);
 
@@ -248,6 +252,10 @@ public class HttpRequest {
         json.addData("ae_code", customer.getAeCode());
         json.addData("society", customer.getSociety());
         json.addData("fiscal", customer.getFiscal());
+        json.addData("doc_type" , customer.getDocType());
+        json.addData("doc_serial" , customer.getDocSerial());
+        json.addData("doc_release" , customer.getDocRelease());
+        json.addData("doc_expire" , customer.getDocExpire());
 
         MakeHttpPost post = new MakeHttpPost("modifyCustomer", json.getData(), apiKey);
 
