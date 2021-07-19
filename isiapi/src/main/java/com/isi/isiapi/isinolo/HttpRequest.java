@@ -270,6 +270,8 @@ public class HttpRequest {
         json.addData("DateEnd" , prenotazione.dateEnd);
         json.addData("Bikes"  , array);
         json.addData("CustomerId" , prenotazione.customerId);
+        json.addData("Credit_card_num" , prenotazione.credit_card_num);
+        json.addData("Credit_card_exp" , prenotazione.credit_card_exp);
 
         MakeHttpPost post = new MakeHttpPost("addReservationApi", json.getData(), apiKey);
 
