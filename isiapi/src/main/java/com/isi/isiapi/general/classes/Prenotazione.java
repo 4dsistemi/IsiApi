@@ -37,10 +37,10 @@ public class Prenotazione{
     @SerializedName("CommercialLocalId")
     public String commercial;
 
-    @SerializedName("credit_card_num")
+    @SerializedName("CreditCardNum")
     public String credit_card_num;
 
-    @SerializedName("credit_card_exp")
+    @SerializedName("CreditCardExp")
     public String credit_card_exp;
 
     public Prenotazione(String dateStart, int duration, ArrayList<Integer> bikesIds, int customerId , String credit_card_num , String credit_card_exp) {
