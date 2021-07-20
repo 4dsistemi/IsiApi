@@ -214,6 +214,7 @@ public class HttpRequest {
         json.addData("ae_code", customer.getAeCode());
         json.addData("society", customer.getSociety());
         json.addData("fiscal", customer.getFiscal());
+        json.addData("birthday" , customer.getBirthday());
         json.addData("doc_type", customer.getDocType());
         json.addData("doc_serial" , customer.getDocSerial());
         json.addData("doc_release" , customer.getDocRelease());
@@ -252,6 +253,7 @@ public class HttpRequest {
         json.addData("ae_code", customer.getAeCode());
         json.addData("society", customer.getSociety());
         json.addData("fiscal", customer.getFiscal());
+        json.addData("birthday" , customer.getBirthday());
         json.addData("doc_type" , customer.getDocType());
         json.addData("doc_serial" , customer.getDocSerial());
         json.addData("doc_release" , customer.getDocRelease());
