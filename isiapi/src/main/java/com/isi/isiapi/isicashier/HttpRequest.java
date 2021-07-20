@@ -565,6 +565,29 @@ public class HttpRequest {
 
     }
 
+    public ArrayList<Report> getReportFromId(String serial, int operatorId){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("operator", operatorId);
+
+        MakeHttpPost post = new MakeHttpPost("getReportFromId", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "getcat: " + response);
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Report>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
     @Deprecated
     public boolean addBill(String serial, Discount discount, int operator, ArrayList<BillProduct> bill, String paymentType){
 
