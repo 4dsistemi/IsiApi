@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.AppActivation;
+import com.isi.isiapi.general.classes.ApplicationList;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -20,7 +22,7 @@ public class HttpRequest {
         this.apiKey = apiKey;
     }
 
-    public ArrayList<AppActivation> getApplicationActive(String serial){
+    public ArrayList<ApplicationList> getApplicationActive(String serial){
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
@@ -30,7 +32,7 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<AppActivation>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<ApplicationList>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
