@@ -7,7 +7,7 @@ public class Operator {
     @SerializedName("Id")
     public int id;
 
-    @SerializedName("OperatorCode")
+    @SerializedName("LoginCode")
     public String operator_code = "0000";
 
     @SerializedName("Privilege")
