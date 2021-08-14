@@ -76,7 +76,7 @@ public class HttpRequest {
 
     }
 
-    public boolean removeShadow(int id){
+    public boolean removeAppActivation(int id){
 
         HttpJson json = new HttpJson();
         json.addData("id", id);
