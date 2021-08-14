@@ -1,4 +1,6 @@
 package com.isi.isiapi.isiapp;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
@@ -45,6 +47,8 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
+            Log.e("TAG", "addShadow: " + response);
+
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -65,6 +69,8 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
+
+            Log.e("TAG", "addShadow: " + response);
 
             return response.trim().equals("ok");
 
