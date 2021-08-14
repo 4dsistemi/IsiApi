@@ -76,6 +76,26 @@ public class HttpRequest {
 
     }
 
+    public boolean removeShadow(int id){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+
+        MakeHttpPost post = new MakeHttpPost("removeAppActive", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public boolean movePriority(int id, int idSecond){
 
         HttpJson json = new HttpJson();
