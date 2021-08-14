@@ -31,6 +31,9 @@ public class Operator {
     @SerializedName("Nfc")
     public String nfc;
 
+    @SerializedName("CtzonCard")
+    public String ctzonCard;
+
     public Operator(int id, int privilege, String name, String surname, String address, String phone, String email, String operator_code, String nfc) {
         this.privilege = privilege;
         this.name = name;

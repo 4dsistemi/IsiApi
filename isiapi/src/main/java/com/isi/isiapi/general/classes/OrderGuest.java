@@ -23,7 +23,7 @@ public class OrderGuest {
     @SerializedName("GuestOrderElements")
     private final ArrayList<OrderGuestElement> elements;
     @SerializedName("Account")
-    public Account account;
+    public Operator account;
     @SerializedName("Table")
     public TableElement table;
 
