@@ -1,5 +1,7 @@
 package com.isi.isiapi.isiapp;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
@@ -24,6 +26,8 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
+
+            Log.e("TAG", "getApplicationActive: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<ApplicationList>>(){}.getType());
 
