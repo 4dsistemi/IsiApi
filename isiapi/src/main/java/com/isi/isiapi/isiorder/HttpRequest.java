@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.Commercial;
 import com.isi.isiapi.general.classes.OrderGuest;
+import com.isi.isiapi.general.classes.QueryToSync;
 import com.isi.isiapi.general.classes.SerialList;
 
 import java.util.ArrayList;
@@ -465,6 +466,23 @@ public class HttpRequest {
 
         return false;
 
+    }
+
+    public ArrayList<QueryToSync> getQueryToSync(String serial){
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+
+        MakeHttpPost post = new MakeHttpPost("getQueriesToSync", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<QueryToSync>>(){}.getType());
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return null;
     }
 
 
