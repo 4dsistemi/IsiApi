@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.ApplicationList;
+import com.isi.isiapi.general.classes.Reservation;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -173,6 +175,88 @@ public class HttpRequest {
         json.addData("serial", serial);
 
         MakeHttpPost post = new MakeHttpPost("updateLocation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public ArrayList<Reservation> getReservations(String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("getReservation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Reservation>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public boolean addReservation(Reservation reservation, String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("reservation", new Gson().toJsonTree(reservation));
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("addReservation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean modifyReservation(Reservation reservation){
+
+        HttpJson json = new HttpJson();
+        json.addData("reservation", new Gson().toJsonTree(reservation));
+
+        MakeHttpPost post = new MakeHttpPost("modifyReservation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean setReservationStatus(Reservation reservation, int status){
+
+        HttpJson json = new HttpJson();
+        json.addData("reservation", reservation.Id);
+        json.addData("status", status);
+
+        MakeHttpPost post = new MakeHttpPost("setReservationStatus", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
