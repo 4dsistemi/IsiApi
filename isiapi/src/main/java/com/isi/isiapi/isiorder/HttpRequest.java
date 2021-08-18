@@ -485,6 +485,26 @@ public class HttpRequest {
         return null;
     }
 
+    public boolean setQueryExecuted(QueryToSync queryToSync, int status){
+
+        HttpJson json = new HttpJson();
+        json.addData("query", queryToSync.Id);
+        json.addData("json", status);
+
+
+        MakeHttpPost post = new MakeHttpPost("setQueryExecuted", json.getData(), apiKey);
+
+        try{
+            String result = post.execute().get();
+
+            return result.trim().equals("ok");
+
+        }catch (Exception e){e.printStackTrace();}
+
+        return false;
+
+    }
+
 
 }
 
