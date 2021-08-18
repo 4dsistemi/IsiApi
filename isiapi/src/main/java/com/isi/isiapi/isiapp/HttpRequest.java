@@ -165,6 +165,27 @@ public class HttpRequest {
 
     }
 
+    public boolean updateLocation(double lat, double lon, String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("lat", lat);
+        json.addData("lon", lon);
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("updateLocation", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
 
 }
 
