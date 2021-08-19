@@ -9,6 +9,6 @@ public class CtzonElement {
     public int Quantity;
     public float Price;
     public int CityzonSuborderId;
-    ArrayList<CtzonElementNote> CityzonElementNotes;
+    public ArrayList<CtzonElementNote> CityzonElementNotes;
 
 }

@@ -12,7 +12,7 @@ public class CtzonSubOrder {
     public int CityzonOrderId;
     public boolean DeliveryConfirm;
     public boolean VendorConfirm;
-    ArrayList<CtzonSuborderStatus> CityzonSuborderStatuses;
-    ArrayList<CtzonElement> CityzonElements;
+    public ArrayList<CtzonSuborderStatus> CityzonSuborderStatuses;
+    public ArrayList<CtzonElement> CityzonElements;
 
 }
