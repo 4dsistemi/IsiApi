@@ -333,6 +333,49 @@ public class HttpRequest {
 
     }
 
+    public boolean checkCapDelivery(String cap){
+
+        HttpJson json = new HttpJson();
+        json.addData("cap", cap);
+
+
+        MakeHttpPost post = new MakeHttpPost("checkCap", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("true");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean updateCap(String cap, String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("cap", cap);
+        json.addData("serial", serial);
+
+
+        MakeHttpPost post = new MakeHttpPost("updateCap", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 }
 
 
