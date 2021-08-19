@@ -90,14 +90,10 @@ public class HttpRequest {
         json.addData("dep_code", dep_code);
         json.addData("product_id", product_id);
 
-        Log.e("TAG", "modifyDepartment: " + json.getData() );
-
         MakeHttpPost post = new MakeHttpPost("modifyDepartment", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "modifyDepartment: " + response);
 
             return response.trim().equals("ok");
 
@@ -117,8 +113,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getOperators: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Department>>(){}.getType());
 
@@ -162,8 +156,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getcat: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Category>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -183,8 +175,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getcat: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>(){}.getType());
 
@@ -284,8 +274,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getcat: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Product>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -305,8 +293,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getcat: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Printer>>(){}.getType());
 
@@ -427,8 +413,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "modifyProduct: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -450,8 +434,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "deleteCustomer: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -472,8 +454,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "insertRefreshToken: " + response);
 
             return response.trim().equals("ok");
 
@@ -532,8 +512,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getInfoAboutMe: " + response);
-
             return new Gson().fromJson(response, InformationAboutCommercial.class);
 
         } catch (ExecutionException | InterruptedException e) {
@@ -554,8 +532,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getcat: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Report>>(){}.getType());
 
@@ -578,8 +554,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getcat: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Report>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -601,14 +575,10 @@ public class HttpRequest {
         json.addData("elements", new Gson().toJsonTree(bill));
         json.addData("payment_type", paymentType);
 
-        Log.e("TAG", "addBill: " + json.getData());
-
         MakeHttpPost post = new MakeHttpPost("addBill", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addBill: " + response);
 
             return response.trim().equals("ok");
 
@@ -631,14 +601,10 @@ public class HttpRequest {
         json.addData("payment_type", paymentType);
         json.addData("total", total);
 
-        Log.e("TAG", "addBill: " + json.getData());
-
         MakeHttpPost post = new MakeHttpPost("addBillWthTotal", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addBill: " + response);
 
             return response.trim().equals("ok");
 
@@ -660,8 +626,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "addBill: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Fattura>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -680,8 +644,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG," ,"deleteFattura: " + response);
 
             return response.trim().equals("ok");
 
@@ -724,15 +686,10 @@ public class HttpRequest {
         json.addData("recover_code", recoverCode);
         json.addData("customer", customer);
 
-
-        Log.e("TAG", "addBill: " + json.getData());
-
         MakeHttpPost post = new MakeHttpPost("addFattura", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addBill: " + response);
 
             return response.trim().equals("ok");
 
@@ -755,14 +712,10 @@ public class HttpRequest {
         json.addData("reparto", reparto);
         json.addData("data", date);
 
-        Log.e("TAG", "addStorno: " + json.getData());
-
         MakeHttpPost post = new MakeHttpPost("addStorno", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addStorno: " + response);
 
             return response.trim().equals("ok");
 

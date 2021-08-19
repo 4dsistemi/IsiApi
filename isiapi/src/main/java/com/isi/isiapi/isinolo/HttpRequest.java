@@ -39,8 +39,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getBikes: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Bike>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -124,8 +122,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getPreno: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<Prenotazione>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -143,8 +139,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getCustomer: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>(){}.getType());
 
@@ -167,8 +161,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getSede: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Sede>>(){}.getType());
 
@@ -278,8 +270,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "addReservationApi: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -307,15 +297,11 @@ public class HttpRequest {
         json.addData("customerId" , prenotazione.customerId);
 
         HttpData data = new HttpData("modifyPrenotazione", json.getData());
-        Log.e("TAG", "modifyPrenotazione: " + data.generateJson(data));
-
 
         MakeHttpPost post = new MakeHttpPost("modifyPrenotazione", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG",   response);
 
             if(response.trim().equals("ok")){
                 return true;

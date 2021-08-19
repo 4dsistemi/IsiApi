@@ -58,8 +58,6 @@ public class HttpRequest {
 
             String response = post.execute().get();
 
-            Log.e("TAG", "addProduct: " + response);
-
             if(response.trim().equals("ok")){
                 return true;
             }

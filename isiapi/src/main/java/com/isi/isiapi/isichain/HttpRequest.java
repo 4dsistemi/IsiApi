@@ -53,14 +53,10 @@ public class HttpRequest {
         json.addData("order", new Gson().toJsonTree(order));
         json.addData("serial", serial);
 
-        Log.e("TAG", "addOrderToForniture: " + json.getData());
-
         MakeHttpPost post = new MakeHttpPost("addOrderToForniture", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addOrderToForniture: " + response);
 
             return response.trim().equals("ok");
 
@@ -82,8 +78,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "updateForniture: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -102,8 +96,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "getOrdersForniture: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<OrderForniturePropel>>(){}.getType());
 
@@ -124,8 +116,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "updateForniture: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -143,8 +133,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "confirmOrder: " + response);
 
             return response.trim().equals("ok");
 

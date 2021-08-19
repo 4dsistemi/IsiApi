@@ -264,8 +264,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "insertAllDao: " + response);
-
             if(response.trim().equals("endTrasition")){
                 return true;
             }
@@ -360,8 +358,6 @@ public class HttpRequest {
         try{
             String result = post.execute().get();
 
-            Log.e("TAG", "getOrderGuest: " + result);
-
             return new Gson().fromJson(result, new TypeToken<ArrayList<OrderGuest>>(){}.getType());
 
         }catch (Exception e){e.printStackTrace();}
@@ -436,8 +432,6 @@ public class HttpRequest {
         try{
             String result = post.execute().get();
 
-            Log.e("TAG", "uploadProduct: " + result);
-
             return result.trim().equals("ok");
 
         }catch (Exception e){e.printStackTrace();}
@@ -457,8 +451,6 @@ public class HttpRequest {
 
         try{
             String result = post.execute().get();
-
-            Log.e("TAG", "uploadCategories: " + result);
 
             return result.trim().equals("ok");
 

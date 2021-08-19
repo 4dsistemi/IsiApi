@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.ApplicationList;
 import com.isi.isiapi.general.classes.Reservation;
+import com.isi.isiapi.general.classes.ctzon.CtzonOrder;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -49,8 +50,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "addShadow: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -71,8 +70,6 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
-
-            Log.e("TAG", "addShadow: " + response);
 
             return response.trim().equals("ok");
 
@@ -220,8 +217,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "addReservation: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -242,8 +237,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "modifyReservation: " + response);
-
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -261,6 +254,71 @@ public class HttpRequest {
         json.addData("status", status);
 
         MakeHttpPost post = new MakeHttpPost("setReservationStatus", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public ArrayList<CtzonOrder> getCtzonOrder(String serial){
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("getCtzonOrders", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<CtzonOrder>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public boolean confirmCtzonOrder(int id, boolean confirm, boolean isidelWith){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+        json.addData("confirm", confirm);
+        json.addData("isidelWith", isidelWith);
+
+
+        MakeHttpPost post = new MakeHttpPost("confirmCtzonOrder", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+
+    public boolean updateCtzonOrder(int id, int status){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+        json.addData("status", status);
+
+
+        MakeHttpPost post = new MakeHttpPost("updateCtzonOrder", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
