@@ -277,6 +277,8 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
+            Log.e("TAG", "getApplicationActive: " + response);
+
             return new Gson().fromJson(response, new TypeToken<ArrayList<CtzonOrder>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
