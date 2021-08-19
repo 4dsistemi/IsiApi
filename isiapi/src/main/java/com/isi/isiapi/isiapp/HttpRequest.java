@@ -220,6 +220,8 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
+            Log.e("TAG", "addReservation: " + response);
+
             return response.trim().equals("ok");
 
         } catch (ExecutionException | InterruptedException e) {
@@ -239,6 +241,8 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
+
+            Log.e("TAG", "modifyReservation: " + response);
 
             return response.trim().equals("ok");
 
