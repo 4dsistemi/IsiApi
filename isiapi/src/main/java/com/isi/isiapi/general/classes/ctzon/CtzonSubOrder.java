@@ -10,8 +10,8 @@ public class CtzonSubOrder {
     public Date PrevisionTimeTrue;
     public boolean IsidelWith;
     public int CityzonOrderId;
-    public boolean DeliveryConfirm;
-    public boolean VendorConfirm;
+    public int DeliveryConfirm;
+    public int VendorConfirm;
     public ArrayList<CtzonSuborderStatus> CityzonSuborderStatuses;
     public ArrayList<CtzonElement> CityzonElements;
 
