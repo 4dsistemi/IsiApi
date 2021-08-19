@@ -17,6 +17,6 @@ public class CtzonOrder {
     public double Longitude;
     public String ComuneCap;
     public String Note;
-    public ArrayList<CtzonSubOrder> CtzonSuborders;
+    public ArrayList<CtzonSubOrder> CityzonSuborders;
 
 }
