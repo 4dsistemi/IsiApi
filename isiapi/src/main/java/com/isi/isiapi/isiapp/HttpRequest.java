@@ -1,4 +1,5 @@
 package com.isi.isiapi.isiapp;
+import android.accounts.Account;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -277,8 +278,6 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            Log.e("TAG", "getApplicationActive: " + response);
-
             return new Gson().fromJson(response, new TypeToken<ArrayList<CtzonOrder>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
@@ -364,6 +363,71 @@ public class HttpRequest {
 
 
         MakeHttpPost post = new MakeHttpPost("updateCap", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public Account searchAccountFromCard(String card, String serial){
+        HttpJson json = new HttpJson();
+        json.addData("card", card);
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost("searchAccountFromCard", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return new Gson().fromJson(response, Account.class);
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public boolean addPointAccount(String card, String serial, int point){
+
+        HttpJson json = new HttpJson();
+        json.addData("account", card);
+        json.addData("serial", serial);
+        json.addData("point", point);
+
+
+        MakeHttpPost post = new MakeHttpPost("addPointAccount", json.getData(), apiKey);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean removePointAccount(String card, String serial, int point){
+
+        HttpJson json = new HttpJson();
+        json.addData("account", card);
+        json.addData("serial", serial);
+        json.addData("point", point);
+
+
+        MakeHttpPost post = new MakeHttpPost("removePointAccount", json.getData(), apiKey);
 
         try {
             String response = post.execute().get();
