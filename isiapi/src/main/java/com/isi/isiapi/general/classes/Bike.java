@@ -19,12 +19,18 @@ public class Bike {
     @SerializedName("CommercialLocalId")
     public String commercial;
 
-    public Bike(int id, String matricNumber, String model, boolean reserved, String commercial) {
+
+    @SerializedName("BikeHourPrice")
+    public float price;
+
+
+    public Bike(int id, String matricNumber, String model, boolean reserved, String commercial , float price) {
         this.id = id;
         this.matricNumber = matricNumber;
         this.model = model;
         this.reserved = reserved;
         this.commercial = commercial;
+        this.price = price;
     }
 
     public int getId() {
@@ -46,6 +52,8 @@ public class Bike {
     public String getCommercial() {
         return commercial;
     }
+
+    public float getPrice(){return price;}
 
     @Override
     public String toString() {
