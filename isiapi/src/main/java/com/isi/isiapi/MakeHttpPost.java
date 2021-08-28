@@ -1,10 +1,12 @@
-package com.isi.isiapi.isiapp;
+package com.isi.isiapi;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpData;
+import com.isi.isiapi.general.Service;
 import com.isi.isiapi.general.Website;
 
 import java.io.BufferedReader;
@@ -21,15 +23,14 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
     private final String intent;
     private final JsonObject data;
     private final String apiKey;
-    private boolean debug = false;
+    private final boolean debug;
+    private final String service;
 
-    public MakeHttpPost(String intent, JsonObject data, String apiKey){
+    public MakeHttpPost(CTZON_SERVICE service, String intent, JsonObject data, String apiKey, boolean debug){
         this.intent = intent;
         this.data = data;
         this.apiKey = apiKey;
-    }
-
-    public void setDebug(boolean debug) {
+        this.service = Service.getService(service);
         this.debug = debug;
     }
 
@@ -48,9 +49,9 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
                 urlReferred = Website.debug;
             }
 
-            urlReferred += "API/IsiApp/IsiAppApi.php";
+            urlReferred += service;
 
-            url = new URL("https://www.ctzon.it/API/IsiApp/IsiAppApi.php");
+            url = new URL(urlReferred);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);

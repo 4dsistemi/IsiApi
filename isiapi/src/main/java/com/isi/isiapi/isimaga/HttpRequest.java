@@ -1,25 +1,28 @@
 package com.isi.isiapi.isimaga;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.isi.isiapi.MakeHttpPost;
+import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.MagaProduct;
 import com.isi.isiapi.general.classes.StorageRemovingElement;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class HttpRequest {
 
     private final String apiKey;
+    private boolean debug = false;
 
     @Deprecated
     public HttpRequest(String serial, String apiKey) {
         this.apiKey = apiKey;
     }
 
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
     public HttpRequest(String apiKey) {
         this.apiKey = apiKey;
@@ -31,7 +34,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getProducts", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIMAGA, "getProducts", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -52,7 +55,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("product", new Gson().toJsonTree(product));
 
-        MakeHttpPost post = new MakeHttpPost("addProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIMAGA, "addProduct", json.getData(), apiKey, debug);
 
         try{
 
@@ -73,7 +76,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("product", new Gson().toJsonTree(product));
 
-        MakeHttpPost post = new MakeHttpPost("modifyProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIMAGA, "modifyProduct", json.getData(), apiKey, debug);
 
         try{
 
@@ -92,7 +95,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("to_remove", new Gson().toJsonTree(elements));
 
-        MakeHttpPost post = new MakeHttpPost("scaricoInUnit", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIMAGA, "scaricoInUnit", json.getData(), apiKey, debug);
 
         try{
 

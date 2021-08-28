@@ -1,9 +1,9 @@
 package com.isi.isiapi.isicashier;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.isi.isiapi.MakeHttpPost;
+import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.BillProduct;
 import com.isi.isiapi.general.classes.Category;
@@ -12,9 +12,7 @@ import com.isi.isiapi.general.classes.Department;
 import com.isi.isiapi.general.classes.Discount;
 import com.isi.isiapi.general.classes.Fattura;
 import com.isi.isiapi.general.classes.InformationAboutCommercial;
-import com.isi.isiapi.general.classes.MagaProduct;
 import com.isi.isiapi.general.classes.Operator;
-import com.isi.isiapi.general.classes.Prenotazione;
 import com.isi.isiapi.general.classes.Printer;
 import com.isi.isiapi.general.classes.Product;
 import com.isi.isiapi.general.classes.Report;
@@ -25,12 +23,16 @@ import java.util.concurrent.ExecutionException;
 public class HttpRequest {
 
     private final String apiKey;
+    private boolean debug = false;
 
     @Deprecated
     public HttpRequest(String serial, String apiKey) {
         this.apiKey = apiKey;
     }
 
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
     public HttpRequest(String apiKey) {
         this.apiKey = apiKey;
@@ -43,7 +45,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getOperators", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getOperators", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -66,7 +68,7 @@ public class HttpRequest {
         json.addData("dep_code", dep_code);
         json.addData("product_id", product_id);
 
-        MakeHttpPost post = new MakeHttpPost("addDepartment", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addDepartment", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -90,7 +92,7 @@ public class HttpRequest {
         json.addData("dep_code", dep_code);
         json.addData("product_id", product_id);
 
-        MakeHttpPost post = new MakeHttpPost("modifyDepartment", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyDepartment", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -109,7 +111,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getDepartments", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getDepartments", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -131,7 +133,7 @@ public class HttpRequest {
         json.addData("name", name);
         json.addData("color", color);
 
-        MakeHttpPost post = new MakeHttpPost("addCategory", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addCategory", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -151,7 +153,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getCategories", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -171,7 +173,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getCustomers", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getCustomers", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -210,7 +212,7 @@ public class HttpRequest {
         json.addData("doc_release" , customer.getDocRelease());
         json.addData("doc_expire", customer.getDocExpire());
 
-        MakeHttpPost post = new MakeHttpPost("addCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addCustomer", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -249,7 +251,7 @@ public class HttpRequest {
         json.addData("doc_release" , customer.getDocRelease());
         json.addData("doc_expire" , customer.getDocExpire());
 
-        MakeHttpPost post = new MakeHttpPost("modifyCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyCustomer", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -269,7 +271,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getProducts", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getProducts", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -289,7 +291,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getPrinters", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getPrinters", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -313,7 +315,7 @@ public class HttpRequest {
         json.addData("is_pref", printer.isPref);
         json.addData("type", printer.type);
 
-        MakeHttpPost post = new MakeHttpPost("addPrinter", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addPrinter", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -335,7 +337,7 @@ public class HttpRequest {
         json.addData("name", printer.name);
         json.addData("type", printer.type);
 
-        MakeHttpPost post = new MakeHttpPost("editPrinter", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "editPrinter", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -356,7 +358,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("id", id);
 
-        MakeHttpPost post = new MakeHttpPost("deleteProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "deleteProduct", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -382,7 +384,7 @@ public class HttpRequest {
         json.addData("department_id", product.department_id);
         json.addData("barcode", product.barcode);
 
-        MakeHttpPost post = new MakeHttpPost("addProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addProduct", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -408,7 +410,7 @@ public class HttpRequest {
         json.addData("department_id", product.department_id);
         json.addData("barcode", product.barcode);
 
-        MakeHttpPost post = new MakeHttpPost("updateProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "updateProduct", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -429,7 +431,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("id", id);
 
-        MakeHttpPost post = new MakeHttpPost("deleteCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "deleteCustomer", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -450,7 +452,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("token", token);
 
-        MakeHttpPost post = new MakeHttpPost("insertRefreshToken", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "insertRefreshToken", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -470,7 +472,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getGybToken", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getGybToken", json.getData(), apiKey, debug);
 
         try {
             return post.execute().get();
@@ -487,7 +489,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("deleteGybToken", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "deleteGybToken", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -507,7 +509,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getInfoAboutMe", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getInfoAboutMe", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -528,7 +530,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getReport", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getReport", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -549,7 +551,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("operator", operatorId);
 
-        MakeHttpPost post = new MakeHttpPost("getReportFromId", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getReportFromId", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -575,7 +577,7 @@ public class HttpRequest {
         json.addData("elements", new Gson().toJsonTree(bill));
         json.addData("payment_type", paymentType);
 
-        MakeHttpPost post = new MakeHttpPost("addBill", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addBill", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -601,7 +603,7 @@ public class HttpRequest {
         json.addData("payment_type", paymentType);
         json.addData("total", total);
 
-        MakeHttpPost post = new MakeHttpPost("addBillWthTotal", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addBillWthTotal", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -621,7 +623,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getFatture", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getFatture", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -640,7 +642,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("id", id);
 
-        MakeHttpPost post = new MakeHttpPost("deleteFattura", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "deleteFattura", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -660,7 +662,7 @@ public class HttpRequest {
         json.addData("status", status);
         json.addData("date", date);
 
-        MakeHttpPost post = new MakeHttpPost("updateFatturaStatus", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "updateFatturaStatus", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -686,7 +688,7 @@ public class HttpRequest {
         json.addData("recover_code", recoverCode);
         json.addData("customer", customer);
 
-        MakeHttpPost post = new MakeHttpPost("addFattura", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addFattura", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -712,7 +714,7 @@ public class HttpRequest {
         json.addData("reparto", reparto);
         json.addData("data", date);
 
-        MakeHttpPost post = new MakeHttpPost("addStorno", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addStorno", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();

@@ -1,23 +1,29 @@
 package com.isi.isiapi.isiapp;
-import android.accounts.Account;
-import android.util.Log;
 
+
+import android.accounts.Account;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.isi.isiapi.MakeHttpPost;
+import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.ApplicationList;
 import com.isi.isiapi.general.classes.Reservation;
 import com.isi.isiapi.general.classes.ctzon.CtzonOrder;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class HttpRequest {
 
     private final String apiKey;
+    private boolean debug = false;
 
     public HttpRequest(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public ArrayList<ApplicationList> getApplicationActive(String serial){
@@ -25,7 +31,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getApplications", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "getApplications", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -46,7 +52,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost("removeShadow", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "removeShadow", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -67,7 +73,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost("addShadow", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "addShadow", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -87,7 +93,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("id", id);
 
-        MakeHttpPost post = new MakeHttpPost("removeAppActive", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "removeAppActive", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -108,7 +114,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("id_second", idSecond);
 
-        MakeHttpPost post = new MakeHttpPost("movePriority", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "movePriority", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -129,7 +135,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost("setPositionMenu", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "setPositionMenu", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -150,7 +156,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("nfc", nfc);
 
-        MakeHttpPost post = new MakeHttpPost("updateNfc", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "updateNfc", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -172,7 +178,7 @@ public class HttpRequest {
         json.addData("lon", lon);
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("updateLocation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "updateLocation", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -192,7 +198,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getReservation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "getReservation", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -213,7 +219,7 @@ public class HttpRequest {
         json.addData("reservation", new Gson().toJsonTree(reservation));
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("addReservation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "addReservation", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -233,7 +239,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("reservation", new Gson().toJsonTree(reservation));
 
-        MakeHttpPost post = new MakeHttpPost("modifyReservation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "modifyReservation", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -254,7 +260,7 @@ public class HttpRequest {
         json.addData("reservation", reservation.Id);
         json.addData("status", status);
 
-        MakeHttpPost post = new MakeHttpPost("setReservationStatus", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "setReservationStatus", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -273,7 +279,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("getCtzonOrders", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "getCtzonOrders", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -296,7 +302,7 @@ public class HttpRequest {
         json.addData("isidelWith", isidelWith);
 
 
-        MakeHttpPost post = new MakeHttpPost("confirmCtzonOrder", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "confirmCtzonOrder", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -319,7 +325,7 @@ public class HttpRequest {
         json.addData("status", status);
 
 
-        MakeHttpPost post = new MakeHttpPost("updateCtzonOrder", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "updateCtzonOrder", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -340,7 +346,7 @@ public class HttpRequest {
         json.addData("cap", cap);
 
 
-        MakeHttpPost post = new MakeHttpPost("checkCap", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "checkCap", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -362,7 +368,7 @@ public class HttpRequest {
         json.addData("serial", serial);
 
 
-        MakeHttpPost post = new MakeHttpPost("updateCap", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "updateCap", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -382,7 +388,7 @@ public class HttpRequest {
         json.addData("card", card);
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost("searchAccountFromCard", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "searchAccountFromCard", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -404,7 +410,7 @@ public class HttpRequest {
         json.addData("point", point);
 
 
-        MakeHttpPost post = new MakeHttpPost("addPointAccount", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "addPointAccount", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -427,7 +433,7 @@ public class HttpRequest {
         json.addData("point", point);
 
 
-        MakeHttpPost post = new MakeHttpPost("removePointAccount", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "removePointAccount", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
