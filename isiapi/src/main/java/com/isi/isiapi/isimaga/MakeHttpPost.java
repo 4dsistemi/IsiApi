@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.isi.isiapi.general.HttpData;
+import com.isi.isiapi.general.Website;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,6 +22,7 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
     private final String intent;
     private final JsonObject data;
     private final String apiKey;
+    private boolean debug = false;
 
     public MakeHttpPost(String intent, JsonObject data, String apiKey){
         this.intent = intent;
@@ -28,6 +30,9 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
         this.apiKey = apiKey;
     }
 
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
     @Override
     protected String doInBackground(Void... params) {
@@ -38,7 +43,15 @@ public class MakeHttpPost extends AsyncTask<Void, Void, String> {
         URL url;
         try {
 
-            url = new URL("https://www.ctzon.it/API/IsiMaga/IsiMagaApi.php");
+            String urlReferred = Website.release;
+
+            if(debug){
+                urlReferred = Website.debug;
+            }
+
+            urlReferred += "API/IsiMaga/IsiMagaApi.php";
+
+            url = new URL(urlReferred);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
