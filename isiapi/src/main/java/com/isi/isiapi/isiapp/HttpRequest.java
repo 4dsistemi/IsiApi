@@ -8,6 +8,7 @@ import com.isi.isiapi.MakeHttpPost;
 import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
 import com.isi.isiapi.general.classes.ApplicationList;
+import com.isi.isiapi.general.classes.Operator;
 import com.isi.isiapi.general.classes.Reservation;
 import com.isi.isiapi.general.classes.ctzon.CtzonOrder;
 import java.util.ArrayList;
@@ -383,7 +384,7 @@ public class HttpRequest {
 
     }
 
-    public Account searchAccountFromCard(String card, String serial){
+    public Operator searchAccountFromCard(String card, String serial){
         HttpJson json = new HttpJson();
         json.addData("card", card);
         json.addData("serial", serial);
@@ -393,7 +394,7 @@ public class HttpRequest {
         try {
             String response = post.execute().get();
 
-            return new Gson().fromJson(response, Account.class);
+            return new Gson().fromJson(response, Operator.class);
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
