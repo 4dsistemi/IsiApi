@@ -592,6 +592,7 @@ public class HttpRequest {
 
     }
 
+    @Deprecated
     public boolean addBill(String serial, Discount discount, int operator, ArrayList<BillProduct> bill, String paymentType, float total){
 
         HttpJson json = new HttpJson();
@@ -604,6 +605,34 @@ public class HttpRequest {
         json.addData("total", total);
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addBillWthTotal", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean addBill(String serial, Discount discount, int operator, ArrayList<BillProduct> bill, String paymentType, float total, String card){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("discount_valor", (discount != null) ? discount.getValor() : 0);
+        json.addData("discount_type", (discount != null) ? (discount.getType() == Discount.DISCOUNT_TYPE.CASH) ? 0 : 1 : 0);
+        json.addData("operator", operator);
+        json.addData("elements", new Gson().toJsonTree(bill));
+        json.addData("payment_type", paymentType);
+        json.addData("total", total);
+        json.addData("card", card);
+
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addBillWtithTotalAndCard", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
