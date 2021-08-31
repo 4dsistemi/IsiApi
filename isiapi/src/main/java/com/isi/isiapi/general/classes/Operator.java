@@ -25,7 +25,7 @@ public class Operator {
     @SerializedName("Address")
     public String address;
 
-    @SerializedName("Phone")
+    @SerializedName("Telephone")
     public String phone;
 
     @SerializedName("Email")
