@@ -211,6 +211,7 @@ public class HttpRequest {
         json.addData("doc_serial" , customer.getDocSerial());
         json.addData("doc_release" , customer.getDocRelease());
         json.addData("doc_expire", customer.getDocExpire());
+        json.addData("birthplace" , customer.getBirthplace());
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addCustomer", json.getData(), apiKey, debug);
 
@@ -250,6 +251,7 @@ public class HttpRequest {
         json.addData("doc_serial" , customer.getDocSerial());
         json.addData("doc_release" , customer.getDocRelease());
         json.addData("doc_expire" , customer.getDocExpire());
+        json.addData("birthplace" , customer.getBirthplace());
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyCustomer", json.getData(), apiKey, debug);
 
