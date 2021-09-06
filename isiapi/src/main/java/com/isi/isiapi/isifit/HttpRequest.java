@@ -20,8 +20,14 @@ public class HttpRequest {
 
     private final String apiKey;
 
+    private boolean debug = false;
+
     public HttpRequest(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public boolean addSport(String serial, IsiFitSport sport){
@@ -30,7 +36,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("sport", new Gson().toJsonTree(sport));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSport", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSport", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -50,7 +56,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("sport", new Gson().toJsonTree(sport));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "modifyIsiFitSport", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "modifyIsiFitSport", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -70,7 +76,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSports", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSports", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -93,7 +99,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("causale", new Gson().toJsonTree(causale));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitCausale", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitCausale", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -113,7 +119,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("causale", new Gson().toJsonTree(causale));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "modifyIsiFitCausale", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "modifyIsiFitCausale", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -133,7 +139,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getCausali", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getCausali", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -156,7 +162,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("spesa", new Gson().toJsonTree(spesa));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSpesaPraticaSportiva", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSpesaPraticaSportiva", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -177,7 +183,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("spesa", new Gson().toJsonTree(spesa));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSpesaPraticaSportivaMinori", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsiFitSpesaPraticaSportivaMinori", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -197,7 +203,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportive", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportive", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -219,7 +225,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportiveMinori", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportiveMinori", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -242,7 +248,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getCessioneBeni", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getCessioneBeni", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
@@ -265,7 +271,7 @@ public class HttpRequest {
         json.addData("serial", serial);
         json.addData("beni", new Gson().toJsonTree(spesa));
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsifitCessioneBeni", json.getData(), apiKey, true);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsifitCessioneBeni", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
