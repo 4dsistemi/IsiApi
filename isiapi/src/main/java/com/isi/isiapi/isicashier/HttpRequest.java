@@ -148,10 +148,9 @@ public class HttpRequest {
 
     }
 
-    public boolean modifyCategory(String serial, Category category){
+    public boolean modifyCategory(Category category){
 
         HttpJson json = new HttpJson();
-        json.addData("serial", serial);
         json.addData("category", new Gson().toJsonTree(category));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyCategory", json.getData(), apiKey, debug);
