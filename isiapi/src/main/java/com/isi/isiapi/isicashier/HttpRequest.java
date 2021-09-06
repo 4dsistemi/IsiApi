@@ -148,6 +148,27 @@ public class HttpRequest {
 
     }
 
+    public boolean modifyCategory(String serial, Category category){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("category", new Gson().toJsonTree(category));
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyCategory", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public ArrayList<Category> getCategories(String serial){
 
         HttpJson json = new HttpJson();

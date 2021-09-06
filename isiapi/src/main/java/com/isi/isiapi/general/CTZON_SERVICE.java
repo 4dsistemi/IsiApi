@@ -7,5 +7,6 @@ public enum CTZON_SERVICE {
     ISICHECK,
     ISIMAGA,
     ISINOLO,
-    ISIORDER
+    ISIORDER,
+    ISIFIT
 }

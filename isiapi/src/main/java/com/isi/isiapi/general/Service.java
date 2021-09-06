@@ -19,6 +19,8 @@ public class Service {
                 return "API/IsiCashier/IsiCashierApi.php";
             case ISIORDER:
                 return "API/IsiOrder/IsiOrderApi.php";
+            case ISIFIT:
+                return "API/IsiFit/IsiFitApi.php";
         }
 
         return "API/IsiCashier/IsiCashierApi.php";
