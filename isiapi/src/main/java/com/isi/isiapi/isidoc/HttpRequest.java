@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.isi.isiapi.MakeHttpPost;
 import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
+import com.isi.isiapi.general.classes.Customer;
 import com.isi.isiapi.general.classes.IsiDocResponse;
 
 import java.util.concurrent.ExecutionException;
@@ -26,9 +27,9 @@ public class HttpRequest {
         this.apiKey = apiKey;
     }
 
-    public IsiDocResponse getMyDoc(String serial){
+    public IsiDocResponse getMyDoc(Customer c){
         HttpJson json = new HttpJson();
-        json.addData("serial", serial);
+        json.addData("customer", c.getId());
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIDOC, "checkDocCustomer", json.getData(), apiKey, debug);
 
