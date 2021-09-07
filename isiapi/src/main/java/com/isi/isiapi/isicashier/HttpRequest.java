@@ -248,6 +248,26 @@ public class HttpRequest {
 
     }
 
+    public Integer addCustomerGetId(String serial, Customer customer){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("customer", new Gson().toJsonTree(customer));
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addCustomerGetId", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return Integer.parseInt(response.trim());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
     public boolean modifyCustomer(Customer customer){
 
         HttpJson json = new HttpJson();
