@@ -12,7 +12,7 @@ import com.isi.isiapi.general.classes.IsiFitCessioneBeni;
 import com.isi.isiapi.general.classes.IsiFitSpesaPraticaSportiva;
 import com.isi.isiapi.general.classes.IsiFitSpesaPraticaSportivaMinori;
 import com.isi.isiapi.general.classes.IsiFitSport;
-
+import com.isi.isiapi.general.classes.IsifitRicevutaUtilizzoGratuito;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -198,6 +198,29 @@ public class HttpRequest {
 
     }
 
+    public boolean addRicevutaOmaggio(String serial, IsifitRicevutaUtilizzoGratuito spesa){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("spesa", new Gson().toJsonTree(spesa));
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addIsifitRicevutaUtilizzoGratuito", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "addRicevutaOmaggio: " + response);
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public ArrayList<IsiFitSpesaPraticaSportiva> getSpesePraticheSportive(String serial){
 
         HttpJson json = new HttpJson();
@@ -211,6 +234,28 @@ public class HttpRequest {
             Log.e("TAG", "getCausali: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<IsiFitSpesaPraticaSportiva>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public ArrayList<IsifitRicevutaUtilizzoGratuito> getRicevuteGratuite(String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getRicevuteGratuite", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "getCausali: " + response);
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsifitRicevutaUtilizzoGratuito>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
@@ -289,5 +334,7 @@ public class HttpRequest {
     }
 
 }
+
+
 
 
