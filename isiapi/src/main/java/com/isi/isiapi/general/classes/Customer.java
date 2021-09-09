@@ -48,11 +48,10 @@ public class Customer {
     private String docRelease;
     @SerializedName("DocExpire")
     private String docExpire;
+    @SerializedName("CommercialComunication")
+    private boolean commercialComunication;
 
-
-
-
-    public Customer(String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal) {
+    public Customer(String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal, boolean commercialComunication) {
         this.name = name;
         this.surname = surname;
         this.iva = iva;
@@ -68,9 +67,10 @@ public class Customer {
         this.birthday = birthday;
         this.society = society;
         this.fiscal = fiscal;
+        this.commercialComunication = commercialComunication;
     }
 
-    public Customer(int id, String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal) {
+    public Customer(int id, String name, String surname, String iva, String email, String address, String city, String province, String zip, String country, String phone, String pec, String aeCode, String birthday, String society, String fiscal, boolean commercialComunication) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -87,6 +87,7 @@ public class Customer {
         this.birthday = birthday;
         this.society = society;
         this.fiscal = fiscal;
+        this.commercialComunication = commercialComunication;
     }
 
     public String getCity() {
