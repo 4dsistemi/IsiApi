@@ -14,7 +14,7 @@ public class IsifitAutocertificazionePremi {
     public Float euro;
     @SerializedName("Iban")
     public String iban;
-    @SerializedName("type")
+    @SerializedName("Type")
     public int type;
     @SerializedName("Customer")
     public Customer customer;
