@@ -266,6 +266,14 @@ public class Customer {
         this.docExpire = docExpire;
     }
 
+    public boolean isCommercialComunication() {
+        return commercialComunication;
+    }
+
+    public void setCommercialComunication(boolean commercialComunication) {
+        this.commercialComunication = commercialComunication;
+    }
+
     @Override
     public String toString() {
         return name + " " + surname;
