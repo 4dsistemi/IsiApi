@@ -12,6 +12,7 @@ import com.isi.isiapi.general.classes.IsiFitCessioneBeni;
 import com.isi.isiapi.general.classes.IsiFitSpesaPraticaSportiva;
 import com.isi.isiapi.general.classes.IsiFitSpesaPraticaSportivaMinori;
 import com.isi.isiapi.general.classes.IsiFitSport;
+import com.isi.isiapi.general.classes.IsifitAutocertificazionePremi;
 import com.isi.isiapi.general.classes.IsifitRicevutaUtilizzoGratuito;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -114,6 +115,29 @@ public class HttpRequest {
 
     }
 
+    public boolean addAutocertificazionePremi(String serial, IsifitAutocertificazionePremi causale){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("autocertificazione", new Gson().toJsonTree(causale));
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "addAutocertificazionePremi", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "addAutocertificazionePremi: " + response);
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public boolean modifyCausale(IsiFitCausalePagamento causale){
 
         HttpJson json = new HttpJson();
@@ -147,6 +171,28 @@ public class HttpRequest {
             Log.e("TAG", "getCausali: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<IsiFitCausalePagamento>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public ArrayList<IsifitAutocertificazionePremi> getAutocertificazionePremi(String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getAutocertificazionePremi", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "getCausali: " + response);
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsifitAutocertificazionePremi>>(){}.getType());
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
