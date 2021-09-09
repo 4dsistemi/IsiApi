@@ -212,26 +212,7 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
-        json.addData("name", customer.getName());
-        json.addData("surname", customer.getSurname());
-        json.addData("iva", customer.getIva());
-        json.addData("email", customer.getEmail());
-        json.addData("address", customer.getAddress());
-        json.addData("city", customer.getCity());
-        json.addData("province", customer.getProvince());
-        json.addData("zip", customer.getZip());
-        json.addData("country", customer.getCountry());
-        json.addData("phone", customer.getPhone());
-        json.addData("pec", customer.getPec());
-        json.addData("ae_code", customer.getAeCode());
-        json.addData("society", customer.getSociety());
-        json.addData("fiscal", customer.getFiscal());
-        json.addData("birthday" , customer.getBirthday());
-        json.addData("doc_type", customer.getDocType());
-        json.addData("doc_serial" , customer.getDocSerial());
-        json.addData("doc_release" , customer.getDocRelease());
-        json.addData("doc_expire", customer.getDocExpire());
-        json.addData("birthplace" , customer.getBirthplace());
+        json.addData("customer", new Gson().toJsonTree(customer));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addCustomer", json.getData(), apiKey, debug);
 
@@ -271,27 +252,8 @@ public class HttpRequest {
     public boolean modifyCustomer(Customer customer){
 
         HttpJson json = new HttpJson();
-        json.addData("id", customer.getId());
-        json.addData("name", customer.getName());
-        json.addData("surname", customer.getSurname());
-        json.addData("iva", customer.getIva());
-        json.addData("email", customer.getEmail());
-        json.addData("address", customer.getAddress());
-        json.addData("city", customer.getCity());
-        json.addData("province", customer.getProvince());
-        json.addData("zip", customer.getZip());
-        json.addData("country", customer.getCountry());
-        json.addData("phone", customer.getPhone());
-        json.addData("pec", customer.getPec());
-        json.addData("ae_code", customer.getAeCode());
-        json.addData("society", customer.getSociety());
-        json.addData("fiscal", customer.getFiscal());
-        json.addData("birthday" , customer.getBirthday());
-        json.addData("doc_type" , customer.getDocType());
-        json.addData("doc_serial" , customer.getDocSerial());
-        json.addData("doc_release" , customer.getDocRelease());
-        json.addData("doc_expire" , customer.getDocExpire());
-        json.addData("birthplace" , customer.getBirthplace());
+        json.addData("customer", new Gson().toJsonTree(customer));
+
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "modifyCustomer", json.getData(), apiKey, debug);
 
