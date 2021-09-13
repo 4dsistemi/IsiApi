@@ -514,6 +514,35 @@ public class HttpRequest {
         return null;
     }
 
+    public int addAccountFromEmail(String serial, String email, ArrayList<ApplicationList> applicationsAdded){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("email", email);
+        json.addData("applications", new Gson().toJsonTree(applicationsAdded));
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "addAccountFromPrivilegeAndEmail", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            if(response.trim().equals("ok")){
+                return 1;
+            }else if(response.trim().equals("account not exists")){
+                return -1;
+            }else{
+                return -2;
+            }
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return -3;
+
+    }
+
+
 }
 
 

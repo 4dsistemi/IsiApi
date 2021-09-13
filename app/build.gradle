@@ -10,8 +10,8 @@ android {
         applicationId "com.isi.isiapi"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 102
-        versionName "2.0.94"
+        versionCode 103
+        versionName "2.0.95"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
