@@ -1,12 +1,16 @@
 package com.isi.isiapi.isiapp;
 
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.MakeHttpPost;
 import com.isi.isiapi.general.CTZON_SERVICE;
 import com.isi.isiapi.general.HttpJson;
+import com.isi.isiapi.general.classes.AppActivation;
 import com.isi.isiapi.general.classes.ApplicationList;
+import com.isi.isiapi.general.classes.ApplicationPrivileges;
 import com.isi.isiapi.general.classes.Operator;
 import com.isi.isiapi.general.classes.Reservation;
 import com.isi.isiapi.general.classes.ctzon.CtzonOrder;
@@ -446,6 +450,68 @@ public class HttpRequest {
 
         return false;
 
+    }
+
+    public boolean updateApplicationActivePriority(ArrayList<AppActivation> activation){
+        HttpJson json = new HttpJson();
+        json.addData("app", new Gson().toJsonTree(activation));
+
+        com.isi.isiapi.MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "updateApplicationActivePriority", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean activateService(int superID, int position, String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("id", superID);
+        json.addData("position", position);
+
+        com.isi.isiapi.MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "activateService", json.getData(), apiKey, debug);
+
+
+        try {
+            String response = post.execute().get();
+
+            Log.e("TAG", "activateService: " + response);
+
+            return response.trim().equals("true");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+
+    public ArrayList<ApplicationPrivileges> getPrivileges(int id, String serial){
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("id", id);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIAPP, "getPrivilege", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<ApplicationPrivileges>>(){}.getType());
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
