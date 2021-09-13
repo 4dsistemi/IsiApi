@@ -14,7 +14,7 @@ public class Operator {
     public String operator_code = "0000";
 
     @SerializedName("Privilege")
-    public boolean privilege;
+    public String privilege;
 
     @SerializedName("Name")
     public String name;
@@ -43,7 +43,7 @@ public class Operator {
     @SerializedName("Points")
     public LoyaltyPoint points;
 
-    public Operator(int id, boolean privilege, String name, String surname, String address, String phone, String email, String operator_code, String nfc) {
+    public Operator(int id, String privilege, String name, String surname, String address, String phone, String email, String operator_code, String nfc) {
         this.privilege = privilege;
         this.name = name;
         this.surname = surname;

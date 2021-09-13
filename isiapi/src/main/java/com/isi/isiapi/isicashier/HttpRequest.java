@@ -43,7 +43,6 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
-        json.addData("serial", serial);
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "getOperators", json.getData(), apiKey, debug);
 
