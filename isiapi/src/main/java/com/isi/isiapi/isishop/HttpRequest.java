@@ -37,7 +37,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
 
-        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISISHOP, "getSerial", json.getData(), apiKey, debug);
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISISHOP, "getShopInfo", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
