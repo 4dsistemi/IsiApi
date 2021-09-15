@@ -95,9 +95,7 @@ public class HttpRequest {
 
     public boolean modifyBike(Bike bike){
         HttpJson json = new HttpJson();
-        json.addData("id", bike.id);
-        json.addData("model", bike.model);
-        json.addData("matric", bike.matricNumber);
+        json.addData("bike", new Gson().toJsonTree(bike));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISINOLO, "modifyBike", json.getData(), apiKey, debug);
 
