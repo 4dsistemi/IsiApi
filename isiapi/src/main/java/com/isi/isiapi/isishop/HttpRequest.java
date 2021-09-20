@@ -12,7 +12,7 @@ import com.isi.isiapi.general.classes.CommercialCategory;
 import com.isi.isiapi.general.classes.ShopDetail;
 import com.isi.isiapi.general.classes.ShopExtraClosing;
 import com.isi.isiapi.general.classes.ShopOpeningHours;
-import com.isi.isiapi.general.classes.ctzon.IsicoinMovement;
+import com.isi.isiapi.general.classes.IsicoinMovement;
 
 import java.util.ArrayList;
 

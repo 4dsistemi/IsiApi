@@ -1,4 +1,4 @@
-package com.isi.isiapi.general.classes.ctzon;
+package com.isi.isiapi.general.classes;
 
 import com.google.gson.annotations.SerializedName;
 
