@@ -367,7 +367,7 @@ public class HttpRequest {
         }
     }
 
-    private boolean addMovement(IsicoinMovement movement, String serial){
+    public boolean addMovement(IsicoinMovement movement, String serial){
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
