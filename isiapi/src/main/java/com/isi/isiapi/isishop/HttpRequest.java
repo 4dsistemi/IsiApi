@@ -12,6 +12,7 @@ import com.isi.isiapi.general.classes.CommercialCategory;
 import com.isi.isiapi.general.classes.ShopDetail;
 import com.isi.isiapi.general.classes.ShopExtraClosing;
 import com.isi.isiapi.general.classes.ShopOpeningHours;
+import com.isi.isiapi.general.classes.ctzon.IsicoinMovement;
 
 import java.util.ArrayList;
 
@@ -357,6 +358,22 @@ public class HttpRequest {
         json.addData("id", id);
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISISHOP,"deleteCategory", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+            return response.trim().equals("ok");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean addMovement(IsicoinMovement movement, String serial){
+
+        HttpJson json = new HttpJson();
+        json.addData("serial", serial);
+        json.addData("movement", new Gson().toJsonTree(serial));
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISISHOP,"movementCoin", json.getData(), apiKey, debug);
 
         try {
             String response = post.execute().get();
