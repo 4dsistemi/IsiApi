@@ -17,3 +17,4 @@ public class Fattura {
     @SerializedName("Fattures")
     public ArrayList<FatturaIn> fattures;
 }
+

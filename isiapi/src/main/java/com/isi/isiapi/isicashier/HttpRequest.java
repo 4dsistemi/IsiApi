@@ -1,5 +1,7 @@
 package com.isi.isiapi.isicashier;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.MakeHttpPost;
@@ -659,6 +661,8 @@ public class HttpRequest {
 
         try {
             String response = post.execute().get();
+
+            Log.e("TAG", "getFatture: " + response);
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Fattura>>(){}.getType());
 

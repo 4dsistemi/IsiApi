@@ -18,5 +18,7 @@ public class FatturaIn {
     public int status;
     @SerializedName("FatturaDeleted")
     public int deleted;
+    @SerializedName("IncrementalNumber")
+    public int incrementalNumber;
 
 }
