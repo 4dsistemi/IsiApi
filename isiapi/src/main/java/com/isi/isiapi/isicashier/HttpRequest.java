@@ -712,7 +712,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addFattura(String serial, Discount discount, int operator, ArrayList<BillProduct> bill, String paymentType, String recoverCode, String customer){
+    public boolean addFattura(String serial, Discount discount, int operator, ArrayList<BillProduct> bill, String paymentType, String recoverCode, String customer, int numberFattura){
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
@@ -723,6 +723,7 @@ public class HttpRequest {
         json.addData("payment_type", paymentType);
         json.addData("recover_code", recoverCode);
         json.addData("customer", customer);
+        json.addData("numberFattura", customer);
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addFattura", json.getData(), apiKey, debug);
 
