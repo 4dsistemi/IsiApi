@@ -723,7 +723,7 @@ public class HttpRequest {
         json.addData("payment_type", paymentType);
         json.addData("recover_code", recoverCode);
         json.addData("customer", customer);
-        json.addData("numberFattura", customer);
+        json.addData("numberFattura", numberFattura);
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISICASHIER, "addFattura", json.getData(), apiKey, debug);
 
