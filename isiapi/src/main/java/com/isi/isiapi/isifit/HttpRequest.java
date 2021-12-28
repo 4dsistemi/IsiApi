@@ -338,10 +338,14 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsifitRicevutaUtilizzoGratuito> getRicevuteGratuite(String serial){
+    public ArrayList<IsifitRicevutaUtilizzoGratuito> getRicevuteGratuite(String serial, Date start, Date end){
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
+        json.addData("start", format.format(start));
+        json.addData("end", format.format(end));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getRicevuteGratuite", json.getData(), apiKey, debug);
 
@@ -357,6 +361,26 @@ public class HttpRequest {
         }
 
         return null;
+
+    }
+
+    public boolean deleteRicevutaUtilizzoGratuito(IsifitRicevutaUtilizzoGratuito spesa){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", spesa.id);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "deleteRicevutaUtilizzoGratuito", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
 
     }
 
@@ -388,10 +412,15 @@ public class HttpRequest {
     }
 
 
-    public ArrayList<IsiFitCessioneBeni> getCessioneBeni(String serial) {
+    public ArrayList<IsiFitCessioneBeni> getCessioneBeni(String serial, Date start, Date end) {
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
+        json.addData("start", format.format(start));
+        json.addData("end", format.format(end));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getCessioneBeni", json.getData(), apiKey, debug);
 
@@ -422,6 +451,26 @@ public class HttpRequest {
             String response = post.execute().get();
 
             Log.e("TAG", "addCessioneBeni: " + response);
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean deleteCessioneBeni(IsiFitCessioneBeni spesa){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", spesa.id);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "deleteCessioneBeni", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
 
             return response.trim().equals("ok");
 
