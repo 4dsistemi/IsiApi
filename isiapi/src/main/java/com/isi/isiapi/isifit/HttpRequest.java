@@ -202,6 +202,26 @@ public class HttpRequest {
 
     }
 
+    public boolean deleteSpesaPraticaSportiva(IsiFitSpesaPraticaSportiva spesa){
+
+        HttpJson json = new HttpJson();
+        json.addData("id", spesa.id);
+
+        MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "deleteSpesaPraticaSportiva", json.getData(), apiKey, debug);
+
+        try {
+            String response = post.execute().get();
+
+            return response.trim().equals("ok");
+
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public boolean addSpesaPraticaSportiva(String serial, IsiFitSpesaPraticaSportiva spesa){
 
         HttpJson json = new HttpJson();
