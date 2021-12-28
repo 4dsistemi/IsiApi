@@ -360,10 +360,15 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiFitSpesaPraticaSportivaMinori> getSpesePraticheSportiveMinori(String serial){
+    public ArrayList<IsiFitSpesaPraticaSportivaMinori> getSpesePraticheSportiveMinori(String serial, Date start,  Date end){
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
+        json.addData("start", format.format(start));
+        json.addData("end", format.format(end));
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportiveMinori", json.getData(), apiKey, debug);
 
