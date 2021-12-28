@@ -14,7 +14,11 @@ import com.isi.isiapi.general.classes.IsiFitSpesaPraticaSportivaMinori;
 import com.isi.isiapi.general.classes.IsiFitSport;
 import com.isi.isiapi.general.classes.IsifitAutocertificazionePremi;
 import com.isi.isiapi.general.classes.IsifitRicevutaUtilizzoGratuito;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class HttpRequest {
@@ -307,10 +311,15 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiFitSpesaPraticaSportiva> getSpesePraticheSportive(String serial){
+    public ArrayList<IsiFitSpesaPraticaSportiva> getSpesePraticheSportive(String serial, Date start,  Date end){
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
 
         HttpJson json = new HttpJson();
         json.addData("serial", serial);
+        json.addData("start", format.format(start));
+        json.addData("end", format.format(end));
+
 
         MakeHttpPost post = new MakeHttpPost(CTZON_SERVICE.ISIFIT, "getSpesePraticheSportive", json.getData(), apiKey, debug);
 
