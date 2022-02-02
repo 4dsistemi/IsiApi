@@ -734,6 +734,26 @@ public class HttpRequest {
 
     }
 
+    public boolean deleteCustomer(Customer customer){
+
+        HttpJson json = new HttpJson();
+        json.addData("customer", new Gson().toJsonTree(customer));
+
+        MakeHttpPost post = new MakeHttpPost( "deleteCustomer", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return response.trim().equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 
 }
 
