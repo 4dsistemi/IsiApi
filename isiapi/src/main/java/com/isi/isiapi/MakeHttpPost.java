@@ -1,115 +1,55 @@
 package com.isi.isiapi;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
-import com.isi.isiapi.general.CTZON_SERVICE;
-import com.isi.isiapi.general.HttpData;
-import com.isi.isiapi.general.Service;
-import com.isi.isiapi.general.Website;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
-public class MakeHttpPost extends AsyncTask<Void, Void, String> {
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+public class MakeHttpPost{
 
     private final String intent;
     private final JsonObject data;
     private final String apiKey;
-    private final boolean debug;
-    private final String service;
 
-    public MakeHttpPost(CTZON_SERVICE service, String intent, JsonObject data, String apiKey, boolean debug){
+    public MakeHttpPost(String intent, JsonObject data, String apiKey){
         this.intent = intent;
         this.data = data;
         this.apiKey = apiKey;
-        this.service = Service.getService(service);
-        this.debug = debug;
     }
 
-    @Override
-    protected String doInBackground(Void... params) {
+    public String post() throws IOException {
 
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
+        final MediaType JSON
+                = MediaType.get("application/json; charset=utf-8");
 
-        URL url;
+        HttpData data = new HttpData(intent, this.data);
+
+        OkHttpClient client = new OkHttpClient.Builder().writeTimeout(5, TimeUnit.SECONDS).readTimeout(15, TimeUnit.SECONDS).connectTimeout(2, TimeUnit.SECONDS).build();
+
+        RequestBody body = RequestBody.create(data.generateJson(data), JSON);
+        Request request = new Request.Builder()
+                .addHeader("authorization", apiKey)
+                .url("http://localhost:9000/API/")
+                .post(body)
+                .build();
         try {
-
-            String urlReferred = Website.release;
-
-            if(debug){
-                urlReferred = Website.debug;
-            }
-
-            urlReferred += service;
-
-            url = new URL(urlReferred);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(15000);
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setDoInput(true);
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("content-type", "application/json");
-            urlConnection.setRequestProperty("authorization", apiKey);
-
-            HttpData data = new HttpData(intent, this.data);
-
-            DataOutputStream os = new DataOutputStream(urlConnection.getOutputStream());
-            os.writeBytes(data.generateJson(data));
-            os.close();
-
-            int statusCode = urlConnection.getResponseCode();
-
-            if(statusCode == 200){
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuilder buffer = new StringBuilder();
-                if (inputStream == null) {
-                    return "";
-                }
-                reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-
-                String line;
-                while ((line = reader.readLine()) != null){
-                    buffer.append(line).append("\n");
-                }
-
-
-                if (buffer.length() == 0){
-                    return "";
-                }
-
-                return buffer.toString();
+            Response response = client.newCall(request).execute();
+            if(response.body() != null){
+                return Objects.requireNonNull(response.body()).string();
             }else{
-                return "";
+                return null;
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            //exception = e;
-            return "";
-        } finally {
-
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (final IOException e) {
-                    Log.e("test", "Error closing stream", e);
-                }
-            }
+        }catch (Exception ignored){
+            return null;
         }
     }
+
 
 }
