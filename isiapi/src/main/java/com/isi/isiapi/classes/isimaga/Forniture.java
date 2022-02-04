@@ -1,15 +1,10 @@
 package com.isi.isiapi.classes.isimaga;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import com.google.gson.annotations.SerializedName;
-import com.isi.isiapp.serverAndApi.database.classes.LastModifiedTables;
+import com.isi.isiapi.classes.LastModifiedTables;
 
-@Entity(tableName = "forniture")
 public class Forniture extends LastModifiedTables {
 
-    @PrimaryKey(autoGenerate = true)
     @SerializedName("Id")
     public int id;
 

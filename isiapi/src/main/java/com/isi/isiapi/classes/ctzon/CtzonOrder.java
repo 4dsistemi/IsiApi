@@ -2,7 +2,7 @@ package com.isi.isiapi.classes.ctzon;
 
 
 import com.google.gson.annotations.SerializedName;
-import com.isi.isiapp.serverAndApi.database.classes.Account;
+import com.isi.isiapi.classes.Account;
 
 import java.util.ArrayList;
 import java.util.Date;
