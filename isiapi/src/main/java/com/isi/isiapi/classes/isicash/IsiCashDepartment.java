@@ -1,8 +1,9 @@
-package com.isi.isiapi.classes;
+package com.isi.isiapi.classes.isicash;
 
 import com.google.gson.annotations.SerializedName;
+import com.isi.isiapi.classes.LastModifiedTables;
 
-public class IsiCashDepartment extends LastModifiedTables{
+public class IsiCashDepartment extends LastModifiedTables {
 
     @SerializedName("Id")
     public int id;

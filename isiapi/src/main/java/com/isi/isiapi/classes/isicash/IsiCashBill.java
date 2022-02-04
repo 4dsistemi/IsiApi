@@ -1,10 +1,12 @@
-package com.isi.isiapi.classes;
+package com.isi.isiapi.classes.isicash;
 
 import com.google.gson.annotations.SerializedName;
+import com.isi.isiapi.classes.LastModifiedTables;
 
 import java.util.Date;
 
-public class IsiCashBill extends LastModifiedTables{
+
+public class IsiCashBill extends LastModifiedTables {
 
     @SerializedName("Id")
     public int id;
@@ -27,7 +29,7 @@ public class IsiCashBill extends LastModifiedTables{
     @SerializedName("Status")
     public int status = 0;
 
-    public IsiCashBill(int discount_valor, int discount_type, int account_id, String payment_type, float total, int closure_number, int document_number) {
+    public IsiCashBill(float discount_valor, int discount_type, int account_id, String payment_type, float total, int closure_number, int document_number) {
         this.discount_valor = discount_valor;
         this.discount_type = discount_type;
         this.account_id = account_id;

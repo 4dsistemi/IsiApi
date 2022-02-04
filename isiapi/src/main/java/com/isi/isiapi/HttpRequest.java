@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.classes.Account;
 import com.isi.isiapi.classes.AppActivation;
 import com.isi.isiapi.classes.AppAndAppActivation;
-import com.isi.isiapi.classes.BillAndFattura;
 import com.isi.isiapi.classes.Category;
 import com.isi.isiapi.classes.CategoryAndProduct;
 import com.isi.isiapi.classes.Commercial;
@@ -16,10 +15,19 @@ import com.isi.isiapi.classes.Customer;
 import com.isi.isiapi.classes.Fattura;
 import com.isi.isiapi.classes.FiscalPrinter;
 import com.isi.isiapi.classes.GYBToken;
-import com.isi.isiapi.classes.IsiCashBill;
-import com.isi.isiapi.classes.IsiCashBillAndElements;
-import com.isi.isiapi.classes.IsiCashDepartment;
 import com.isi.isiapi.classes.Product;
+import com.isi.isiapi.classes.ThermalPrinter;
+import com.isi.isiapi.classes.ctzon.CtzonOrder;
+import com.isi.isiapi.classes.isicash.BillAndFattura;
+import com.isi.isiapi.classes.isicash.IsiCashBill;
+import com.isi.isiapi.classes.isicash.IsiCashBillAndElements;
+import com.isi.isiapi.classes.isicash.IsiCashDepartment;
+import com.isi.isiapi.classes.isiorder.IsiorderAccount;
+import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
+import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
+import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
+import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
+import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -748,6 +756,607 @@ public class HttpRequest {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    //ISIORDER
+
+    public ArrayList<IsiorderAccount> getAccounts(){
+        ArrayList<IsiorderAccount> accounts = new ArrayList<>();
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "isiorderUser", json.getData(), apiKey);
+
+            String result = post.post();
+
+            accounts = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderAccount>>(){}.getType());
+
+        } catch (Exception ignored) {
+
+        }
+        return accounts;
+    }
+
+    public IsiorderOrdersProductElement getOrderForTable(int table){
+        try{
+            HttpJson json = new HttpJson();
+            json.addData("id", table);
+
+            MakeHttpPost post = new MakeHttpPost( "getOrderForTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, IsiorderOrdersProductElement.class);
+
+        }catch (Exception ignored){
+
+        }
+
+        return null;
+    }
+
+    public ArrayList<IsiorderCategoriesProductsNotes> getElements(){
+
+        ArrayList<IsiorderCategoriesProductsNotes> ctageories = new ArrayList<>();
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "needToUpdate", json.getData(), apiKey);
+
+            String result = post.post();
+
+            ctageories = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoriesProductsNotes>>(){}.getType());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return ctageories;
+
+    }
+
+    public boolean cancelOrderGuest(int id){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+
+            MakeHttpPost post = new MakeHttpPost( "cancelOrderGuest", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.contains("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean sendDelivery(String jsona, String elements, int operator){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("json", jsona);
+            json.addData("elements", elements);
+            json.addData("operator", operator);
+
+            MakeHttpPost post = new MakeHttpPost( "sendDelivery", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.contains("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public ArrayList<CtzonOrder> getMyIsiDel(){
+
+        ArrayList<CtzonOrder> missions = new ArrayList<>();
+
+        try {
+
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey);
+
+            String result = post.post();
+
+            if(result.trim().equals("notActive")){
+                return missions;
+            }
+
+            missions = new Gson().fromJson(result, new TypeToken<ArrayList<CtzonOrder>>(){}.getType());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return missions;
+
+    }
+
+    public boolean confirmIsiDel(String id, boolean confirm, boolean isidel){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("confirm", confirm);
+            json.addData("isidel", isidel);
+            MakeHttpPost post = new MakeHttpPost( "confirmIsiDel", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean updateStatus(int id, int status){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("status", status);
+            MakeHttpPost post = new MakeHttpPost( "updateStatusDelivery", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public void occupingTable(int id, int operator){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("account", operator);
+            MakeHttpPost post = new MakeHttpPost( "occupingTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public void releaseTable(int id){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            MakeHttpPost post = new MakeHttpPost( "releaseTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+        } catch (Exception ignored) {
+
+        }
+
+    }
+
+    public boolean checkisiDel(){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return !result.trim().equals("notActive");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean reopenOrder(int id){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            MakeHttpPost post = new MakeHttpPost( "reopenOrder", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean updateElementAlreadySent(IsiorderElementOrder element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", element.id);
+            json.addData("newName", element.newName);
+            json.addData("newPrice", element.newPrice);
+
+            MakeHttpPost post = new MakeHttpPost( "changeElementAlreadySent", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<ThermalPrinter> getIsiOrderPrinter(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinter>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+    }
+
+    public ArrayList<IsiorderCategoryAndTables> getCategoriesTables(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "tables", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean canAccess(int id){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order", new Gson().toJsonTree(isiorderOrdersProductElement));
+            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean printPrebuill(int id, boolean discount_auto, boolean romana, boolean all){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("discount_auto", id);
+            json.addData("romana", id);
+            json.addData("all", id);
+
+            MakeHttpPost post = new MakeHttpPost( "printPrebill", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean setRomanaPayedElement(int orderId, boolean stamp, int account_id, float discount, float total, int peopleSelected){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order_id", orderId);
+            json.addData("stamp", stamp);
+            json.addData("account_id", account_id);
+            json.addData("discount", discount);
+            json.addData("total", total);
+            json.addData("people", peopleSelected);
+
+            MakeHttpPost post = new MakeHttpPost( "setRomanaPayedElement", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean setPayedElement(ArrayList<Integer> ids, int orderId, boolean stamp, int account_id, float discount, float total, int peopleSelected){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", new Gson().toJsonTree(ids));
+            json.addData("order_id", orderId);
+            json.addData("stamp", stamp);
+            json.addData("account_id", account_id);
+            json.addData("discount", discount);
+            json.addData("total", total);
+
+            MakeHttpPost post = new MakeHttpPost( "setPayedElements", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean setReadedMessages(int toId){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("to_id", toId);
+            MakeHttpPost post = new MakeHttpPost( "setReadedMessages", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<IsiorderChatAccounts> getAllMyMessages(int myId){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            json.addData("myId", myId);
+
+            MakeHttpPost post = new MakeHttpPost( "getAllMyMessages", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChatAccounts>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean deleteChat(int fromId, int toId){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("from_id", fromId);
+            json.addData("to_id", toId);
+
+            MakeHttpPost post = new MakeHttpPost( "deleteChat", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean sendMessageToPrinter(int id, String text, int operator){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("text", text);
+            json.addData("operator", operator);
+
+            MakeHttpPost post = new MakeHttpPost( "sendMessageToPrinter", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public ArrayList<IsiorderOrdersProductElement> getAllOrderToday(int myId){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            json.addData("myId", myId);
+
+            MakeHttpPost post = new MakeHttpPost( "getAllOrderToday", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChatAccounts>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean changeCoperti(int orderId, int coperti){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order_id", orderId);
+            json.addData("coperti", coperti);
+
+            MakeHttpPost post = new MakeHttpPost( "changeCoperti", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean moveTable(int order, int table){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order", order);
+            json.addData("table", table);
+
+            MakeHttpPost post = new MakeHttpPost( "moveTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean addSconto(int order, double sconto){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", order);
+            json.addData("sconto", sconto);
+
+            MakeHttpPost post = new MakeHttpPost( "addSconto", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean printExit(int order, int exit){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", order);
+            json.addData("whatExit", exit);
+
+            MakeHttpPost post = new MakeHttpPost( "printExit", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
         }
 
         return false;
