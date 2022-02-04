@@ -44,10 +44,10 @@ public class MakeHttpPost{
             if(response.body() != null){
                 return Objects.requireNonNull(response.body()).string();
             }else{
-                return null;
+                return "";
             }
         }catch (Exception ignored){
-            return null;
+            return "";
         }
     }
 
