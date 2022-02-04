@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class IsiorderChatAccounts extends LastModifiedTables {
 
-    IsiorderChat chat;
+    public IsiorderChat chat;
 
-    IsiorderAccount from;
+    public IsiorderAccount from;
 
-    IsiorderAccount to;
+    public IsiorderAccount to;
 }

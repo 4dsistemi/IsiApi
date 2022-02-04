@@ -8,10 +8,15 @@ import java.util.List;
 
 public class IsiorderCategoriesProductsNotes {
 
-    Category categories;
+    public Category categories;
 
     public List<Product> products;
 
     public List<IsiorderNote> notes;
 
+    public IsiorderCategoriesProductsNotes(Category categories, List<Product> products, List<IsiorderNote> notes) {
+        this.categories = categories;
+        this.products = products;
+        this.notes = notes;
+    }
 }
