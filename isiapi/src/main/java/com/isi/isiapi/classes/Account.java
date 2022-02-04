@@ -51,9 +51,6 @@ public class Account {
     @SerializedName("GeneralVerification")
     public String general_verification;
 
-    @SerializedName("LoginCode")
-    public String operator_code = "0000";
-
     @SerializedName("Nfc")
     public String nfc;
 
