@@ -48,7 +48,7 @@ public class IsiorderOrder extends LastModifiedTables {
     public int coperti_payed = 0;
 
     @SerializedName("TotalPayed")
-    public int total_payed = 0;
+    public float total_payed = 0;
 
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
         this.isiorder_table_element_id = isiorder_table_element_id;

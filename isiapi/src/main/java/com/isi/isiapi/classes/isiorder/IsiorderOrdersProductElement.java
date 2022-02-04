@@ -28,6 +28,20 @@ public class    IsiorderOrdersProductElement {
         elementOrderAndProducts.add(new IsiorderElementOrderAndProducts(isiorderElementOrder, product));
     }
 
+    public double getTotal(){
+
+        double total = 0;
+
+        for (IsiorderElementOrderAndProducts isiorderNotesAndNoteOrder : elementOrderAndProducts){
+
+            total += isiorderNotesAndNoteOrder.getTotal();
+
+        }
+
+        return total;
+
+    }
+
     public IsiorderOrdersProductElement(IsiorderOrder orders) {
         this.orders = orders;
     }

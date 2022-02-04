@@ -17,4 +17,21 @@ public class IsiorderElementOrderAndProducts {
         this.elementOrder = elementOrder;
         this.products = products;
     }
+
+    public double getTotal(){
+
+        double total = elementOrder.newPrice;
+
+        for (IsiorderNotesAndNoteOrder isiorderNotesAndNoteOrder : notesAndNoteOrders){
+
+            if(isiorderNotesAndNoteOrder.notes != null){
+                total += isiorderNotesAndNoteOrder.notes.price;
+            }
+
+        }
+
+        return total;
+
+    }
+
 }

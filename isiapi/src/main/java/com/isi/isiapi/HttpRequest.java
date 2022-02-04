@@ -1080,12 +1080,13 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement){
+    public boolean IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, boolean stamp){
         try {
 
             HttpJson json = new HttpJson();
             json.addData("order", new Gson().toJsonTree(isiorderOrdersProductElement));
-            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey);
+            json.addData("stamp", stamp);
+            MakeHttpPost post = new MakeHttpPost( "sendOrder", json.getData(), apiKey);
 
             String result = post.post();
 
