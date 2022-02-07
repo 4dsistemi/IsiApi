@@ -29,6 +29,8 @@ import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
+import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
+import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -1470,6 +1472,81 @@ public class HttpRequest {
 
         return new JsonObject().toString();
     }
+
+    //TODO
+
+    public boolean isiorderAddTable(IsiorderTableElement element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("table", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean isiorderEditTable(IsiorderTableElement element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("table", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean isiorderAddCategoryTable(IsiorderTableCategory element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("category", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddCategoryTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean isiorderEditCategoryTable(IsiorderTableCategory element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("category", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditCategoryTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
 }
 
 
