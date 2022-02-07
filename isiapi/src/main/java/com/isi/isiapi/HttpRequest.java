@@ -4,6 +4,7 @@ package com.isi.isiapi;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.classes.Account;
 import com.isi.isiapi.classes.AppActivation;
@@ -1080,7 +1081,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, boolean stamp){
+    public JsonObject IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, boolean stamp){
         try {
 
             HttpJson json = new HttpJson();
@@ -1090,13 +1091,13 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return result.trim().equals("ok");
+            return new JsonObject().getAsJsonObject(result);
 
         } catch (Exception ignored) {
 
         }
 
-        return false;
+        return new JsonObject();
     }
 
     public boolean printPrebuill(int id, boolean discount_auto, boolean romana, boolean all){
@@ -1147,7 +1148,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean setPayedElement(ArrayList<Integer> ids, int orderId, boolean stamp, int account_id, float discount, float total, int peopleSelected){
+    public boolean setPayedElement(ArrayList<Integer> ids, int orderId, boolean stamp, int account_id, float discount, float total){
         try {
 
             HttpJson json = new HttpJson();
@@ -1364,7 +1365,70 @@ public class HttpRequest {
 
     }
 
+    public boolean cleanTable(int account_id, int order, boolean stamp, float discount, float total, String ctzonCard){
 
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("account_id", account_id);
+            json.addData("id", order);
+            json.addData("stamp", stamp);
+            json.addData("discount", discount);
+            json.addData("total", total);
+            json.addData("ctzonCard", ctzonCard);
+
+
+            MakeHttpPost post = new MakeHttpPost( "cleanTable", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("tableCleaned");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public float getCopertiCost(){
+        try {
+
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getCopertiCost", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return Float.parseFloat(result.trim());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return 0;
+    }
+
+    public boolean getChatService(int order, int exit){
+
+        try {
+
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getChatService", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("activated");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
 }
 
 
