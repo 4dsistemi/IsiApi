@@ -28,6 +28,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
+import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
 import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
@@ -1546,6 +1547,62 @@ public class HttpRequest {
 
         return false;
     }
+
+    public boolean isiorderAddNote(IsiorderNote element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("note", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddNote", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean isiorderEditNote(IsiorderNote element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("note", element);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditNote", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<IsiorderNote> isiorderGetNotes(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "isiorderGetNotes", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderNote>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
 
 }
 
