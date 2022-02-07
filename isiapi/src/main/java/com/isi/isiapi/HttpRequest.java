@@ -1410,7 +1410,7 @@ public class HttpRequest {
         return 0;
     }
 
-    public boolean getChatService(int order, int exit){
+    public boolean getChatService(){
 
         try {
 
@@ -1428,6 +1428,47 @@ public class HttpRequest {
 
         return false;
 
+    }
+
+    public boolean addMessageChat(int account_id, int friend_id,  String message){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", account_id);
+            json.addData("friendId", friend_id);
+            json.addData("txt", message);
+
+            MakeHttpPost post = new MakeHttpPost( "addMessageChat", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("arrived");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public String getChatMessage(int myId, int friend_id){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("myId", myId);
+            json.addData("friendId", friend_id);
+
+            MakeHttpPost post = new MakeHttpPost( "getChatMessage", json.getData(), apiKey);
+
+            return post.post();
+
+        } catch (Exception ignored) {
+
+        }
+
+        return new JsonObject().toString();
     }
 }
 

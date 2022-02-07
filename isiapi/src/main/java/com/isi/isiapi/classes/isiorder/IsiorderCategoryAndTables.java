@@ -8,6 +8,4 @@ public class IsiorderCategoryAndTables {
 
     public List<IsiorderTableElement> isiorderTableElements;
 
-    public IsiorderOrder order;
-
 }

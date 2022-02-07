@@ -29,6 +29,9 @@ public class IsiorderTableElement extends LastModifiedTables {
     @SerializedName("Guest")
     public int guest = 1;
 
+    @SerializedName("Order")
+    public IsiorderOrder order;
+
     public IsiorderTableElement(String name, int isiorder_table_category_id, int is_occupied) {
         this.name = name;
         this.isiorder_table_category_id = isiorder_table_category_id;
