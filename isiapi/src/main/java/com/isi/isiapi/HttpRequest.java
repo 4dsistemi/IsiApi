@@ -31,6 +31,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
+import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
@@ -1399,22 +1400,22 @@ public class HttpRequest {
 
     }
 
-    public float getCopertiCost(){
+    public IsiorderGeneralInfo getIsiorderGeneralInfo(){
         try {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getCopertiCost", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getIsiorderGeneralInfo", json.getData(), apiKey);
 
             String result = post.post();
 
-            return Float.parseFloat(result.trim());
+            return new Gson().fromJson(result, IsiorderGeneralInfo.class);
 
         } catch (Exception ignored) {
 
         }
 
-        return 0;
+        return null;
     }
 
     public boolean getChatService(){
@@ -1653,6 +1654,25 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
 
             MakeHttpPost post = new MakeHttpPost( "getThermalPrintersAndCategories", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+    }
+
+    public ArrayList<Integer> testThermalPrinter(ThermalPrinter printer){
+
+        try {
+            HttpJson json = new HttpJson();
+            json.addData("printer", new Gson().toJsonTree(printer));
+
+            MakeHttpPost post = new MakeHttpPost( "testThermalPrinter", json.getData(), apiKey);
 
             String result = post.post();
 
