@@ -1652,7 +1652,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getThermalPrintersAndCategories", json.getData(), apiKey);
 
             String result = post.post();
 
