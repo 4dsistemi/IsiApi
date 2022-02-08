@@ -60,4 +60,8 @@ public class Product extends LastModifiedTables{
         this.connection_product = connection_product;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -7,4 +7,9 @@ public class CategoryAndProduct {
     public Category category;
 
     public List<Product> product;
+
+    @Override
+    public String toString() {
+        return category.name;
+    }
 }

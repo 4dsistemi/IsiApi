@@ -1084,17 +1084,18 @@ public class HttpRequest {
         return false;
     }
 
-    public JsonObject IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, boolean stamp){
+    public JsonObject IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, ArrayList<Integer> deleting, boolean stamp){
         try {
 
             HttpJson json = new HttpJson();
             json.addData("order", new Gson().toJsonTree(isiorderOrdersProductElement));
+            json.addData("deleting", new Gson().toJsonTree(deleting));
             json.addData("stamp", stamp);
             MakeHttpPost post = new MakeHttpPost( "sendOrder", json.getData(), apiKey);
 
             String result = post.post();
 
-            return new JsonObject().getAsJsonObject(result);
+            return new Gson().fromJson(result, JsonObject.class);
 
         } catch (Exception ignored) {
 
