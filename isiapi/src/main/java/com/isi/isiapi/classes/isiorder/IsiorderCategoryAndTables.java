@@ -8,4 +8,8 @@ public class IsiorderCategoryAndTables {
 
     public List<IsiorderTableElement> isiorderTableElements;
 
+    @Override
+    public String toString() {
+        return isiorderTableCategory.name;
+    }
 }

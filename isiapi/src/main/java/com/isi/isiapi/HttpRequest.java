@@ -18,6 +18,9 @@ import com.isi.isiapi.classes.FiscalPrinter;
 import com.isi.isiapi.classes.GYBToken;
 import com.isi.isiapi.classes.Product;
 import com.isi.isiapi.classes.ThermalPrinter;
+import com.isi.isiapi.classes.ThermalPrinterAndCategories;
+import com.isi.isiapi.classes.ThermalPrinterCategory;
+import com.isi.isiapi.classes.ThermalPrinterSubcategory;
 import com.isi.isiapi.classes.ctzon.CtzonOrder;
 import com.isi.isiapi.classes.isicash.BillAndFattura;
 import com.isi.isiapi.classes.isicash.IsiCashBill;
@@ -1599,6 +1602,66 @@ public class HttpRequest {
 
         return null;
 
+
+    }
+
+    public boolean addThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("printer", new Gson().toJsonTree(printer));
+            json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
+            json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
+
+            MakeHttpPost post = new MakeHttpPost( "addThermalPrinter", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean editThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("printer", new Gson().toJsonTree(printer));
+            json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
+            json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
+
+            MakeHttpPost post = new MakeHttpPost( "editThermalPrinter", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<ThermalPrinterAndCategories> getIsiOrderPrinterAndCategories(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
 
     }
 
