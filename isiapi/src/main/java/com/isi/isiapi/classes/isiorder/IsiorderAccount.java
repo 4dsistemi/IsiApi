@@ -35,7 +35,7 @@ public class IsiorderAccount extends LastModifiedTables {
     @SerializedName("AccountId")
     public Integer account_id;
 
-    public IsiorderAccount(String name, String surname, String password, int privilege, String email, int account_id) {
+    public IsiorderAccount(String name, String surname, String password, int privilege, String email, Integer account_id) {
         this.name = name;
         this.surname = surname;
         this.password = password;

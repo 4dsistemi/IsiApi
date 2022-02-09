@@ -789,6 +789,48 @@ public class HttpRequest {
         return accounts;
     }
 
+    public boolean editIsiorderAccount(IsiorderAccount account){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("account", new Gson().toJsonTree(account));
+
+            MakeHttpPost post = new MakeHttpPost( "editIsiorderAccount", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.contains("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean addIsiorderAccount(IsiorderAccount account){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("account", new Gson().toJsonTree(account));
+
+            MakeHttpPost post = new MakeHttpPost( "addIsiorderAccount", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.contains("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
     public IsiorderOrdersProductElement getOrderForTable(int table){
         try{
             HttpJson json = new HttpJson();
@@ -1726,6 +1768,31 @@ public class HttpRequest {
 
     }
 
+    public void printCarico(ArrayList<String> toPrint, int tot){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("toPrint", new Gson().toJsonTree(toPrint));
+            json.addData("tot", tot);
+            MakeHttpPost post = new MakeHttpPost( "printCarico", json.getData(), apiKey);
+
+            post.post();
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public String transformIsiorderPrivilege(int privilege){
+        switch (privilege){
+            case 1:
+                return "Admin";
+            case 2:
+                return "Cassa";
+            default:
+                return "cameriere";
+        }
+    }
 
 }
 
