@@ -1051,6 +1051,25 @@ public class HttpRequest {
 
     }
 
+    public ArrayList<IsiorderCategoryAndTables> getCategoriesTablesActive(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "tablesActive", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
     public ArrayList<IsiorderCategoryAndTables> getCategoriesTables(){
 
         try {
@@ -1275,7 +1294,29 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChatAccounts>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public ArrayList<IsiorderOrdersProductElement> getOrderFromTo(Date start, Date end){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            json.addData("start", start.getTime());
+            json.addData("end", end.getTime());
+
+            MakeHttpPost post = new MakeHttpPost( "getOrderFromTo", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
         } catch (Exception ignored) {
 
         }
