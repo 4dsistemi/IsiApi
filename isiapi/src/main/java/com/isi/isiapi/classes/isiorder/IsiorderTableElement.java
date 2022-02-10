@@ -8,7 +8,7 @@ public class IsiorderTableElement extends LastModifiedTables {
     @SerializedName("Id")
     public int id;
 
-    @SerializedName("name")
+    @SerializedName("Name")
     public String name;
 
     @SerializedName("IsiorderTableCategoryId")
