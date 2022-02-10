@@ -11,7 +11,7 @@ public class IsiorderNote extends LastModifiedTables {
     @SerializedName("Name")
     public String name;
 
-    @SerializedName("price")
+    @SerializedName("Price")
     public float price;
 
     @SerializedName("CategoryId")
