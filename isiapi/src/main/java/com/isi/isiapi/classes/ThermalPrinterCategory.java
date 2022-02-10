@@ -3,7 +3,7 @@ package com.isi.isiapi.classes;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ThermalPrinterCategory {
+public class ThermalPrinterCategory extends LastModifiedTables{
 
     @SerializedName("Id")
     public int id;
