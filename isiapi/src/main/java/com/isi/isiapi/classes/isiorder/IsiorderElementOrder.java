@@ -18,8 +18,8 @@ public class IsiorderElementOrder extends LastModifiedTables {
     @SerializedName("IsiorderOrderId")
     public int isiorder_order_id;
 
-    @SerializedName("Exit")
-    public int exit;
+    @SerializedName("ExitStatus")
+    public int exit_status;
 
     @SerializedName("Status")
     public int status = 0;
@@ -48,9 +48,9 @@ public class IsiorderElementOrder extends LastModifiedTables {
     @SerializedName("DeletedQuantity")
     public int deleted_quantity = 0;
 
-    public IsiorderElementOrder(int product_id, int exit, int isiorder_order_id, int quantity) {
+    public IsiorderElementOrder(int product_id, int exit_status, int isiorder_order_id, int quantity) {
         this.product_id = product_id;
-        this.exit = exit;
+        this.exit_status = exit_status;
         this.isiorder_order_id = isiorder_order_id;
         this.quantity = quantity;
     }
