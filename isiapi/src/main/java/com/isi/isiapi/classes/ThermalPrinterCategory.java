@@ -8,7 +8,7 @@ public class ThermalPrinterCategory extends LastModifiedTables{
     @SerializedName("Id")
     public int id;
 
-    @SerializedName("PrintersId")
+    @SerializedName("PrinterId")
     public int printer_id;
 
     @SerializedName("CategoryId")
