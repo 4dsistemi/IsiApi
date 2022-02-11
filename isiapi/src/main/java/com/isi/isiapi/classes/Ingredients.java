@@ -15,9 +15,9 @@ public class Ingredients extends LastModifiedTables{
     public int product_id;
 
     @SerializedName("Quantity")
-    public int quantity;
+    public float quantity;
 
-    public Ingredients(int product_forniture_id, int product_id, int quantity) {
+    public Ingredients(int product_forniture_id, int product_id, float quantity) {
         this.product_forniture_id = product_forniture_id;
         this.product_id = product_id;
         this.quantity = quantity;

@@ -26,6 +26,7 @@ import com.isi.isiapi.classes.isicash.BillAndFattura;
 import com.isi.isiapi.classes.isicash.IsiCashBill;
 import com.isi.isiapi.classes.isicash.IsiCashBillAndElements;
 import com.isi.isiapi.classes.isicash.IsiCashDepartment;
+import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
@@ -1793,6 +1794,28 @@ public class HttpRequest {
                 return "cameriere";
         }
     }
+
+    //ISIMAGA
+
+    public ArrayList<ProductForniture> isimagaGetProductForniture(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getProductForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ProductForniture>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
 
 }
 
