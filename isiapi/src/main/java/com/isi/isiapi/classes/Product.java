@@ -19,7 +19,7 @@ public class Product extends LastModifiedTables{
     @SerializedName("Color")
     public Integer color;
 
-    @SerializedName("Deparment")
+    @SerializedName("Department")
     public int department;
 
     @SerializedName("CategoryId")
