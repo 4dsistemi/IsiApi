@@ -16,6 +16,7 @@ import com.isi.isiapi.classes.Customer;
 import com.isi.isiapi.classes.Fattura;
 import com.isi.isiapi.classes.FiscalPrinter;
 import com.isi.isiapi.classes.GYBToken;
+import com.isi.isiapi.classes.Ingredients;
 import com.isi.isiapi.classes.Product;
 import com.isi.isiapi.classes.ThermalPrinter;
 import com.isi.isiapi.classes.ThermalPrinterAndCategories;
@@ -378,10 +379,11 @@ public class HttpRequest {
 
     }
 
-    public boolean addProduct(Product product){
+    public boolean addProduct(Product product, List<Ingredients> ingredients){
 
         HttpJson json = new HttpJson();
         json.addData("product", new Gson().toJsonTree(product));
+        json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
         MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey);
 
@@ -398,10 +400,11 @@ public class HttpRequest {
 
     }
 
-    public boolean editProduct(Product product){
+    public boolean editProduct(Product product, List<Ingredients> ingredients){
 
         HttpJson json = new HttpJson();
         json.addData("product", new Gson().toJsonTree(product));
+        json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
         MakeHttpPost post = new MakeHttpPost( "editProduct", json.getData(), apiKey);
 
