@@ -1560,7 +1560,7 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChat>>(){}.getType());
         } catch (Exception ignored) {
 
         }
