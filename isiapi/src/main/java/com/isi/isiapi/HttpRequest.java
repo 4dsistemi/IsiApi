@@ -31,6 +31,7 @@ import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
+import com.isi.isiapi.classes.isiorder.IsiorderChat;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
@@ -1548,7 +1549,7 @@ public class HttpRequest {
 
     }
 
-    public String getChatMessage(int myId, int friend_id){
+    public List<IsiorderChat> getChatMessage(int myId, int friend_id){
         try {
 
             HttpJson json = new HttpJson();
@@ -1557,13 +1558,14 @@ public class HttpRequest {
 
             MakeHttpPost post = new MakeHttpPost( "getChatMessage", json.getData(), apiKey);
 
-            return post.post();
+            String result = post.post();
 
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
         } catch (Exception ignored) {
 
         }
 
-        return new JsonObject().toString();
+        return new ArrayList<>();
     }
 
     public boolean isiorderAddTable(IsiorderTableElement element){
@@ -1796,6 +1798,25 @@ public class HttpRequest {
             default:
                 return "cameriere";
         }
+    }
+
+    public boolean editIsiorderGeneralInfo(IsiorderGeneralInfo info){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("info", new Gson().toJsonTree(info));
+
+            MakeHttpPost post = new MakeHttpPost( "editIsiorderGeneralInfo", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
     }
 
     //ISIMAGA
