@@ -32,7 +32,7 @@ public class IsiorderTableElement extends LastModifiedTables {
     @SerializedName("Order")
     public IsiorderOrder order;
 
-    @SerializedName("Guest")
+    @SerializedName("GuestOrder")
     public int guest_order = 0;
 
     public IsiorderTableElement(String name, int isiorder_table_category_id) {
