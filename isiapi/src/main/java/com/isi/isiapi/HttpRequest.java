@@ -35,6 +35,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderChat;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
+import com.isi.isiapi.classes.isiorder.IsiorderGuestOrderElementNote;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
@@ -1819,6 +1820,45 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean changeIsiorderPassword(int account, String password){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("password", password);
+            json.addData("account", account);
+
+            MakeHttpPost post = new MakeHttpPost( "changeIsiorderPassword", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<IsiorderGuestOrderElementNote> getIsiorderGuestOrder(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getAllOrdersGuest", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderGuestOrderElementNote>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
     //ISIMAGA
 
     public ArrayList<ProductForniture> isimagaGetProductForniture(){
@@ -1839,7 +1879,6 @@ public class HttpRequest {
 
 
     }
-
 
 }
 
