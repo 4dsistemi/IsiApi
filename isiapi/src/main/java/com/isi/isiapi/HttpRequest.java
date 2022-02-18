@@ -27,6 +27,7 @@ import com.isi.isiapi.classes.isicash.BillAndFattura;
 import com.isi.isiapi.classes.isicash.IsiCashBill;
 import com.isi.isiapi.classes.isicash.IsiCashBillAndElements;
 import com.isi.isiapi.classes.isicash.IsiCashDepartment;
+import com.isi.isiapi.classes.isimaga.Forniture;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
@@ -1879,6 +1880,116 @@ public class HttpRequest {
 
 
     }
+
+    public String transformIsimagaUnity(int unity){
+        switch (unity){
+            case 0:
+                return "Litri";
+            case 1:
+                return "Grammi";
+            default:
+                return "Unità";
+        }
+    }
+
+    public boolean editProductForniture(ProductForniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("product", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "editProductForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean addProductForniture(ProductForniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("product", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "addProductForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    //ISICHAIN
+
+    public ArrayList<Forniture> getForniture(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<Forniture>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean editForniture(Forniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("forniture", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "editForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean addForniture(Forniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("forniture", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "addForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+
 
 }
 
