@@ -2069,6 +2069,25 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean acceptOrderForniture(OrdersAndForniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "acceptOrderForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
 }
 
 

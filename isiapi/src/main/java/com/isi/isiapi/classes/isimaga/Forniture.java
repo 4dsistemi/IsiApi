@@ -18,7 +18,7 @@ public class Forniture extends LastModifiedTables {
     public String phone;
 
     @SerializedName("Active")
-    public boolean active;
+    public boolean active = true;
 
     public Forniture(String name, String email, String phone) {
         this.name = name;
