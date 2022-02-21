@@ -28,6 +28,9 @@ import com.isi.isiapi.classes.isicash.IsiCashBill;
 import com.isi.isiapi.classes.isicash.IsiCashBillAndElements;
 import com.isi.isiapi.classes.isicash.IsiCashDepartment;
 import com.isi.isiapi.classes.isimaga.Forniture;
+import com.isi.isiapi.classes.isimaga.OrderToForniture;
+import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
+import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
@@ -1989,7 +1992,82 @@ public class HttpRequest {
         return false;
     }
 
+    public ArrayList<OrdersAndForniture> getOrderToForniture(){
 
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getOrderToForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<OrdersAndForniture>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean addOrderToForniture(OrderToForniture f, List<OrderToFornitureElement> elements){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order", new Gson().toJsonTree(f));
+            json.addData("elements", new Gson().toJsonTree(elements));
+
+            MakeHttpPost post = new MakeHttpPost( "addOrderToForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean editOrderToForniture(OrderToForniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("order", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "editOrderToForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean editOrderToFornitureElements(List<OrderToFornitureElement> elements){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("elements", new Gson().toJsonTree(elements));
+
+            MakeHttpPost post = new MakeHttpPost( "editOrderToFornitureElements", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
 
 }
 
