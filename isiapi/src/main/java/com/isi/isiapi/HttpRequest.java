@@ -2188,7 +2188,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addExtraordinaryClosing(Forniture f){
+    public boolean addExtraordinaryClosing(ExtraordinaryClosing f){
         try {
 
             HttpJson json = new HttpJson();

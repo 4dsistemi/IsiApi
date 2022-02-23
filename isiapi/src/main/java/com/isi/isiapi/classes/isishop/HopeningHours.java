@@ -2,7 +2,7 @@ package com.isi.isiapi.classes.isishop;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Time;
+import java.util.Date;
 
 public class HopeningHours {
 
@@ -10,18 +10,18 @@ public class HopeningHours {
     public int id;
 
     @SerializedName("Opening1")
-    public Time opening1;
+    public Date opening1;
 
     @SerializedName("Opening2")
-    public Time opening2;
+    public Date opening2;
 
     @SerializedName("Closing1")
-    public Time closing1;
+    public Date closing1;
 
     @SerializedName("Closing2")
-    public Time closing2;
+    public Date closing2;
 
-    public HopeningHours(Time opening1, Time opening2, Time closing1, Time closing2) {
+    public HopeningHours(Date opening1, Date opening2, Date closing1, Date closing2) {
         this.opening1 = opening1;
         this.opening2 = opening2;
         this.closing1 = closing1;
