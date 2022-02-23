@@ -84,7 +84,7 @@ public class HttpRequest {
     public boolean updateCommercial(Commercial c){
 
         HttpJson json = new HttpJson();
-        json.addData("commercila", new Gson().toJsonTree(c));
+        json.addData("commercial", new Gson().toJsonTree(c));
 
         MakeHttpPost post = new MakeHttpPost( "updateCommercial", json.getData(), apiKey);
 
