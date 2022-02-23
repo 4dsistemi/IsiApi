@@ -44,6 +44,9 @@ import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
 import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
+import com.isi.isiapi.classes.isishop.CommercialCategoryAndMy;
+import com.isi.isiapi.classes.isishop.ExtraordinaryClosing;
+import com.isi.isiapi.classes.isishop.HopeningHours;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -2096,6 +2099,139 @@ public class HttpRequest {
             json.addData("order", new Gson().toJsonTree(f));
 
             MakeHttpPost post = new MakeHttpPost( "acceptOrderForniture", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    //ISISHOP
+
+    public List<CommercialCategoryAndMy> getCommercialCategories(){
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getCommercialCategories", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<CommercialCategoryAndMy>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+    }
+
+    public boolean editCommercialCategories(List<CommercialCategoryAndMy> categories){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("categories", new Gson().toJsonTree(categories));
+
+            MakeHttpPost post = new MakeHttpPost( "editCommercialCategories", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<ExtraordinaryClosing> getExtraordinaryClosing(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getExtraordinaryClosing", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ExtraordinaryClosing>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean editExtraordinaryClosing(ExtraordinaryClosing f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("closing", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "editExtraordinaryClosing", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean addExtraordinaryClosing(Forniture f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("closing", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "addExtraordinaryClosing", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<HopeningHours> getHopeningHours(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getHopeningHours", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<HopeningHours>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean editHopeningHours(HopeningHours f){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("hours", new Gson().toJsonTree(f));
+
+            MakeHttpPost post = new MakeHttpPost( "editHopeningHours", json.getData(), apiKey);
 
             String result = post.post();
 
