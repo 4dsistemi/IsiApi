@@ -47,6 +47,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
 import com.isi.isiapi.classes.isishop.CommercialCategoryAndMy;
 import com.isi.isiapi.classes.isishop.ExtraordinaryClosing;
 import com.isi.isiapi.classes.isishop.HopeningHours;
+import com.isi.isiapi.classes.isishop.IsicoinMovement;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -2242,6 +2243,45 @@ public class HttpRequest {
         }
 
         return false;
+    }
+
+    public ArrayList<IsicoinMovement> getIsicoinMovement(){
+
+        try {
+            HttpJson json = new HttpJson();
+
+            MakeHttpPost post = new MakeHttpPost( "getIsicoinMovement", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsicoinMovement>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+
+    }
+
+    public boolean addIsicoinMovement(IsicoinMovement isicoinMovement){
+
+        try {
+            HttpJson json = new HttpJson();
+            json.addData("movement", new Gson().toJsonTree(isicoinMovement));
+
+            MakeHttpPost post = new MakeHttpPost( "addIsicoinMovement", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+
     }
 
 }
