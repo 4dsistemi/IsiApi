@@ -60,4 +60,10 @@ public class Commercial extends LastModifiedTables{
     @SerializedName("Cap")
     public String cap;
 
+    @SerializedName("Email")
+    public String email;
+
+    @SerializedName("Description")
+    public String description;
+
 }

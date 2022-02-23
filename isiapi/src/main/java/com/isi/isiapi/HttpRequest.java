@@ -77,6 +77,26 @@ public class HttpRequest {
 
     }
 
+    public boolean updateCommercial(Commercial c){
+
+        HttpJson json = new HttpJson();
+        json.addData("commercila", new Gson().toJsonTree(c));
+
+        MakeHttpPost post = new MakeHttpPost( "updateCommercial", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return response.trim().equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public List<Account> getAccount(){
 
         HttpJson json = new HttpJson();
