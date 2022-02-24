@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class HopeningHours {
+public class OpeningHours {
 
     @SerializedName("Id")
     public int id;
@@ -21,7 +21,7 @@ public class HopeningHours {
     @SerializedName("Closing2")
     public Date closing2;
 
-    public HopeningHours(Date opening1, Date opening2, Date closing1, Date closing2) {
+    public OpeningHours(Date opening1, Date opening2, Date closing1, Date closing2) {
         this.opening1 = opening1;
         this.opening2 = opening2;
         this.closing1 = closing1;

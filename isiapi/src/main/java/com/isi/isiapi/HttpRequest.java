@@ -46,7 +46,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
 import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
 import com.isi.isiapi.classes.isishop.CommercialCategoryAndMy;
 import com.isi.isiapi.classes.isishop.ExtraordinaryClosing;
-import com.isi.isiapi.classes.isishop.HopeningHours;
+import com.isi.isiapi.classes.isishop.OpeningHours;
 import com.isi.isiapi.classes.isishop.IsicoinMovement;
 import com.isi.isiapi.classes.isishop.MyCommercialCategory;
 
@@ -2208,7 +2208,7 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<HopeningHours> getHopeningHours(){
+    public ArrayList<OpeningHours> getHopeningHours(){
 
         try {
             HttpJson json = new HttpJson();
@@ -2217,7 +2217,7 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<HopeningHours>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<OpeningHours>>(){}.getType());
         } catch (Exception ignored) {
 
         }
@@ -2227,7 +2227,7 @@ public class HttpRequest {
 
     }
 
-    public boolean editHopeningHours(HopeningHours f){
+    public boolean editHopeningHours(OpeningHours f){
         try {
 
             HttpJson json = new HttpJson();
