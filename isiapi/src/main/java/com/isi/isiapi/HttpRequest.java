@@ -48,6 +48,7 @@ import com.isi.isiapi.classes.isishop.CommercialCategoryAndMy;
 import com.isi.isiapi.classes.isishop.ExtraordinaryClosing;
 import com.isi.isiapi.classes.isishop.HopeningHours;
 import com.isi.isiapi.classes.isishop.IsicoinMovement;
+import com.isi.isiapi.classes.isishop.MyCommercialCategory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -2131,7 +2132,7 @@ public class HttpRequest {
 
     }
 
-    public boolean editCommercialCategories(List<CommercialCategoryAndMy> categories){
+    public boolean editCommercialCategories(List<MyCommercialCategory> categories){
         try {
 
             HttpJson json = new HttpJson();
