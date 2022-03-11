@@ -8,10 +8,10 @@ public class IsiCashDepartment extends LastModifiedTables {
     @SerializedName("Id")
     public int id;
 
-    @SerializedName("DepartmentNumber")
+    @SerializedName("Department")
     public int department;
 
-    @SerializedName("DepartmentCode")
+    @SerializedName("Code")
     public String code;
 
     @SerializedName("ProductId")
