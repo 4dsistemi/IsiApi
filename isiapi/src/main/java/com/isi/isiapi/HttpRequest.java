@@ -654,7 +654,7 @@ public class HttpRequest {
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("fattura", new Gson().toJsonTree(fattura));
 
-        MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addFattura", json.getData(), apiKey);
 
         try {
             String response = post.post();
