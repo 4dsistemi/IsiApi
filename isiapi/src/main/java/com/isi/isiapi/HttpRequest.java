@@ -596,10 +596,11 @@ public class HttpRequest {
 
     }
 
-    public boolean addBill(IsiCashBillAndElements bill){
+    public boolean addBill(IsiCashBillAndElements bill, boolean scarico){
 
         HttpJson json = new HttpJson();
         json.addData("bill", new Gson().toJsonTree(bill));
+        json.addData("scarico", scarico);
 
         MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey);
 
@@ -657,11 +658,12 @@ public class HttpRequest {
 
     }
 
-    public boolean addFattura(IsiCashBillAndElements bill, Fattura fattura){
+    public boolean addFattura(IsiCashBillAndElements bill, Fattura fattura, boolean scarico){
 
         HttpJson json = new HttpJson();
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("fattura", new Gson().toJsonTree(fattura));
+        json.addData("scarico", scarico);
 
         MakeHttpPost post = new MakeHttpPost( "addFattura", json.getData(), apiKey);
 
