@@ -1,8 +1,10 @@
 package com.isi.isiapi.classes;
 
 import com.google.gson.annotations.SerializedName;
+import com.isi.isiapi.classes.ctzon.CtzPoint;
 
 import java.util.Date;
+import java.util.List;
 
 public class Account {
 
@@ -62,5 +64,8 @@ public class Account {
 
     @SerializedName("CtzonCard")
     public String ctzonCard;
+
+    @SerializedName("CtzPoints")
+    public List<CtzPoint> ctzonPoints;
 
 }
