@@ -50,6 +50,9 @@ public class IsiorderOrder extends LastModifiedTables {
     @SerializedName("TotalPayed")
     public float total_payed = 0;
 
+    @SerializedName("FreeDraw")
+    public byte[] free_draw = null;
+
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
         this.isiorder_table_element_id = isiorder_table_element_id;
         this.account_id = account_id;
