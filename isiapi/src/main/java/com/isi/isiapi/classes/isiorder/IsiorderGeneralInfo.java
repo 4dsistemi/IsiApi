@@ -27,4 +27,7 @@ public class IsiorderGeneralInfo extends LastModifiedTables {
     @SerializedName("Coperto")
     public float coperto = 0;
 
+    @SerializedName("FreeDraw")
+    public boolean FreeDraw = false;
+
 }
