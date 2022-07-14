@@ -1215,15 +1215,36 @@ public class HttpRequest {
         return new JsonObject();
     }
 
+    public boolean reprintOrder(int id){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+
+            MakeHttpPost post = new MakeHttpPost( "reprintOrder", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
     public boolean printPrebuill(int id, boolean discount_auto, boolean romana, boolean all){
 
         try {
 
             HttpJson json = new HttpJson();
             json.addData("id", id);
-            json.addData("discount_auto", id);
-            json.addData("romana", id);
-            json.addData("all", id);
+            json.addData("discount_auto", discount_auto);
+            json.addData("romana", romana);
+            json.addData("all", all);
 
             MakeHttpPost post = new MakeHttpPost( "printPrebill", json.getData(), apiKey);
 
