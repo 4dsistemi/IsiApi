@@ -1920,6 +1920,26 @@ public class HttpRequest {
 
     }
 
+    public boolean setIsiorderOrderServed(int id, boolean served){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", id);
+            json.addData("served", served);
+
+            MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
     //ISIMAGA
 
     public ArrayList<ProductForniture> isimagaGetProductForniture(){
