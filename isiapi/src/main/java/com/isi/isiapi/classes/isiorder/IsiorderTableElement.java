@@ -35,6 +35,9 @@ public class IsiorderTableElement extends LastModifiedTables {
     @SerializedName("GuestOrder")
     public int guest_order = 0;
 
+    @SerializedName("ExitNotSet")
+    public boolean exit_not_set = false;
+
     public IsiorderTableElement(String name, int isiorder_table_category_id) {
         this.name = name;
         this.isiorder_table_category_id = isiorder_table_category_id;
