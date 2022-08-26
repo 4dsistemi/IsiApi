@@ -1940,6 +1940,24 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean updateTableMassive(List<IsiorderTableElement> element){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("tables", element);
+            MakeHttpPost post = new MakeHttpPost( "updateTableMassive", json.getData(), apiKey);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
     //ISIMAGA
 
     public ArrayList<ProductForniture> isimagaGetProductForniture(){
