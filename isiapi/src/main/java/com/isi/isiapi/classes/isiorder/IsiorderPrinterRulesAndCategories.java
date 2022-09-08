@@ -6,7 +6,7 @@ import java.util.List;
 
 public class IsiorderPrinterRulesAndCategories {
 
-    public com.isi.isiorder.managing.printer.IsiorderPrinterRule isiorderPrinterRule;
+    public IsiorderPrinterRule isiorderPrinterRule;
 
     public ThermalPrinter thermalPrinter;
 
