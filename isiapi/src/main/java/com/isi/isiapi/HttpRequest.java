@@ -42,6 +42,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
 import com.isi.isiapi.classes.isiorder.IsiorderGuestOrderElementNote;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
+import com.isi.isiapi.classes.isiorder.IsiorderPrinterRulesAndCategories;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
 import com.isi.isiapi.classes.isiorder.IsiorderTableElement;
 import com.isi.isiapi.classes.isishop.CommercialCategoryAndMy;
@@ -1957,6 +1958,64 @@ public class HttpRequest {
 
         return false;
     }
+
+    public boolean addPrinterRule(String description, int printerId, List<IsiorderTableCategory> isiorderTableCategories, List<Category> categories){
+        HttpJson json = new HttpJson();
+        json.addData("description", description);
+        json.addData("thermal_id", printerId);
+        json.addData("table_categories", new Gson().toJsonTree(isiorderTableCategories));
+        json.addData("element_category", new Gson().toJsonTree(categories));
+
+        MakeHttpPost post = new MakeHttpPost( "addPrinterRule", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return response.equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public List<IsiorderPrinterRulesAndCategories> getPrinterRules(){
+        HttpJson json = new HttpJson();
+
+        MakeHttpPost post = new MakeHttpPost( "getPrinterRules", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiorderPrinterRulesAndCategories>>(){}.getType());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public boolean editActivePrinterRule(int id, boolean active){
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+        json.addData("active", active);
+
+        MakeHttpPost post = new MakeHttpPost( "editActivePrinterRule", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return response.equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
     //ISIMAGA
 
