@@ -41,6 +41,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
 import com.isi.isiapi.classes.isiorder.IsiorderGuestOrderElementNote;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
+import com.isi.isiapi.classes.isiorder.IsiorderOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderPrinterRulesAndCategories;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
@@ -597,11 +598,12 @@ public class HttpRequest {
 
     }
 
-    public boolean addBill(IsiCashBillAndElements bill, boolean scarico){
+    public boolean addBill(IsiCashBillAndElements bill, boolean scarico, IsiorderOrder isiorderOrder){
 
         HttpJson json = new HttpJson();
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("scarico", scarico);
+        json.addData("isiorderOrder", isiorderOrder);
 
         MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey);
 
