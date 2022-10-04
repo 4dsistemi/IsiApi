@@ -598,12 +598,11 @@ public class HttpRequest {
 
     }
 
-    public boolean addBill(IsiCashBillAndElements bill, boolean scarico, IsiorderOrder isiorderOrder){
+    public boolean addBill(IsiCashBillAndElements bill, boolean scarico){
 
         HttpJson json = new HttpJson();
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("scarico", scarico);
-        json.addData("isiorderOrder", isiorderOrder);
 
         MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey);
 
