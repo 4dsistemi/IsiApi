@@ -24,4 +24,7 @@ public class IsiorderGuestOrder {
     @SerializedName("Payment")
     public int payment;
 
+    @SerializedName("NumberOfPeople")
+    public int number_of_people;
+
 }
