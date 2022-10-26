@@ -38,6 +38,9 @@ public class IsiorderTableElement extends LastModifiedTables {
     @SerializedName("ExitNotSet")
     public boolean exit_not_set = false;
 
+    @SerializedName("OrderServed")
+    public int order_served = 0;
+
     public IsiorderTableElement(String name, int isiorder_table_category_id) {
         this.name = name;
         this.isiorder_table_category_id = isiorder_table_category_id;
