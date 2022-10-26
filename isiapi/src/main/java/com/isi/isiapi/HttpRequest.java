@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.isi.isiapi.classes.Account;
 import com.isi.isiapi.classes.AppActivation;
@@ -32,6 +33,7 @@ import com.isi.isiapi.classes.isimaga.OrderToForniture;
 import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
 import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
+import com.isi.isiapi.classes.isiorder.CategoriesTableResponse;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
@@ -40,8 +42,8 @@ import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
 import com.isi.isiapi.classes.isiorder.IsiorderGuestOrderElementNote;
+import com.isi.isiapi.classes.isiorder.IsiorderInformationOrders;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
-import com.isi.isiapi.classes.isiorder.IsiorderOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderPrinterRulesAndCategories;
 import com.isi.isiapi.classes.isiorder.IsiorderTableCategory;
@@ -1141,7 +1143,7 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiorderCategoryAndTables> getCategoriesTablesActive(){
+    public CategoriesTableResponse getCategoriesTablesActive(){
 
         try {
             HttpJson json = new HttpJson();
@@ -1150,7 +1152,14 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
+            JsonObject obj = JsonParser.parseString(result).getAsJsonObject();
+
+            ArrayList<IsiorderCategoryAndTables> isiorderCategoryAndTables = new Gson().fromJson(obj.getAsJsonArray("categories"), new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
+            ArrayList<IsiorderInformationOrders> isiorderInformationOrders = new Gson().fromJson(obj.getAsJsonArray("informations"), new TypeToken<ArrayList<IsiorderInformationOrders>>(){}.getType());
+
+
+            return new CategoriesTableResponse(isiorderInformationOrders, isiorderCategoryAndTables);
+
         } catch (Exception ignored) {
 
         }
