@@ -51,6 +51,12 @@ public class IsiorderElementOrder extends LastModifiedTables {
     @SerializedName("CustomerNumber")
     public Integer customerNumber = null;
 
+    @SerializedName("ElementServed")
+    public int element_served = 0;
+
+    @SerializedName("ElementServedTime")
+    public Date element_served_time = null;
+
     public IsiorderElementOrder(int product_id, int exit_status, int isiorder_order_id, int quantity) {
         this.product_id = product_id;
         this.exit_status = exit_status;

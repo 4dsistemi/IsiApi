@@ -56,8 +56,14 @@ public class IsiorderOrder extends LastModifiedTables {
     @SerializedName("OrderServed")
     public int order_served = 0;
 
+    @SerializedName("OrderServedTime")
+    public Date order_served_time = null;
+
     @SerializedName("IsReadyCode")
     public String is_ready_code = null;
+
+    @SerializedName("IsiorderNote")
+    public String isiorder_note;
 
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
         this.isiorder_table_element_id = isiorder_table_element_id;
