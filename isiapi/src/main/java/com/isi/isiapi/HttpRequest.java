@@ -1935,7 +1935,7 @@ public class HttpRequest {
         try {
 
             HttpJson json = new HttpJson();
-            json.addData("isiorderorder", id);
+            json.addData("isiorderorder", new Gson().toJsonTree(id));
 
             MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey);
 
