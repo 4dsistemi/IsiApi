@@ -1931,12 +1931,11 @@ public class HttpRequest {
 
     }
 
-    public boolean setIsiorderOrderServed(int id, boolean served){
+    public boolean setIsiorderOrderServed(IsiorderOrdersProductElement id){
         try {
 
             HttpJson json = new HttpJson();
             json.addData("id", id);
-            json.addData("served", served);
 
             MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey);
 
@@ -2026,6 +2025,24 @@ public class HttpRequest {
         return false;
     }
 
+    public boolean editOrderNote(int id, String note){
+        HttpJson json = new HttpJson();
+        json.addData("id", id);
+        json.addData("note", note);
+
+        MakeHttpPost post = new MakeHttpPost( "editOrderNote", json.getData(), apiKey);
+
+        try {
+            String response = post.post();
+
+            return response.equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     //ISIMAGA
 
