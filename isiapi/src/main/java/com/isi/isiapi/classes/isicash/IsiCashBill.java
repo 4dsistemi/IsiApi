@@ -28,6 +28,12 @@ public class IsiCashBill extends LastModifiedTables {
     public int document_number;
     @SerializedName("Status")
     public int status = 0;
+    @SerializedName("UserId")
+    public Integer user_id;
+    @SerializedName("PointsCollected")
+    public int points_collected = 0;
+    @SerializedName("PointsUsed")
+    public int points_used = 0;
 
     public IsiCashBill(float discount_valor, int discount_type, int account_id, String payment_type, float total, int closure_number, int document_number) {
         this.discount_valor = discount_valor;
