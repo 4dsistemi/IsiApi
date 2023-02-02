@@ -17,11 +17,13 @@ public class MakeHttpPost{
     private final String intent;
     private final JsonObject data;
     private final String apiKey;
+    private final WebControllers webController;
 
-    public MakeHttpPost(String intent, JsonObject data, String apiKey){
+    public MakeHttpPost(String intent, JsonObject data, String apiKey, WebControllers webController){
         this.intent = intent;
         this.data = data;
         this.apiKey = apiKey;
+        this.webController = webController;
     }
 
     public String post() throws IOException {
@@ -36,7 +38,7 @@ public class MakeHttpPost{
         RequestBody body = RequestBody.create(data.generateJson(data), JSON);
         Request request = new Request.Builder()
                 .addHeader("authorization", apiKey)
-                .url("http://"+ HttpRequest.serverIpAddress +":9000/API/")
+                .url("http://"+ HttpRequest.serverIpAddress +":9000/API/" + webController.name() + "/")
                 .post(body)
                 .build();
         try {

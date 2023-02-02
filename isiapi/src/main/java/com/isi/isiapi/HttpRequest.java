@@ -80,7 +80,7 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getCommercial", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getCommercial", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -100,7 +100,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("commercial", new Gson().toJsonTree(c));
 
-        MakeHttpPost post = new MakeHttpPost( "updateCommercial", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateCommercial", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -119,7 +119,7 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getAccount", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getAccount", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -138,7 +138,7 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getApplicationActive", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getApplicationActive", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -159,7 +159,7 @@ public class HttpRequest {
         json.addData("id", appActivation.id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "removeShadow", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "removeShadow", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -179,7 +179,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("id", appActivation.id);
 
-        MakeHttpPost post = new MakeHttpPost( "addShadow", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addShadow", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -200,7 +200,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "activateService", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "activateService", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -224,7 +224,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("applications", new Gson().toJsonTree(activations));
 
-        MakeHttpPost post = new MakeHttpPost( "updateApplicationActivePriority", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateApplicationActivePriority", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -246,7 +246,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("id", appActivation.id);
 
-        MakeHttpPost post = new MakeHttpPost( "removeAppActivation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "removeAppActivation", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -267,7 +267,7 @@ public class HttpRequest {
         json.addData("id", appActivation.id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "setPositionInMenu", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "setPositionInMenu", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -288,7 +288,7 @@ public class HttpRequest {
         json.addData("lat", lat);
         json.addData("lon", lon);
 
-        MakeHttpPost post = new MakeHttpPost( "updateLocation", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateLocation", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -309,7 +309,7 @@ public class HttpRequest {
         json.addData("id", account.id);
         json.addData("nfc", nfc);
 
-        MakeHttpPost post = new MakeHttpPost( "updateNfc", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateNfc", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -331,7 +331,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("department", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "addDepartment", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -351,7 +351,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("department", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "editDepartment", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -369,7 +369,7 @@ public class HttpRequest {
     public List<IsiCashDepartment> getDepartment(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getDepartment", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -388,7 +388,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("category", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "addCategory", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addCategory", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -408,7 +408,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("category", new Gson().toJsonTree(category));
 
-        MakeHttpPost post = new MakeHttpPost( "editCategory", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editCategory", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -429,7 +429,7 @@ public class HttpRequest {
         json.addData("product", new Gson().toJsonTree(product));
         json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
-        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -450,7 +450,7 @@ public class HttpRequest {
         json.addData("product", new Gson().toJsonTree(product));
         json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
-        MakeHttpPost post = new MakeHttpPost( "editProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -470,7 +470,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("product", new Gson().toJsonTree(product));
 
-        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -488,7 +488,7 @@ public class HttpRequest {
     public List<CategoryAndProduct> getCategories(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getCategories", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getCategories", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -507,7 +507,7 @@ public class HttpRequest {
     public List<FiscalPrinter> getFiscalPrinter(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getFiscalPrinter", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -526,7 +526,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("printer", new Gson().toJsonTree(printer));
 
-        MakeHttpPost post = new MakeHttpPost( "addFiscalPrinter", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -546,7 +546,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("printer", new Gson().toJsonTree(printer));
 
-        MakeHttpPost post = new MakeHttpPost( "editFiscalPrinter", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -566,7 +566,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("token", new Gson().toJsonTree(token));
 
-        MakeHttpPost post = new MakeHttpPost( "addGybToken", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addGybToken", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -585,7 +585,7 @@ public class HttpRequest {
 
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getGybToken", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getGybToken", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -606,7 +606,7 @@ public class HttpRequest {
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("scarico", scarico);
 
-        MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -627,7 +627,7 @@ public class HttpRequest {
         json.addData("start", start.getTime());
         json.addData("to", to.getTime());
 
-        MakeHttpPost post = new MakeHttpPost( "getIsicashierBills", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getIsicashierBills", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -647,7 +647,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("bill", new Gson().toJsonTree(bill));
 
-        MakeHttpPost post = new MakeHttpPost( "updateBill", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateBill", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -669,7 +669,7 @@ public class HttpRequest {
         json.addData("fattura", new Gson().toJsonTree(fattura));
         json.addData("scarico", scarico);
 
-        MakeHttpPost post = new MakeHttpPost( "addFattura", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -687,7 +687,7 @@ public class HttpRequest {
     public List<BillAndFattura> getFatture(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getFatture", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getFatture", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -708,7 +708,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("fattura", new Gson().toJsonTree(fattura));
 
-        MakeHttpPost post = new MakeHttpPost( "deleteFattura", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "deleteFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -728,7 +728,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("fattura", new Gson().toJsonTree(fattura));
 
-        MakeHttpPost post = new MakeHttpPost( "updateFattura", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "updateFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -746,7 +746,7 @@ public class HttpRequest {
     public List<Customer> getCustomers(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getCustomers", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getCustomers", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -765,7 +765,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "addCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -785,7 +785,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "editCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -805,7 +805,7 @@ public class HttpRequest {
         HttpJson json = new HttpJson();
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "deleteCustomer", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "deleteCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -827,7 +827,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "isiorderUser", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderUser", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -846,7 +846,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("account", new Gson().toJsonTree(account));
 
-            MakeHttpPost post = new MakeHttpPost( "editIsiorderAccount", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -867,7 +867,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("account", new Gson().toJsonTree(account));
 
-            MakeHttpPost post = new MakeHttpPost( "addIsiorderAccount", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -886,7 +886,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("id", table);
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderForTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getOrderForTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -906,7 +906,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "needToUpdate", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "needToUpdate", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -927,7 +927,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("id", id);
 
-            MakeHttpPost post = new MakeHttpPost( "cancelOrderGuest", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "cancelOrderGuest", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -950,7 +950,7 @@ public class HttpRequest {
             json.addData("elements", elements);
             json.addData("operator", operator);
 
-            MakeHttpPost post = new MakeHttpPost( "sendDelivery", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "sendDelivery", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -972,7 +972,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -998,7 +998,7 @@ public class HttpRequest {
             json.addData("id", id);
             json.addData("confirm", confirm);
             json.addData("isidel", isidel);
-            MakeHttpPost post = new MakeHttpPost( "confirmIsiDel", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "confirmIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1019,7 +1019,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("id", id);
             json.addData("status", status);
-            MakeHttpPost post = new MakeHttpPost( "updateStatusDelivery", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "updateStatusDelivery", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1040,7 +1040,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("id", id);
             json.addData("account", operator);
-            MakeHttpPost post = new MakeHttpPost( "occupingTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "occupingTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1055,7 +1055,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "releaseTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "releaseTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1070,7 +1070,7 @@ public class HttpRequest {
         try {
 
             HttpJson json = new HttpJson();
-            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1090,7 +1090,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "reopenOrder", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "reopenOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1112,7 +1112,7 @@ public class HttpRequest {
             json.addData("newName", element.newName);
             json.addData("newPrice", element.newPrice);
 
-            MakeHttpPost post = new MakeHttpPost( "changeElementAlreadySent", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "changeElementAlreadySent", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1130,7 +1130,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1148,7 +1148,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "tablesActive", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "tablesActive", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1174,7 +1174,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "tables", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "tables", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1193,7 +1193,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1213,7 +1213,7 @@ public class HttpRequest {
             json.addData("order", new Gson().toJsonTree(isiorderOrdersProductElement));
             json.addData("deleting", new Gson().toJsonTree(deleting));
             json.addData("stamp", stamp);
-            MakeHttpPost post = new MakeHttpPost( "sendOrder", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "sendOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1233,7 +1233,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("id", id);
 
-            MakeHttpPost post = new MakeHttpPost( "reprintOrder", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "reprintOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1257,7 +1257,7 @@ public class HttpRequest {
             json.addData("romana", romana);
             json.addData("all", all);
 
-            MakeHttpPost post = new MakeHttpPost( "printPrebill", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "printPrebill", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1282,7 +1282,7 @@ public class HttpRequest {
             json.addData("total", total);
             json.addData("people", peopleSelected);
 
-            MakeHttpPost post = new MakeHttpPost( "setRomanaPayedElement", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "setRomanaPayedElement", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1306,7 +1306,7 @@ public class HttpRequest {
             json.addData("discount", discount);
             json.addData("total", total);
 
-            MakeHttpPost post = new MakeHttpPost( "setPayedElements", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "setPayedElements", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1324,7 +1324,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("to_id", toId);
-            MakeHttpPost post = new MakeHttpPost( "setReadedMessages", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "setReadedMessages", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1344,7 +1344,7 @@ public class HttpRequest {
 
             json.addData("myId", myId);
 
-            MakeHttpPost post = new MakeHttpPost( "getAllMyMessages", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getAllMyMessages", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1366,7 +1366,7 @@ public class HttpRequest {
             json.addData("from_id", fromId);
             json.addData("to_id", toId);
 
-            MakeHttpPost post = new MakeHttpPost( "deleteChat", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "deleteChat", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1389,7 +1389,7 @@ public class HttpRequest {
             json.addData("text", text);
             json.addData("operator", operator);
 
-            MakeHttpPost post = new MakeHttpPost( "sendMessageToPrinter", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "sendMessageToPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1410,7 +1410,7 @@ public class HttpRequest {
 
             json.addData("myId", myId);
 
-            MakeHttpPost post = new MakeHttpPost( "getAllOrderToday", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getAllOrderToday", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1432,7 +1432,7 @@ public class HttpRequest {
             json.addData("start", start.getTime());
             json.addData("end", end.getTime());
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderFromTo", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getOrderFromTo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1454,7 +1454,7 @@ public class HttpRequest {
             json.addData("order_id", orderId);
             json.addData("coperti", coperti);
 
-            MakeHttpPost post = new MakeHttpPost( "changeCoperti", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "changeCoperti", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1476,7 +1476,7 @@ public class HttpRequest {
             json.addData("order", order);
             json.addData("table", table);
 
-            MakeHttpPost post = new MakeHttpPost( "moveTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "moveTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1498,7 +1498,7 @@ public class HttpRequest {
             json.addData("id", order);
             json.addData("sconto", sconto);
 
-            MakeHttpPost post = new MakeHttpPost( "addSconto", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addSconto", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1520,7 +1520,7 @@ public class HttpRequest {
             json.addData("id", order);
             json.addData("whatExit", exit);
 
-            MakeHttpPost post = new MakeHttpPost( "printExit", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "printExit", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1547,7 +1547,7 @@ public class HttpRequest {
             json.addData("ctzonCard", ctzonCard);
 
 
-            MakeHttpPost post = new MakeHttpPost( "cleanTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "cleanTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1566,7 +1566,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getIsiorderGeneralInfo", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1585,7 +1585,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getChatService", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getChatService", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1608,7 +1608,7 @@ public class HttpRequest {
             json.addData("friendId", friend_id);
             json.addData("txt", message);
 
-            MakeHttpPost post = new MakeHttpPost( "addMessageChat", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addMessageChat", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1629,7 +1629,7 @@ public class HttpRequest {
             json.addData("myId", myId);
             json.addData("friendId", friend_id);
 
-            MakeHttpPost post = new MakeHttpPost( "getChatMessage", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getChatMessage", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1646,7 +1646,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("table", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1664,7 +1664,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("table", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1682,7 +1682,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("category", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddCategoryTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1700,7 +1700,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("category", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditCategoryTable", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1718,7 +1718,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("note", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddNote", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderAddNote", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1736,7 +1736,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("note", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditNote", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderEditNote", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1754,7 +1754,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "isiorderGetNotes", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "isiorderGetNotes", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1776,7 +1776,7 @@ public class HttpRequest {
             json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
             json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
 
-            MakeHttpPost post = new MakeHttpPost( "addThermalPrinter", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1797,7 +1797,7 @@ public class HttpRequest {
             json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
             json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
 
-            MakeHttpPost post = new MakeHttpPost( "editThermalPrinter", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1815,7 +1815,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getThermalPrintersAndCategories", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getThermalPrintersAndCategories", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1834,7 +1834,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("printer", new Gson().toJsonTree(printer));
 
-            MakeHttpPost post = new MakeHttpPost( "testThermalPrinter", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "testThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1853,7 +1853,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("toPrint", new Gson().toJsonTree(toPrint));
             json.addData("tot", tot);
-            MakeHttpPost post = new MakeHttpPost( "printCarico", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "printCarico", json.getData(), apiKey, WebControllers.isiorder);
 
             post.post();
 
@@ -1879,7 +1879,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("info", new Gson().toJsonTree(info));
 
-            MakeHttpPost post = new MakeHttpPost( "editIsiorderGeneralInfo", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1899,7 +1899,7 @@ public class HttpRequest {
             json.addData("password", password);
             json.addData("account", account);
 
-            MakeHttpPost post = new MakeHttpPost( "changeIsiorderPassword", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "changeIsiorderPassword", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1917,7 +1917,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getAllOrdersGuest", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getAllOrdersGuest", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1937,7 +1937,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("isiorderorder", new Gson().toJsonTree(id));
 
-            MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1955,7 +1955,7 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
             json.addData("tables", element);
-            MakeHttpPost post = new MakeHttpPost( "updateTableMassive", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "updateTableMassive", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1975,7 +1975,7 @@ public class HttpRequest {
         json.addData("table_categories", new Gson().toJsonTree(isiorderTableCategories));
         json.addData("element_category", new Gson().toJsonTree(categories));
 
-        MakeHttpPost post = new MakeHttpPost( "addPrinterRule", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "addPrinterRule", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -1992,7 +1992,7 @@ public class HttpRequest {
     public List<IsiorderPrinterRulesAndCategories> getPrinterRules(){
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getPrinterRules", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "getPrinterRules", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2011,7 +2011,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("active", active);
 
-        MakeHttpPost post = new MakeHttpPost( "editActivePrinterRule", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editActivePrinterRule", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2030,7 +2030,7 @@ public class HttpRequest {
         json.addData("id", id);
         json.addData("note", note);
 
-        MakeHttpPost post = new MakeHttpPost( "editOrderNote", json.getData(), apiKey);
+        MakeHttpPost post = new MakeHttpPost( "editOrderNote", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2051,7 +2051,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getProductForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2082,7 +2082,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("product", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editProductForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2101,7 +2101,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("product", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addProductForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2121,7 +2121,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2141,7 +2141,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("forniture", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2160,7 +2160,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("forniture", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2178,7 +2178,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderToForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2199,7 +2199,7 @@ public class HttpRequest {
             json.addData("order", new Gson().toJsonTree(f));
             json.addData("elements", new Gson().toJsonTree(elements));
 
-            MakeHttpPost post = new MakeHttpPost( "addOrderToForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2218,7 +2218,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("order", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editOrderToForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2237,7 +2237,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("elements", new Gson().toJsonTree(elements));
 
-            MakeHttpPost post = new MakeHttpPost( "editOrderToFornitureElements", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editOrderToFornitureElements", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2256,7 +2256,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("order", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "acceptOrderForniture", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "acceptOrderForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2275,7 +2275,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getCommercialCategories", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2294,7 +2294,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("categories", new Gson().toJsonTree(categories));
 
-            MakeHttpPost post = new MakeHttpPost( "editCommercialCategories", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2312,7 +2312,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getExtraordinaryClosing", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2332,7 +2332,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("closing", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editExtraordinaryClosing", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2351,7 +2351,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("closing", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addExtraordinaryClosing", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2369,7 +2369,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getHopeningHours", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getHopeningHours", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2389,7 +2389,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("hours", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editHopeningHours", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "editHopeningHours", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2407,7 +2407,7 @@ public class HttpRequest {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getIsicoinMovement", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "getIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2427,7 +2427,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("movement", new Gson().toJsonTree(isicoinMovement));
 
-            MakeHttpPost post = new MakeHttpPost( "addIsicoinMovement", json.getData(), apiKey);
+            MakeHttpPost post = new MakeHttpPost( "addIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
