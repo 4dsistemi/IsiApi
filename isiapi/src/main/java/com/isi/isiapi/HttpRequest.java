@@ -29,6 +29,7 @@ import com.isi.isiapi.classes.isicash.IsiCashBill;
 import com.isi.isiapi.classes.isicash.IsiCashBillAndElements;
 import com.isi.isiapi.classes.isicash.IsiCashDepartment;
 import com.isi.isiapi.classes.isimaga.Forniture;
+import com.isi.isiapi.classes.isimaga.IsimagaPorductMovement;
 import com.isi.isiapi.classes.isimaga.OrderToForniture;
 import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
 import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
@@ -2093,6 +2094,44 @@ public class HttpRequest {
         }
 
         return false;
+    }
+
+    public boolean addIsimagaProductMovement(IsimagaPorductMovement movement){
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("movement", new Gson().toJsonTree(movement));
+
+            MakeHttpPost post = new MakeHttpPost( "addIsimagaProductMovement", json.getData(), apiKey, WebControllers.isimaga);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public ArrayList<IsimagaPorductMovement> getIsimagaProductMovements(int product_forniture_id){
+
+        try {
+            HttpJson json = new HttpJson();
+            json.addData("product_forniture_id", product_forniture_id);
+
+            MakeHttpPost post = new MakeHttpPost( "getIsimagaProductMovements", json.getData(), apiKey, WebControllers.isichain);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsimagaPorductMovement>>(){}.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
     }
 
     public boolean addProductForniture(ProductForniture f){
