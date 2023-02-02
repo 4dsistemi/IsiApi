@@ -35,6 +35,7 @@ import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
 import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.CategoriesTableResponse;
+import com.isi.isiapi.classes.isiorder.DevicesAuthorization;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
@@ -2045,6 +2046,65 @@ public class HttpRequest {
         return false;
     }
 
+    public List<DevicesAuthorization> listOfDeviceAuth(){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            MakeHttpPost post = new MakeHttpPost( "getClientDevices", json.getData(), "", WebControllers.isiorder);
+
+            String result = post.post();
+
+            return new Gson().fromJson(result, new TypeToken<List<DevicesAuthorization>>(){}.getType());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+    }
+
+    public boolean deleteCron(){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            MakeHttpPost post = new MakeHttpPost( "deleteCronDevices", json.getData(), "", WebControllers.isiorder);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
+    public boolean changeDeviceActivation(int deviceId, boolean active){
+
+        try {
+
+            HttpJson json = new HttpJson();
+            json.addData("id", deviceId);
+            json.addData("active", active ? 1 : 0);
+            MakeHttpPost post = new MakeHttpPost( "changeDeviceActivation", json.getData(), "", WebControllers.isiorder);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+
+    }
+
     //ISIMAGA
 
     public ArrayList<ProductForniture> isimagaGetProductForniture(){
@@ -2121,7 +2181,7 @@ public class HttpRequest {
             HttpJson json = new HttpJson();
             json.addData("product_forniture_id", product_forniture_id);
 
-            MakeHttpPost post = new MakeHttpPost( "getIsimagaProductMovements", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost( "getIsimagaProductMovements", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
