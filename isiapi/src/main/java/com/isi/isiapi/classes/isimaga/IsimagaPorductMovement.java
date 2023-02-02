@@ -19,7 +19,7 @@ public class IsimagaPorductMovement extends LastModifiedTables {
     @SerializedName("Quantity")
     public float quantity;
 
-    @SerializedName("isPlus")
+    @SerializedName("IsPlus")
     public boolean is_plus;
 
     @SerializedName("fatturaNr")
