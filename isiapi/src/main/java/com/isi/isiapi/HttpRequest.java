@@ -782,6 +782,26 @@ public class HttpRequest {
 
     }
 
+    public boolean upsertCustomerBySociety(Customer customer){
+
+        HttpJson json = new HttpJson();
+        json.addData("customer", new Gson().toJsonTree(customer));
+
+        MakeHttpPost post = new MakeHttpPost( "upsertCustomerBySociety", json.getData(), apiKey, WebControllers.isicashier);
+
+        try {
+            String response = post.post();
+
+            return response.trim().equals("ok");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public boolean editCustomer(Customer customer){
 
         HttpJson json = new HttpJson();
