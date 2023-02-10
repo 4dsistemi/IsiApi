@@ -56,7 +56,6 @@ import com.isi.isiapi.classes.isishop.OpeningHours;
 import com.isi.isiapi.classes.isishop.IsicoinMovement;
 import com.isi.isiapi.classes.isishop.MyCommercialCategory;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, Commercial.class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -109,7 +108,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -128,7 +127,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Account>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -147,7 +146,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<AppAndAppActivation>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -168,7 +167,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -188,7 +187,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -213,7 +212,7 @@ public class HttpRequest {
 
             return 0;
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -235,7 +234,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -255,7 +254,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -276,7 +275,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -297,7 +296,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -318,7 +317,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -340,7 +339,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -360,7 +359,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -378,7 +377,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashDepartment>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -397,7 +396,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -417,7 +416,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -438,7 +437,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -459,7 +458,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -479,7 +478,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -499,7 +498,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<CategoryAndProduct>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -516,7 +515,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<FiscalPrinter>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -535,7 +534,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -555,7 +554,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -575,7 +574,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -594,7 +593,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, GYBToken.class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -615,7 +614,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -636,7 +635,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashBillAndElements>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -656,7 +655,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -678,7 +677,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -698,7 +697,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<BillAndFattura>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -717,7 +716,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -737,7 +736,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -755,7 +754,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -774,7 +773,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -794,7 +793,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -814,7 +813,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -834,7 +833,7 @@ public class HttpRequest {
 
             return response.trim().equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -2004,7 +2003,7 @@ public class HttpRequest {
 
             return response.equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -2021,7 +2020,7 @@ public class HttpRequest {
 
             return new Gson().fromJson(response, new TypeToken<ArrayList<IsiorderPrinterRulesAndCategories>>(){}.getType());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -2040,7 +2039,7 @@ public class HttpRequest {
 
             return response.equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -2059,7 +2058,7 @@ public class HttpRequest {
 
             return response.equals("ok");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
