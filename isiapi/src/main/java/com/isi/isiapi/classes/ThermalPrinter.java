@@ -20,9 +20,13 @@ public class ThermalPrinter extends LastModifiedTables{
     @SerializedName("Active")
     public int active = 1;
 
-    public ThermalPrinter(String name, String ip, int preconto) {
+    @SerializedName("Beep")
+    public int beep;
+
+    public ThermalPrinter(String name, String ip, int preconto, int beep) {
         this.name = name;
         this.ip = ip;
         this.preconto = preconto;
+        this.beep = beep;
     }
 }
