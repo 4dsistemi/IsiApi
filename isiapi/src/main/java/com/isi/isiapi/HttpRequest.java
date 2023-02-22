@@ -69,39 +69,24 @@ public class HttpRequest {
     private final String apiKey;
     public static String serverIpAddress = "10.99.66.2";
 
-    public HttpRequest(String apiKey) {
+    private final Commercial commercial;
+
+    public HttpRequest(String apiKey, Commercial commercial) {
         this.apiKey = apiKey;
         String myIp = getIPAddress(true);
         String substr = myIp.substring(0, myIp.lastIndexOf("."));
         serverIpAddress = substr + ".2";
 
-    }
-
-    public Commercial getCommercial(){
-
-        HttpJson json = new HttpJson();
-
-        MakeHttpPost post = new MakeHttpPost( "getCommercial", json.getData(), apiKey, WebControllers.isiapp);
-
-        try {
-            String response = post.post();
-
-            return new Gson().fromJson(response, Commercial.class);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        this.commercial = commercial;
 
     }
 
-    public boolean updateCommercial(Commercial c){
+    public boolean updateCommercial(Commercial c) {
 
         HttpJson json = new HttpJson();
         json.addData("commercial", new Gson().toJsonTree(c));
 
-        MakeHttpPost post = new MakeHttpPost( "updateCommercial", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("updateCommercial", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -116,16 +101,18 @@ public class HttpRequest {
 
     }
 
-    public List<Account> getAccount(){
+    public List<Account> getAccount() {
 
         HttpJson json = new HttpJson();
+        json.addData("commercial", this.commercial.local_id);
 
-        MakeHttpPost post = new MakeHttpPost( "getAccount", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("getAccount", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<Account>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Account>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,16 +122,19 @@ public class HttpRequest {
 
     }
 
-    public List<AppAndAppActivation> getApplicationActive(){
+    public List<AppAndAppActivation> getApplicationActive() {
 
         HttpJson json = new HttpJson();
+        json.addData("commercial", this.commercial.local_id);
 
-        MakeHttpPost post = new MakeHttpPost( "getApplicationActive", json.getData(), apiKey, WebControllers.isiapp);
+
+        MakeHttpPost post = new MakeHttpPost("getApplicationActive", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<AppAndAppActivation>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<AppAndAppActivation>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,13 +144,15 @@ public class HttpRequest {
 
     }
 
-    public boolean removeShadow(AppActivation appActivation, int position){
+    public boolean removeShadow(AppActivation appActivation, int position) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", appActivation.id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "removeShadow", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("removeShadow", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -175,12 +167,14 @@ public class HttpRequest {
 
     }
 
-    public boolean addShadow(AppActivation appActivation){
+    public boolean addShadow(AppActivation appActivation) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", appActivation.id);
 
-        MakeHttpPost post = new MakeHttpPost( "addShadow", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("addShadow", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -195,18 +189,20 @@ public class HttpRequest {
 
     }
 
-    public int activateService(int id, int position){
+    public int activateService(int id, int position) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "activateService", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("activateService", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
 
-            if(response.trim().equals("ok")) {
+            if (response.trim().equals("ok")) {
                 return 1;
             }
 
@@ -220,12 +216,14 @@ public class HttpRequest {
 
     }
 
-    public boolean updateApplicationActivePriority(ArrayList<AppAndAppActivation> activations){
+    public boolean updateApplicationActivePriority(ArrayList<AppAndAppActivation> activations) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("applications", new Gson().toJsonTree(activations));
 
-        MakeHttpPost post = new MakeHttpPost( "updateApplicationActivePriority", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("updateApplicationActivePriority", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -242,12 +240,14 @@ public class HttpRequest {
 
     }
 
-    public boolean removeAppActivation(AppActivation appActivation){
+    public boolean removeAppActivation(AppActivation appActivation) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", appActivation.id);
 
-        MakeHttpPost post = new MakeHttpPost( "removeAppActivation", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("removeAppActivation", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -262,13 +262,15 @@ public class HttpRequest {
 
     }
 
-    public boolean setPositionInMenu(AppActivation appActivation, int position){
+    public boolean setPositionInMenu(AppActivation appActivation, int position) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", appActivation.id);
         json.addData("position", position);
 
-        MakeHttpPost post = new MakeHttpPost( "setPositionInMenu", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("setPositionInMenu", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -283,13 +285,15 @@ public class HttpRequest {
 
     }
 
-    public boolean updateLocation(double lat, double lon){
+    public boolean updateLocation(double lat, double lon) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("lat", lat);
         json.addData("lon", lon);
 
-        MakeHttpPost post = new MakeHttpPost( "updateLocation", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("updateLocation", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -304,13 +308,15 @@ public class HttpRequest {
 
     }
 
-    public boolean updateNfc(Account account, String nfc){
+    public boolean updateNfc(Account account, String nfc) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", account.id);
         json.addData("nfc", nfc);
 
-        MakeHttpPost post = new MakeHttpPost( "updateNfc", json.getData(), apiKey, WebControllers.isiapp);
+        MakeHttpPost post = new MakeHttpPost("updateNfc", json.getData(), apiKey, WebControllers.isiapp);
 
         try {
             String response = post.post();
@@ -327,12 +333,14 @@ public class HttpRequest {
 
     //ISICASHIER
 
-    public boolean addDepartment(IsiCashDepartment department){
+    public boolean addDepartment(IsiCashDepartment department) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("department", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "addDepartment", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -347,12 +355,14 @@ public class HttpRequest {
 
     }
 
-    public boolean editDepartment(IsiCashDepartment department){
+    public boolean editDepartment(IsiCashDepartment department) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("department", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "editDepartment", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("editDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -367,15 +377,17 @@ public class HttpRequest {
 
     }
 
-    public List<IsiCashDepartment> getDepartment(){
+    public List<IsiCashDepartment> getDepartment() {
         HttpJson json = new HttpJson();
+        json.addData("commercial", this.commercial.local_id);
 
-        MakeHttpPost post = new MakeHttpPost( "getDepartment", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("getDepartment", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashDepartment>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashDepartment>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -384,12 +396,14 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean addCategory(Category department){
+    public boolean addCategory(Category department) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("category", new Gson().toJsonTree(department));
 
-        MakeHttpPost post = new MakeHttpPost( "addCategory", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addCategory", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -404,12 +418,14 @@ public class HttpRequest {
 
     }
 
-    public boolean editcategory(Category category){
+    public boolean editcategory(Category category) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("category", new Gson().toJsonTree(category));
 
-        MakeHttpPost post = new MakeHttpPost( "editCategory", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("editCategory", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -424,13 +440,15 @@ public class HttpRequest {
 
     }
 
-    public boolean addProduct(Product product, List<Ingredients> ingredients){
+    public boolean addProduct(Product product, List<Ingredients> ingredients) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("product", new Gson().toJsonTree(product));
         json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
-        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -445,13 +463,15 @@ public class HttpRequest {
 
     }
 
-    public boolean editProduct(Product product, List<Ingredients> ingredients){
+    public boolean editProduct(Product product, List<Ingredients> ingredients) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("product", new Gson().toJsonTree(product));
         json.addData("ingredients", new Gson().toJsonTree(ingredients));
 
-        MakeHttpPost post = new MakeHttpPost( "editProduct", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("editProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -466,12 +486,14 @@ public class HttpRequest {
 
     }
 
-    public boolean deleteProduct(Product product){
+    public boolean deleteProduct(Product product) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("product", new Gson().toJsonTree(product));
 
-        MakeHttpPost post = new MakeHttpPost( "addProduct", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addProduct", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -486,17 +508,20 @@ public class HttpRequest {
 
     }
 
-    public List<CategoryAndProduct> getCategories(){
+    public List<CategoryAndProduct> getCategories() {
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getCategories", json.getData(), apiKey, WebControllers.isicashier);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
             Log.e("TAG", "getCategories: " + response);
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<CategoryAndProduct>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<CategoryAndProduct>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -505,15 +530,18 @@ public class HttpRequest {
         return null;
     }
 
-    public List<FiscalPrinter> getFiscalPrinter(){
+    public List<FiscalPrinter> getFiscalPrinter() {
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<FiscalPrinter>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<FiscalPrinter>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -522,12 +550,14 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean addFiscalPrinter(FiscalPrinter printer){
+    public boolean addFiscalPrinter(FiscalPrinter printer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("printer", new Gson().toJsonTree(printer));
 
-        MakeHttpPost post = new MakeHttpPost( "addFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -542,12 +572,14 @@ public class HttpRequest {
 
     }
 
-    public boolean editFiscalPrinter(FiscalPrinter printer){
+    public boolean editFiscalPrinter(FiscalPrinter printer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("printer", new Gson().toJsonTree(printer));
 
-        MakeHttpPost post = new MakeHttpPost( "editFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("editFiscalPrinter", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -562,12 +594,14 @@ public class HttpRequest {
 
     }
 
-    public boolean addGybToken(GYBToken token){
+    public boolean addGybToken(GYBToken token) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("token", new Gson().toJsonTree(token));
 
-        MakeHttpPost post = new MakeHttpPost( "addGybToken", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addGybToken", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -582,11 +616,13 @@ public class HttpRequest {
 
     }
 
-    public GYBToken getGybToken(){
+    public GYBToken getGybToken() {
 
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getGybToken", json.getData(), apiKey, WebControllers.isicashier);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getGybToken", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -601,13 +637,15 @@ public class HttpRequest {
 
     }
 
-    public boolean addBill(IsiCashBillAndElements bill, boolean scarico){
+    public boolean addBill(IsiCashBillAndElements bill, boolean scarico) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("scarico", scarico);
 
-        MakeHttpPost post = new MakeHttpPost( "addBill", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addBill", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -622,18 +660,21 @@ public class HttpRequest {
 
     }
 
-    public List<IsiCashBillAndElements> getBill(Date start, Date to){
+    public List<IsiCashBillAndElements> getBill(Date start, Date to) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("start", start.getTime());
         json.addData("to", to.getTime());
 
-        MakeHttpPost post = new MakeHttpPost( "getIsicashierBills", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("getIsicashierBills", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashBillAndElements>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiCashBillAndElements>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -643,12 +684,14 @@ public class HttpRequest {
 
     }
 
-    public boolean updateBill(IsiCashBill bill){
+    public boolean updateBill(IsiCashBill bill) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("bill", new Gson().toJsonTree(bill));
 
-        MakeHttpPost post = new MakeHttpPost( "updateBill", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("updateBill", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -663,14 +706,16 @@ public class HttpRequest {
 
     }
 
-    public boolean addFattura(IsiCashBillAndElements bill, Fattura fattura, boolean scarico){
+    public boolean addFattura(IsiCashBillAndElements bill, Fattura fattura, boolean scarico) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("bill", new Gson().toJsonTree(bill));
         json.addData("fattura", new Gson().toJsonTree(fattura));
         json.addData("scarico", scarico);
 
-        MakeHttpPost post = new MakeHttpPost( "addFattura", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -685,17 +730,20 @@ public class HttpRequest {
 
     }
 
-    public List<BillAndFattura> getFatture(){
+    public List<BillAndFattura> getFatture() {
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getFatture", json.getData(), apiKey, WebControllers.isicashier);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getFatture", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
             Log.e("TAG", "getFatture: " + response);
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<BillAndFattura>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<BillAndFattura>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -704,12 +752,14 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean deleteFattura(Fattura fattura){
+    public boolean deleteFattura(Fattura fattura) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("fattura", new Gson().toJsonTree(fattura));
 
-        MakeHttpPost post = new MakeHttpPost( "deleteFattura", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("deleteFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -724,12 +774,14 @@ public class HttpRequest {
 
     }
 
-    public boolean updateFattura(Fattura fattura){
+    public boolean updateFattura(Fattura fattura) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("fattura", new Gson().toJsonTree(fattura));
 
-        MakeHttpPost post = new MakeHttpPost( "updateFattura", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("updateFattura", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -744,15 +796,18 @@ public class HttpRequest {
 
     }
 
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() {
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getCustomers", json.getData(), apiKey, WebControllers.isicashier);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getCustomers", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Customer>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -761,12 +816,14 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean addCustomer(Customer customer){
+    public boolean addCustomer(Customer customer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "addCustomer", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("addCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -781,12 +838,14 @@ public class HttpRequest {
 
     }
 
-    public boolean upsertCustomerBySociety(Customer customer){
+    public boolean upsertCustomerBySociety(Customer customer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "upsertCustomerBySociety", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("upsertCustomerBySociety", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -801,12 +860,14 @@ public class HttpRequest {
 
     }
 
-    public boolean editCustomer(Customer customer){
+    public boolean editCustomer(Customer customer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "editCustomer", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("editCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -821,12 +882,14 @@ public class HttpRequest {
 
     }
 
-    public boolean deleteCustomer(Customer customer){
+    public boolean deleteCustomer(Customer customer) {
 
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("customer", new Gson().toJsonTree(customer));
 
-        MakeHttpPost post = new MakeHttpPost( "deleteCustomer", json.getData(), apiKey, WebControllers.isicashier);
+        MakeHttpPost post = new MakeHttpPost("deleteCustomer", json.getData(), apiKey, WebControllers.isicashier);
 
         try {
             String response = post.post();
@@ -843,16 +906,19 @@ public class HttpRequest {
 
     //ISIORDER
 
-    public ArrayList<IsiorderAccount> getAccounts(){
+    public ArrayList<IsiorderAccount> getAccounts() {
         ArrayList<IsiorderAccount> accounts = new ArrayList<>();
         try {
-            HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "isiorderUser", json.getData(), apiKey, WebControllers.isiorder);
+            HttpJson json = new HttpJson();
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderUser", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            accounts = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderAccount>>(){}.getType());
+            accounts = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderAccount>>() {
+            }.getType());
 
         } catch (Exception ignored) {
 
@@ -860,14 +926,16 @@ public class HttpRequest {
         return accounts;
     }
 
-    public boolean editIsiorderAccount(IsiorderAccount account){
+    public boolean editIsiorderAccount(IsiorderAccount account) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("account", new Gson().toJsonTree(account));
 
-            MakeHttpPost post = new MakeHttpPost( "editIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("editIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -881,14 +949,16 @@ public class HttpRequest {
 
     }
 
-    public boolean addIsiorderAccount(IsiorderAccount account){
+    public boolean addIsiorderAccount(IsiorderAccount account) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("account", new Gson().toJsonTree(account));
 
-            MakeHttpPost post = new MakeHttpPost( "addIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("addIsiorderAccount", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -902,36 +972,41 @@ public class HttpRequest {
 
     }
 
-    public IsiorderOrdersProductElement getOrderForTable(int table){
-        try{
+    public IsiorderOrdersProductElement getOrderForTable(int table) {
+        try {
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", table);
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderForTable", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getOrderForTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
             return new Gson().fromJson(result, IsiorderOrdersProductElement.class);
 
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
 
         return null;
     }
 
-    public ArrayList<IsiorderCategoriesProductsNotes> getElements(){
+    public ArrayList<IsiorderCategoriesProductsNotes> getElements() {
 
         ArrayList<IsiorderCategoriesProductsNotes> ctageories = new ArrayList<>();
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "needToUpdate", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("needToUpdate", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            ctageories = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoriesProductsNotes>>(){}.getType());
+            ctageories = new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoriesProductsNotes>>() {
+            }.getType());
 
         } catch (Exception ignored) {
 
@@ -941,14 +1016,16 @@ public class HttpRequest {
 
     }
 
-    public boolean cancelOrderGuest(int id){
+    public boolean cancelOrderGuest(int id) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
 
-            MakeHttpPost post = new MakeHttpPost( "cancelOrderGuest", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("cancelOrderGuest", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -962,16 +1039,18 @@ public class HttpRequest {
 
     }
 
-    public boolean sendDelivery(String jsona, String elements, int operator){
+    public boolean sendDelivery(String jsona, String elements, int operator) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("json", jsona);
             json.addData("elements", elements);
             json.addData("operator", operator);
 
-            MakeHttpPost post = new MakeHttpPost( "sendDelivery", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("sendDelivery", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -985,7 +1064,7 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<CtzonOrder> getMyIsiDel(){
+    public ArrayList<CtzonOrder> getMyIsiDel() {
 
         ArrayList<CtzonOrder> missions = new ArrayList<>();
 
@@ -993,15 +1072,18 @@ public class HttpRequest {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            if(result.trim().equals("notActive")){
+            if (result.trim().equals("notActive")) {
                 return missions;
             }
 
-            missions = new Gson().fromJson(result, new TypeToken<ArrayList<CtzonOrder>>(){}.getType());
+            missions = new Gson().fromJson(result, new TypeToken<ArrayList<CtzonOrder>>() {
+            }.getType());
 
         } catch (Exception ignored) {
 
@@ -1011,15 +1093,18 @@ public class HttpRequest {
 
     }
 
-    public boolean confirmIsiDel(String id, boolean confirm, boolean isidel){
+    public boolean confirmIsiDel(String id, boolean confirm, boolean isidel) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
             json.addData("confirm", confirm);
             json.addData("isidel", isidel);
-            MakeHttpPost post = new MakeHttpPost( "confirmIsiDel", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("confirmIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1033,14 +1118,16 @@ public class HttpRequest {
 
     }
 
-    public boolean updateStatus(int id, int status){
+    public boolean updateStatus(int id, int status) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
             json.addData("status", status);
-            MakeHttpPost post = new MakeHttpPost( "updateStatusDelivery", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("updateStatusDelivery", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1054,14 +1141,16 @@ public class HttpRequest {
 
     }
 
-    public void occupingTable(int id, int operator){
+    public void occupingTable(int id, int operator) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
             json.addData("account", operator);
-            MakeHttpPost post = new MakeHttpPost( "occupingTable", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("occupingTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1070,13 +1159,16 @@ public class HttpRequest {
         }
     }
 
-    public void releaseTable(int id){
+    public void releaseTable(int id) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "releaseTable", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("releaseTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1086,12 +1178,14 @@ public class HttpRequest {
 
     }
 
-    public boolean checkisiDel(){
+    public boolean checkisiDel() {
 
         try {
 
             HttpJson json = new HttpJson();
-            MakeHttpPost post = new MakeHttpPost( "getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
+
+            json.addData("commercial", this.commercial.local_id);
+            MakeHttpPost post = new MakeHttpPost("getMyIsiDel", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1105,13 +1199,16 @@ public class HttpRequest {
 
     }
 
-    public boolean reopenOrder(int id){
+    public boolean reopenOrder(int id) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "reopenOrder", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("reopenOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1125,15 +1222,17 @@ public class HttpRequest {
 
     }
 
-    public boolean updateElementAlreadySent(IsiorderElementOrder element){
+    public boolean updateElementAlreadySent(IsiorderElementOrder element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", element.id);
             json.addData("newName", element.newName);
             json.addData("newPrice", element.newPrice);
 
-            MakeHttpPost post = new MakeHttpPost( "changeElementAlreadySent", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("changeElementAlreadySent", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1146,16 +1245,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<ThermalPrinter> getIsiOrderPrinter(){
+    public ArrayList<ThermalPrinter> getIsiOrderPrinter() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getPrinters", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getPrinters", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinter>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinter>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1164,19 +1266,23 @@ public class HttpRequest {
 
     }
 
-    public CategoriesTableResponse getCategoriesTablesActive(){
+    public CategoriesTableResponse getCategoriesTablesActive() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "tablesActive", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("tablesActive", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
             JsonObject obj = JsonParser.parseString(result).getAsJsonObject();
 
-            ArrayList<IsiorderCategoryAndTables> isiorderCategoryAndTables = new Gson().fromJson(obj.getAsJsonArray("categories"), new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
-            ArrayList<IsiorderInformationOrders> isiorderInformationOrders = new Gson().fromJson(obj.getAsJsonArray("informations"), new TypeToken<ArrayList<IsiorderInformationOrders>>(){}.getType());
+            ArrayList<IsiorderCategoryAndTables> isiorderCategoryAndTables = new Gson().fromJson(obj.getAsJsonArray("categories"), new TypeToken<ArrayList<IsiorderCategoryAndTables>>() {
+            }.getType());
+            ArrayList<IsiorderInformationOrders> isiorderInformationOrders = new Gson().fromJson(obj.getAsJsonArray("informations"), new TypeToken<ArrayList<IsiorderInformationOrders>>() {
+            }.getType());
 
 
             return new CategoriesTableResponse(isiorderInformationOrders, isiorderCategoryAndTables);
@@ -1190,16 +1296,19 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiorderCategoryAndTables> getCategoriesTables(){
+    public ArrayList<IsiorderCategoryAndTables> getCategoriesTables() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "tables", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("tables", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoryAndTables>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderCategoryAndTables>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1209,12 +1318,15 @@ public class HttpRequest {
 
     }
 
-    public boolean canAccess(int id){
+    public boolean canAccess(int id) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
-            MakeHttpPost post = new MakeHttpPost( "canAccess", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("canAccess", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1227,14 +1339,17 @@ public class HttpRequest {
         return false;
     }
 
-    public JsonObject IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, ArrayList<Integer> deleting, boolean stamp){
+    public JsonObject IsiorderSendOrder(IsiorderOrdersProductElement isiorderOrdersProductElement, ArrayList<Integer> deleting, boolean stamp) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order", new Gson().toJsonTree(isiorderOrdersProductElement));
             json.addData("deleting", new Gson().toJsonTree(deleting));
             json.addData("stamp", stamp);
-            MakeHttpPost post = new MakeHttpPost( "sendOrder", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("sendOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1247,14 +1362,16 @@ public class HttpRequest {
         return new JsonObject();
     }
 
-    public boolean reprintOrder(int id){
+    public boolean reprintOrder(int id) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
 
-            MakeHttpPost post = new MakeHttpPost( "reprintOrder", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("reprintOrder", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1268,17 +1385,19 @@ public class HttpRequest {
 
     }
 
-    public boolean printPrebuill(int id, boolean discount_auto, boolean romana, boolean all){
+    public boolean printPrebuill(int id, boolean discount_auto, boolean romana, boolean all) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
             json.addData("discount_auto", discount_auto);
             json.addData("romana", romana);
             json.addData("all", all);
 
-            MakeHttpPost post = new MakeHttpPost( "printPrebill", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("printPrebill", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1292,10 +1411,12 @@ public class HttpRequest {
 
     }
 
-    public boolean setRomanaPayedElement(int orderId, boolean stamp, int account_id, float discount, float total, int peopleSelected){
+    public boolean setRomanaPayedElement(int orderId, boolean stamp, int account_id, float discount, float total, int peopleSelected) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order_id", orderId);
             json.addData("stamp", stamp);
             json.addData("account_id", account_id);
@@ -1303,7 +1424,7 @@ public class HttpRequest {
             json.addData("total", total);
             json.addData("people", peopleSelected);
 
-            MakeHttpPost post = new MakeHttpPost( "setRomanaPayedElement", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("setRomanaPayedElement", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1316,10 +1437,12 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean setPayedElement(ArrayList<Integer> ids, int orderId, boolean stamp, int account_id, float discount, float total){
+    public boolean setPayedElement(ArrayList<Integer> ids, int orderId, boolean stamp, int account_id, float discount, float total) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", new Gson().toJsonTree(ids));
             json.addData("order_id", orderId);
             json.addData("stamp", stamp);
@@ -1327,7 +1450,7 @@ public class HttpRequest {
             json.addData("discount", discount);
             json.addData("total", total);
 
-            MakeHttpPost post = new MakeHttpPost( "setPayedElements", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("setPayedElements", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1340,12 +1463,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean setReadedMessages(int toId){
+    public boolean setReadedMessages(int toId) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("to_id", toId);
-            MakeHttpPost post = new MakeHttpPost( "setReadedMessages", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("setReadedMessages", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1358,18 +1484,20 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsiorderChatAccounts> getAllMyMessages(int myId){
+    public ArrayList<IsiorderChatAccounts> getAllMyMessages(int myId) {
 
         try {
             HttpJson json = new HttpJson();
 
+            json.addData("commercial", this.commercial.local_id);
             json.addData("myId", myId);
 
-            MakeHttpPost post = new MakeHttpPost( "getAllMyMessages", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getAllMyMessages", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChatAccounts>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChatAccounts>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1379,15 +1507,17 @@ public class HttpRequest {
 
     }
 
-    public boolean deleteChat(int fromId, int toId){
+    public boolean deleteChat(int fromId, int toId) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("from_id", fromId);
             json.addData("to_id", toId);
 
-            MakeHttpPost post = new MakeHttpPost( "deleteChat", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("deleteChat", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1401,16 +1531,18 @@ public class HttpRequest {
 
     }
 
-    public boolean sendMessageToPrinter(int id, String text, int operator){
+    public boolean sendMessageToPrinter(int id, String text, int operator) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", id);
             json.addData("text", text);
             json.addData("operator", operator);
 
-            MakeHttpPost post = new MakeHttpPost( "sendMessageToPrinter", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("sendMessageToPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1424,18 +1556,20 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiorderOrdersProductElement> getAllOrderToday(int myId){
+    public ArrayList<IsiorderOrdersProductElement> getAllOrderToday(int myId) {
 
         try {
             HttpJson json = new HttpJson();
 
+            json.addData("commercial", this.commercial.local_id);
             json.addData("myId", myId);
 
-            MakeHttpPost post = new MakeHttpPost( "getAllOrderToday", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getAllOrderToday", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1445,19 +1579,21 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<IsiorderOrdersProductElement> getOrderFromTo(Date start, Date end){
+    public ArrayList<IsiorderOrdersProductElement> getOrderFromTo(Date start, Date end) {
 
         try {
             HttpJson json = new HttpJson();
 
+            json.addData("commercial", this.commercial.local_id);
             json.addData("start", start.getTime());
             json.addData("end", end.getTime());
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderFromTo", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getOrderFromTo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderOrdersProductElement>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1467,15 +1603,17 @@ public class HttpRequest {
 
     }
 
-    public boolean changeCoperti(int orderId, int coperti){
+    public boolean changeCoperti(int orderId, int coperti) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order_id", orderId);
             json.addData("coperti", coperti);
 
-            MakeHttpPost post = new MakeHttpPost( "changeCoperti", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("changeCoperti", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1489,15 +1627,17 @@ public class HttpRequest {
 
     }
 
-    public boolean moveTable(int order, int table){
+    public boolean moveTable(int order, int table) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order", order);
             json.addData("table", table);
 
-            MakeHttpPost post = new MakeHttpPost( "moveTable", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("moveTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1511,15 +1651,17 @@ public class HttpRequest {
 
     }
 
-    public boolean addSconto(int order, double sconto){
+    public boolean addSconto(int order, double sconto) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", order);
             json.addData("sconto", sconto);
 
-            MakeHttpPost post = new MakeHttpPost( "addSconto", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("addSconto", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1533,15 +1675,17 @@ public class HttpRequest {
 
     }
 
-    public boolean printExit(int order, int exit){
+    public boolean printExit(int order, int exit) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", order);
             json.addData("whatExit", exit);
 
-            MakeHttpPost post = new MakeHttpPost( "printExit", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("printExit", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1555,11 +1699,13 @@ public class HttpRequest {
 
     }
 
-    public boolean cleanTable(int account_id, int order, boolean stamp, float discount, float total, String ctzonCard){
+    public boolean cleanTable(int account_id, int order, boolean stamp, float discount, float total, String ctzonCard) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("account_id", account_id);
             json.addData("id", order);
             json.addData("stamp", stamp);
@@ -1568,7 +1714,7 @@ public class HttpRequest {
             json.addData("ctzonCard", ctzonCard);
 
 
-            MakeHttpPost post = new MakeHttpPost( "cleanTable", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("cleanTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1582,12 +1728,14 @@ public class HttpRequest {
 
     }
 
-    public IsiorderGeneralInfo getIsiorderGeneralInfo(){
+    public IsiorderGeneralInfo getIsiorderGeneralInfo() {
         try {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1600,13 +1748,15 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean getChatService(){
+    public boolean getChatService() {
 
         try {
 
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getChatService", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getChatService", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1620,16 +1770,18 @@ public class HttpRequest {
 
     }
 
-    public boolean addMessageChat(int account_id, int friend_id,  String message){
+    public boolean addMessageChat(int account_id, int friend_id, String message) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", account_id);
             json.addData("friendId", friend_id);
             json.addData("txt", message);
 
-            MakeHttpPost post = new MakeHttpPost( "addMessageChat", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("addMessageChat", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1643,18 +1795,21 @@ public class HttpRequest {
 
     }
 
-    public List<IsiorderChat> getChatMessage(int myId, int friend_id){
+    public List<IsiorderChat> getChatMessage(int myId, int friend_id) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("myId", myId);
             json.addData("friendId", friend_id);
 
-            MakeHttpPost post = new MakeHttpPost( "getChatMessage", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getChatMessage", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChat>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderChat>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1662,12 +1817,15 @@ public class HttpRequest {
         return new ArrayList<>();
     }
 
-    public boolean isiorderAddTable(IsiorderTableElement element){
+    public boolean isiorderAddTable(IsiorderTableElement element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("table", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddTable", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderAddTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1680,12 +1838,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean isiorderEditTable(IsiorderTableElement element){
+    public boolean isiorderEditTable(IsiorderTableElement element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("table", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditTable", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderEditTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1698,12 +1859,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean isiorderAddCategoryTable(IsiorderTableCategory element){
+    public boolean isiorderAddCategoryTable(IsiorderTableCategory element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("category", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderAddCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1716,12 +1880,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean isiorderEditCategoryTable(IsiorderTableCategory element){
+    public boolean isiorderEditCategoryTable(IsiorderTableCategory element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("category", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderEditCategoryTable", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1734,12 +1901,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean isiorderAddNote(IsiorderNote element){
+    public boolean isiorderAddNote(IsiorderNote element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("note", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderAddNote", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderAddNote", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1752,12 +1922,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean isiorderEditNote(IsiorderNote element){
+    public boolean isiorderEditNote(IsiorderNote element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("note", element);
-            MakeHttpPost post = new MakeHttpPost( "isiorderEditNote", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderEditNote", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1770,16 +1943,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsiorderNote> isiorderGetNotes(){
+    public ArrayList<IsiorderNote> isiorderGetNotes() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "isiorderGetNotes", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("isiorderGetNotes", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderNote>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderNote>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1789,15 +1965,17 @@ public class HttpRequest {
 
     }
 
-    public boolean addThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories){
+    public boolean addThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("printer", new Gson().toJsonTree(printer));
             json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
             json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
 
-            MakeHttpPost post = new MakeHttpPost( "addThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("addThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1810,15 +1988,17 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean editThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories){
+    public boolean editThermalPrinter(ThermalPrinter printer, List<ThermalPrinterCategory> thermalPrinterCategories, List<ThermalPrinterSubcategory> thermalPrinterSubcategories) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("printer", new Gson().toJsonTree(printer));
             json.addData("categories", new Gson().toJsonTree(thermalPrinterCategories));
             json.addData("subcategories", new Gson().toJsonTree(thermalPrinterSubcategories));
 
-            MakeHttpPost post = new MakeHttpPost( "editThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("editThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1831,16 +2011,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<ThermalPrinterAndCategories> getIsiOrderPrinterAndCategories(){
+    public ArrayList<ThermalPrinterAndCategories> getIsiOrderPrinterAndCategories() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getThermalPrintersAndCategories", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getThermalPrintersAndCategories", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1849,17 +2032,20 @@ public class HttpRequest {
 
     }
 
-    public ArrayList<Integer> testThermalPrinter(ThermalPrinter printer){
+    public ArrayList<Integer> testThermalPrinter(ThermalPrinter printer) {
 
         try {
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("printer", new Gson().toJsonTree(printer));
 
-            MakeHttpPost post = new MakeHttpPost( "testThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("testThermalPrinter", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ThermalPrinterAndCategories>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1868,13 +2054,15 @@ public class HttpRequest {
 
     }
 
-    public void printCarico(ArrayList<String> toPrint, int tot){
+    public void printCarico(ArrayList<String> toPrint, int tot) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("toPrint", new Gson().toJsonTree(toPrint));
             json.addData("tot", tot);
-            MakeHttpPost post = new MakeHttpPost( "printCarico", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("printCarico", json.getData(), apiKey, WebControllers.isiorder);
 
             post.post();
 
@@ -1883,8 +2071,8 @@ public class HttpRequest {
         }
     }
 
-    public String transformIsiorderPrivilege(int privilege){
-        switch (privilege){
+    public String transformIsiorderPrivilege(int privilege) {
+        switch (privilege) {
             case 1:
                 return "Admin";
             case 2:
@@ -1894,13 +2082,15 @@ public class HttpRequest {
         }
     }
 
-    public boolean editIsiorderGeneralInfo(IsiorderGeneralInfo info){
+    public boolean editIsiorderGeneralInfo(IsiorderGeneralInfo info) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("info", new Gson().toJsonTree(info));
 
-            MakeHttpPost post = new MakeHttpPost( "editIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("editIsiorderGeneralInfo", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1913,14 +2103,16 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean changeIsiorderPassword(int account, String password){
+    public boolean changeIsiorderPassword(int account, String password) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("password", password);
             json.addData("account", account);
 
-            MakeHttpPost post = new MakeHttpPost( "changeIsiorderPassword", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("changeIsiorderPassword", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1933,16 +2125,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsiorderGuestOrderElementNote> getIsiorderGuestOrder(){
+    public ArrayList<IsiorderGuestOrderElementNote> getIsiorderGuestOrder() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getAllOrdersGuest", json.getData(), apiKey, WebControllers.isiorder);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getAllOrdersGuest", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderGuestOrderElementNote>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsiorderGuestOrderElementNote>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -1952,13 +2147,15 @@ public class HttpRequest {
 
     }
 
-    public boolean setIsiorderOrderServed(IsiorderOrdersProductElement id){
+    public boolean setIsiorderOrderServed(IsiorderOrdersProductElement id) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("isiorderorder", new Gson().toJsonTree(id));
 
-            MakeHttpPost post = new MakeHttpPost( "setIsiorderOrderServed", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("setIsiorderOrderServed", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1971,12 +2168,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean updateTableMassive(List<IsiorderTableElement> element){
+    public boolean updateTableMassive(List<IsiorderTableElement> element) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("tables", element);
-            MakeHttpPost post = new MakeHttpPost( "updateTableMassive", json.getData(), apiKey, WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("updateTableMassive", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 
@@ -1989,14 +2189,16 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addPrinterRule(String description, int printerId, List<IsiorderTableCategory> isiorderTableCategories, List<Category> categories){
+    public boolean addPrinterRule(String description, int printerId, List<IsiorderTableCategory> isiorderTableCategories, List<Category> categories) {
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("description", description);
         json.addData("thermal_id", printerId);
         json.addData("table_categories", new Gson().toJsonTree(isiorderTableCategories));
         json.addData("element_category", new Gson().toJsonTree(categories));
 
-        MakeHttpPost post = new MakeHttpPost( "addPrinterRule", json.getData(), apiKey, WebControllers.isiorder);
+        MakeHttpPost post = new MakeHttpPost("addPrinterRule", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2010,15 +2212,18 @@ public class HttpRequest {
         return false;
     }
 
-    public List<IsiorderPrinterRulesAndCategories> getPrinterRules(){
+    public List<IsiorderPrinterRulesAndCategories> getPrinterRules() {
         HttpJson json = new HttpJson();
 
-        MakeHttpPost post = new MakeHttpPost( "getPrinterRules", json.getData(), apiKey, WebControllers.isiorder);
+        json.addData("commercial", this.commercial.local_id);
+
+        MakeHttpPost post = new MakeHttpPost("getPrinterRules", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
 
-            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiorderPrinterRulesAndCategories>>(){}.getType());
+            return new Gson().fromJson(response, new TypeToken<ArrayList<IsiorderPrinterRulesAndCategories>>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -2027,12 +2232,14 @@ public class HttpRequest {
         return null;
     }
 
-    public boolean editActivePrinterRule(int id, boolean active){
+    public boolean editActivePrinterRule(int id, boolean active) {
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", id);
         json.addData("active", active);
 
-        MakeHttpPost post = new MakeHttpPost( "editActivePrinterRule", json.getData(), apiKey, WebControllers.isiorder);
+        MakeHttpPost post = new MakeHttpPost("editActivePrinterRule", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2046,12 +2253,14 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean editOrderNote(int id, String note){
+    public boolean editOrderNote(int id, String note) {
         HttpJson json = new HttpJson();
+
+        json.addData("commercial", this.commercial.local_id);
         json.addData("id", id);
         json.addData("note", note);
 
-        MakeHttpPost post = new MakeHttpPost( "editOrderNote", json.getData(), apiKey, WebControllers.isiorder);
+        MakeHttpPost post = new MakeHttpPost("editOrderNote", json.getData(), apiKey, WebControllers.isiorder);
 
         try {
             String response = post.post();
@@ -2065,16 +2274,20 @@ public class HttpRequest {
         return false;
     }
 
-    public List<DevicesAuthorization> listOfDeviceAuth(){
+    public List<DevicesAuthorization> listOfDeviceAuth() {
 
         try {
 
             HttpJson json = new HttpJson();
-            MakeHttpPost post = new MakeHttpPost( "getClientDevices", json.getData(), "", WebControllers.isiorder);
+
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getClientDevices", json.getData(), "", WebControllers.isiorder);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<List<DevicesAuthorization>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<List<DevicesAuthorization>>() {
+            }.getType());
 
         } catch (Exception ignored) {
 
@@ -2084,12 +2297,15 @@ public class HttpRequest {
 
     }
 
-    public boolean deleteCron(){
+    public boolean deleteCron() {
 
         try {
 
             HttpJson json = new HttpJson();
-            MakeHttpPost post = new MakeHttpPost( "deleteCronDevices", json.getData(), "", WebControllers.isiorder);
+
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("deleteCronDevices", json.getData(), "", WebControllers.isiorder);
 
             String result = post.post();
 
@@ -2103,14 +2319,17 @@ public class HttpRequest {
 
     }
 
-    public boolean changeDeviceActivation(int deviceId, boolean active){
+    public boolean changeDeviceActivation(int deviceId, boolean active) {
 
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("id", deviceId);
             json.addData("active", active ? 1 : 0);
-            MakeHttpPost post = new MakeHttpPost( "changeDeviceActivation", json.getData(), "", WebControllers.isiorder);
+
+            MakeHttpPost post = new MakeHttpPost("changeDeviceActivation", json.getData(), "", WebControllers.isiorder);
 
             String result = post.post();
 
@@ -2126,16 +2345,19 @@ public class HttpRequest {
 
     //ISIMAGA
 
-    public ArrayList<ProductForniture> isimagaGetProductForniture(){
+    public ArrayList<ProductForniture> isimagaGetProductForniture() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getProductForniture", json.getData(), apiKey, WebControllers.isimaga);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<ProductForniture>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ProductForniture>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2145,8 +2367,8 @@ public class HttpRequest {
 
     }
 
-    public String transformIsimagaUnity(int unity){
-        switch (unity){
+    public String transformIsimagaUnity(int unity) {
+        switch (unity) {
             case 0:
                 return "Litri";
             case 1:
@@ -2156,13 +2378,15 @@ public class HttpRequest {
         }
     }
 
-    public boolean editProductForniture(ProductForniture f){
+    public boolean editProductForniture(ProductForniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("product", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editProductForniture", json.getData(), apiKey, WebControllers.isimaga);
+            MakeHttpPost post = new MakeHttpPost("editProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2175,13 +2399,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addIsimagaProductMovement(IsimagaPorductMovement movement){
+    public boolean addIsimagaProductMovement(IsimagaPorductMovement movement) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("movement", new Gson().toJsonTree(movement));
 
-            MakeHttpPost post = new MakeHttpPost( "addIsimagaProductMovement", json.getData(), apiKey, WebControllers.isimaga);
+            MakeHttpPost post = new MakeHttpPost("addIsimagaProductMovement", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2194,17 +2420,20 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsimagaPorductMovement> getIsimagaProductMovements(int product_forniture_id){
+    public ArrayList<IsimagaPorductMovement> getIsimagaProductMovements(int product_forniture_id) {
 
         try {
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("product_forniture_id", product_forniture_id);
 
-            MakeHttpPost post = new MakeHttpPost( "getIsimagaProductMovements", json.getData(), apiKey, WebControllers.isimaga);
+            MakeHttpPost post = new MakeHttpPost("getIsimagaProductMovements", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsimagaPorductMovement>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsimagaPorductMovement>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2213,13 +2442,15 @@ public class HttpRequest {
 
     }
 
-    public boolean addProductForniture(ProductForniture f){
+    public boolean addProductForniture(ProductForniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("product", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addProductForniture", json.getData(), apiKey, WebControllers.isimaga);
+            MakeHttpPost post = new MakeHttpPost("addProductForniture", json.getData(), apiKey, WebControllers.isimaga);
 
             String result = post.post();
 
@@ -2234,16 +2465,19 @@ public class HttpRequest {
 
     //ISICHAIN
 
-    public ArrayList<Forniture> getForniture(){
+    public ArrayList<Forniture> getForniture() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getForniture", json.getData(), apiKey, WebControllers.isichain);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<Forniture>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<Forniture>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2253,13 +2487,15 @@ public class HttpRequest {
 
     }
 
-    public boolean editForniture(Forniture f){
+    public boolean editForniture(Forniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("forniture", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editForniture", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("editForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2272,13 +2508,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addForniture(Forniture f){
+    public boolean addForniture(Forniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("forniture", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addForniture", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("addForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2291,16 +2529,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<OrdersAndForniture> getOrderToForniture(){
+    public ArrayList<OrdersAndForniture> getOrderToForniture() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<OrdersAndForniture>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<OrdersAndForniture>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2310,14 +2551,16 @@ public class HttpRequest {
 
     }
 
-    public boolean addOrderToForniture(OrderToForniture f, List<OrderToFornitureElement> elements){
+    public boolean addOrderToForniture(OrderToForniture f, List<OrderToFornitureElement> elements) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order", new Gson().toJsonTree(f));
             json.addData("elements", new Gson().toJsonTree(elements));
 
-            MakeHttpPost post = new MakeHttpPost( "addOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("addOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2330,13 +2573,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean editOrderToForniture(OrderToForniture f){
+    public boolean editOrderToForniture(OrderToForniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("editOrderToForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2349,13 +2594,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean editOrderToFornitureElements(List<OrderToFornitureElement> elements){
+    public boolean editOrderToFornitureElements(List<OrderToFornitureElement> elements) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("elements", new Gson().toJsonTree(elements));
 
-            MakeHttpPost post = new MakeHttpPost( "editOrderToFornitureElements", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("editOrderToFornitureElements", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2368,13 +2615,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean acceptOrderForniture(OrdersAndForniture f){
+    public boolean acceptOrderForniture(OrdersAndForniture f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("order", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "acceptOrderForniture", json.getData(), apiKey, WebControllers.isichain);
+            MakeHttpPost post = new MakeHttpPost("acceptOrderForniture", json.getData(), apiKey, WebControllers.isichain);
 
             String result = post.post();
 
@@ -2389,15 +2638,18 @@ public class HttpRequest {
 
     //ISISHOP
 
-    public List<CommercialCategoryAndMy> getCommercialCategories(){
+    public List<CommercialCategoryAndMy> getCommercialCategories() {
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<CommercialCategoryAndMy>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<CommercialCategoryAndMy>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2406,13 +2658,15 @@ public class HttpRequest {
 
     }
 
-    public boolean editCommercialCategories(List<MyCommercialCategory> categories){
+    public boolean editCommercialCategories(List<MyCommercialCategory> categories) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("categories", new Gson().toJsonTree(categories));
 
-            MakeHttpPost post = new MakeHttpPost( "editCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
+            MakeHttpPost post = new MakeHttpPost("editCommercialCategories", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2425,16 +2679,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<ExtraordinaryClosing> getExtraordinaryClosing(){
+    public ArrayList<ExtraordinaryClosing> getExtraordinaryClosing() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<ExtraordinaryClosing>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<ExtraordinaryClosing>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2444,13 +2701,15 @@ public class HttpRequest {
 
     }
 
-    public boolean editExtraordinaryClosing(ExtraordinaryClosing f){
+    public boolean editExtraordinaryClosing(ExtraordinaryClosing f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("closing", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
+            MakeHttpPost post = new MakeHttpPost("editExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2463,13 +2722,15 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean addExtraordinaryClosing(ExtraordinaryClosing f){
+    public boolean addExtraordinaryClosing(ExtraordinaryClosing f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("closing", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "addExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
+            MakeHttpPost post = new MakeHttpPost("addExtraordinaryClosing", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2482,16 +2743,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<OpeningHours> getHopeningHours(){
+    public ArrayList<OpeningHours> getHopeningHours() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getHopeningHours", json.getData(), apiKey, WebControllers.isishop);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getHopeningHours", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<OpeningHours>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<OpeningHours>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2501,13 +2765,15 @@ public class HttpRequest {
 
     }
 
-    public boolean editHopeningHours(OpeningHours f){
+    public boolean editHopeningHours(OpeningHours f) {
         try {
 
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("hours", new Gson().toJsonTree(f));
 
-            MakeHttpPost post = new MakeHttpPost( "editHopeningHours", json.getData(), apiKey, WebControllers.isishop);
+            MakeHttpPost post = new MakeHttpPost("editHopeningHours", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2520,16 +2786,19 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsicoinMovement> getIsicoinMovement(){
+    public ArrayList<IsicoinMovement> getIsicoinMovement() {
 
         try {
             HttpJson json = new HttpJson();
 
-            MakeHttpPost post = new MakeHttpPost( "getIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
-            return new Gson().fromJson(result, new TypeToken<ArrayList<IsicoinMovement>>(){}.getType());
+            return new Gson().fromJson(result, new TypeToken<ArrayList<IsicoinMovement>>() {
+            }.getType());
         } catch (Exception ignored) {
 
         }
@@ -2539,13 +2808,15 @@ public class HttpRequest {
 
     }
 
-    public boolean addIsicoinMovement(IsicoinMovement isicoinMovement){
+    public boolean addIsicoinMovement(IsicoinMovement isicoinMovement) {
 
         try {
             HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
             json.addData("movement", new Gson().toJsonTree(isicoinMovement));
 
-            MakeHttpPost post = new MakeHttpPost( "addIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
+            MakeHttpPost post = new MakeHttpPost("addIsicoinMovement", json.getData(), apiKey, WebControllers.isishop);
 
             String result = post.post();
 
@@ -2568,7 +2839,7 @@ public class HttpRequest {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress();
                         //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-                        boolean isIPv4 = Objects.requireNonNull(sAddr).indexOf(':')<0;
+                        boolean isIPv4 = Objects.requireNonNull(sAddr).indexOf(':') < 0;
 
                         if (useIPv4) {
                             if (isIPv4)
@@ -2576,13 +2847,14 @@ public class HttpRequest {
                         } else {
                             if (!isIPv4) {
                                 int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim<0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
                             }
                         }
                     }
                 }
             }
-        } catch (Exception ignored) { } // for now eat exceptions
+        } catch (Exception ignored) {
+        } // for now eat exceptions
         return "";
     }
 
