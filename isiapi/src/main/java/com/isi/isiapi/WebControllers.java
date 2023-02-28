@@ -8,6 +8,7 @@ public enum WebControllers {
     isishop,
     isifit,
     isimaga,
-    isichain
+    isichain,
+    commercial
 
 }

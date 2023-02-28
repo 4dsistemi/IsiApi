@@ -81,6 +81,23 @@ public class HttpRequest {
 
     }
 
+    public List<Commercial> getCommercials(){
+        HttpJson json = new HttpJson();
+
+        MakeHttpPost post = new MakeHttpPost("getCommercials", json.getData(), apiKey, WebControllers.commercial);
+
+        try {
+            String response = post.post();
+            return new Gson().fromJson(response, new TypeToken<ArrayList<Commercial>>() {
+            }.getType());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public boolean updateCommercial(Commercial c) {
 
         HttpJson json = new HttpJson();
