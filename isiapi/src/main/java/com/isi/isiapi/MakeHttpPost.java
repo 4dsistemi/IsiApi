@@ -38,7 +38,7 @@ public class MakeHttpPost{
         RequestBody body = RequestBody.create(data.generateJson(data), JSON);
         Request request = new Request.Builder()
                 .addHeader("authorization", apiKey)
-                .url("http://"+ HttpRequest.serverIpAddress +":9000/API/" + webController.name() + "/")
+                .url("http://"+ HttpRequest.serverIpAddress +":9000/api/" + webController.name() + "/")
                 .post(body)
                 .build();
         try {
