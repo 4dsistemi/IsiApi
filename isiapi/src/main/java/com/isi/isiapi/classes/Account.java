@@ -54,7 +54,7 @@ public class Account {
     public String general_verification;
 
 
-    public String operator_code = "0000";
+    public String login_code = "0000";
 
 
     public String nfc;
