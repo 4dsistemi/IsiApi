@@ -8,31 +8,31 @@ import java.util.Date;
 
 public class IsiorderAccount extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("Surname")
+    
     public String surname;
 
-    @SerializedName("Password")
+    
     public String password;
 
-    @SerializedName("Privilege")
+    
     public int privilege;
 
-    @SerializedName("LastLogin")
+    
     public Date last_login;
 
-    @SerializedName("Email")
+    
     public String email;
 
-    @SerializedName("Active")
+    
     public int active = 1;
 
-    @SerializedName("AccountId")
+    
     public Integer account_id;
 
     public IsiorderAccount(String name, String surname, String password, int privilege, String email, Integer account_id) {

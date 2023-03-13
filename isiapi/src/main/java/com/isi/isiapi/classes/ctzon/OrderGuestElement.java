@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class OrderGuestElement {
 
-    @SerializedName("Id")
+    
     private final int id;
-    @SerializedName("ProductId")
+    
     private final int product_id;
-    @SerializedName("Quantity")
+    
     private final int quantity;
-    @SerializedName("OrderId")
+    
     private final int order_id;
-    @SerializedName("Name")
+    
     private final String name;
-    @SerializedName("Price")
+    
     private final float price;
-    @SerializedName("GuestOrderNotess")
+    
     private final ArrayList<NotesOrderGuest> notesOrderGuests;
 
     public OrderGuestElement(int id, int product_id, int quantity, int order_id, String name, float price, ArrayList<NotesOrderGuest> notesOrderGuests) {

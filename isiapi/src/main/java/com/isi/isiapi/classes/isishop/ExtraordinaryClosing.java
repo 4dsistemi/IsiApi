@@ -6,16 +6,16 @@ import java.util.Date;
 
 public class ExtraordinaryClosing {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("StartDate")
+    
     public Date start_date;
 
-    @SerializedName("EndDate")
+    
     public Date end_date;
 
-    @SerializedName("Description")
+    
     public String description;
 
     public ExtraordinaryClosing(Date start_date, Date end_date, String description) {

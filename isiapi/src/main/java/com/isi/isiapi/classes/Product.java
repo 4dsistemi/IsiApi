@@ -4,46 +4,46 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product extends LastModifiedTables{
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("Price")
+    
     public float price;
 
-    @SerializedName("PriceBanco")
+    
     public float price_banco;
 
-    @SerializedName("Color")
+    
     public Integer color;
 
-    @SerializedName("Department")
+    
     public int department;
 
-    @SerializedName("CategoryId")
+    
     public int category_id;
 
-    @SerializedName("BarcodeValue")
+    
     public String barcode_value;
 
-    @SerializedName("Image")
+    
     public String image;
 
-    @SerializedName("Description")
+    
     public String description;
 
-    @SerializedName("ConnectionProduct")
+    
     public Integer connection_product = null;
 
-    @SerializedName("PriorityProd")
+    
     public int priority_prod = 0;
 
-    @SerializedName("Active")
+    
     public int active = 1;
 
-    @SerializedName("Guest")
+    
     public int guest = 1;
 
 

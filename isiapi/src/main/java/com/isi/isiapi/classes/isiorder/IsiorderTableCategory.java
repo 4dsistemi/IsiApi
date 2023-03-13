@@ -6,16 +6,16 @@ import com.isi.isiapi.classes.LastModifiedTables;
 
 public class IsiorderTableCategory extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("Active")
+    
     public int active = 1;
 
-    @SerializedName("Guest")
+    
     public int guest = 1;
 
     public IsiorderTableCategory(String name) {

@@ -8,31 +8,31 @@ import java.util.Date;
 
 public class IsiCashBill extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
-    @SerializedName("Arrival")
+    
     public Date arrival = new Date();
-    @SerializedName("DiscountValor")
+    
     public float discount_valor;
-    @SerializedName("DiscountType")
+    
     public int discount_type;
-    @SerializedName("AccountId")
+    
     public int account_id;
-    @SerializedName("PaymentType")
+    
     public String payment_type;
-    @SerializedName("Total")
+    
     public float total;
-    @SerializedName("ClosureNumber")
+    
     public int closure_number;
-    @SerializedName("DocumentNumber")
+    
     public int document_number;
-    @SerializedName("Status")
+    
     public int status = 0;
-    @SerializedName("UserId")
+    
     public Integer user_id;
-    @SerializedName("PointsCollected")
+    
     public int points_collected = 0;
-    @SerializedName("PointsUsed")
+    
     public int points_used = 0;
 
     public IsiCashBill(float discount_valor, int discount_type, int account_id, String payment_type, float total, int closure_number, int document_number) {

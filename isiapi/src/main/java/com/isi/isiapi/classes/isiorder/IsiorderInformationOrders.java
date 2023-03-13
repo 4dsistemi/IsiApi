@@ -5,10 +5,10 @@ import com.isi.isiapi.classes.Category;
 
 public class IsiorderInformationOrders {
 
-    @SerializedName("Category")
+    
     public Category category;
 
-    @SerializedName("ElementInQueue")
+    
     public int elementInQueue;
 
     public IsiorderInformationOrders(Category category, int elementInQueue) {

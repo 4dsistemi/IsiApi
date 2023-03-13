@@ -5,37 +5,37 @@ import com.isi.isiapi.classes.LastModifiedTables;
 
 public class IsiorderTableElement extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("IsiorderTableCategoryId")
+    
     public int isiorder_table_category_id;
 
-    @SerializedName("IsOccupied")
+    
     public Integer is_occupied;
 
-    @SerializedName("XPposition")
+    
     public float x_position = 0;
 
-    @SerializedName("YPposition")
+    
     public float y_position = 0;
 
-    @SerializedName("Active")
+    
     public int active = 1;
 
-    @SerializedName("Guest")
+    
     public int guest = 1;
 
-    @SerializedName("Order")
+    
     public IsiorderOrder order;
 
-    @SerializedName("GuestOrder")
+    
     public int guest_order = 0;
 
-    @SerializedName("ExitNotSet")
+    
     public boolean exit_not_set = false;
 
     public IsiorderTableElement(String name, int isiorder_table_category_id) {

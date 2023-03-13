@@ -8,25 +8,25 @@ import java.util.ArrayList;
 
 public class OrderGuest {
 
-    @SerializedName("Id")
+    
     private final int id;
-    @SerializedName("Timestamp")
+    
     private final String timestamp;
-    @SerializedName("AccountId")
+    
     private final int account_id;
-    @SerializedName("TableId")
+    
     private final int table_id;
-    @SerializedName("Status")
+    
     private int status;
-    @SerializedName("Payment")
+    
     private final int payment;
-    @SerializedName("CommercialId")
+    
     private final String commercial_id;
-    @SerializedName("GuestOrderElements")
+    
     private final ArrayList<OrderGuestElement> elements;
-    @SerializedName("Account")
+    
     public Account account;
-    @SerializedName("Table")
+    
     public IsiorderTableElement table;
 
     public OrderGuest(int id, String timestamp, int account_id, int table_id, int status, int payment, String commercial_id, ArrayList<OrderGuestElement> elements) {

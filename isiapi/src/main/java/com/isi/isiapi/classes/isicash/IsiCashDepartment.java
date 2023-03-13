@@ -5,16 +5,16 @@ import com.isi.isiapi.classes.LastModifiedTables;
 
 public class IsiCashDepartment extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Department")
+    
     public int department;
 
-    @SerializedName("Code")
+    
     public String code;
 
-    @SerializedName("ProductId")
+    
     public Integer product_id;
 
     public IsiCashDepartment(int id, int department, Integer product_id, String code) {

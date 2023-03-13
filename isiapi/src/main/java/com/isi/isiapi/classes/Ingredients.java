@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Ingredients extends LastModifiedTables{
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("ProductFornitureId")
+    
     public int product_forniture_id;
 
-    @SerializedName("ProductId")
+    
     public int product_id;
 
-    @SerializedName("Quantity")
+    
     public float quantity;
 
     public Ingredients(int product_forniture_id, int product_id, float quantity) {

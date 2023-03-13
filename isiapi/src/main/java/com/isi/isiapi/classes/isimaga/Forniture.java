@@ -5,19 +5,19 @@ import com.isi.isiapi.classes.LastModifiedTables;
 
 public class Forniture extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("Email")
+    
     public String email;
 
-    @SerializedName("Phone")
+    
     public String phone;
 
-    @SerializedName("Active")
+    
     public boolean active = true;
 
     public Forniture(String name, String email, String phone) {

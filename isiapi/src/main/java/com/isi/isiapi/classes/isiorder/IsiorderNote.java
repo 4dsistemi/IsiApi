@@ -5,22 +5,22 @@ import com.isi.isiapi.classes.LastModifiedTables;
 
 public class IsiorderNote extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Name")
+    
     public String name;
 
-    @SerializedName("Price")
+    
     public float price;
 
-    @SerializedName("CategoryId")
+    
     public int category_id;
 
-    @SerializedName("Color")
+    
     public int color;
 
-    @SerializedName("Active")
+    
     public int active = 1;
 
     public IsiorderNote(String name, float price, int category_id, int color) {

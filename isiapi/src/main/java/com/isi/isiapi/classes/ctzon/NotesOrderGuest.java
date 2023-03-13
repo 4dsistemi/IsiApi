@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class NotesOrderGuest {
 
-    @SerializedName("Id")
+    
     private final int id;
-    @SerializedName("Note_id")
+    
     private final int note_id;
-    @SerializedName("Element_id")
+    
     private final int element_id;
-    @SerializedName("Name")
+    
     private final String name;
-    @SerializedName("Price")
+    
     private final float price;
 
     public NotesOrderGuest(int id, int note_id, int element_id, String name, float price) {

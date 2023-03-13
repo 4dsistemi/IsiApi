@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class HttpData {
 
-    @SerializedName("intent")
+    
     public final String intent;
-    @SerializedName("data")
+    
     public final JsonObject data;
 
     public HttpData(String intent, JsonObject data) {

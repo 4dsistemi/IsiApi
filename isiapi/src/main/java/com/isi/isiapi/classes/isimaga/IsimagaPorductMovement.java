@@ -7,22 +7,22 @@ import java.util.Date;
 
 public class IsimagaPorductMovement extends LastModifiedTables {
 
-    @SerializedName("Id")
+    
     public int id;
 
-    @SerializedName("Arrival")
+    
     public Date arrival = new Date();
 
-    @SerializedName("ProductFornitureId")
+    
     public int product_forniture_id;
 
-    @SerializedName("Quantity")
+    
     public float quantity;
 
-    @SerializedName("IsPlus")
+    
     public boolean is_plus;
 
-    @SerializedName("fatturaNr")
+    
     public String fattura_nr;
 
     public IsimagaPorductMovement(int product_forniture_id, float quantity, boolean is_plus, String fattura_nr) {

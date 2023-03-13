@@ -11,7 +11,7 @@ public class CtzonOrder {
 
     public int Id;
     public Date Arrival;
-    @SerializedName("Account")
+    
     public Account account;
     public int AccountId;
     public Date RequestTime;

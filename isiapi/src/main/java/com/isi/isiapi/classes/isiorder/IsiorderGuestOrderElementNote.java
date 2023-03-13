@@ -7,7 +7,7 @@ import java.util.List;
 public class IsiorderGuestOrderElementNote {
 
     public IsiorderGuestOrder isiorderGuestOrder;
-    @SerializedName("IsiorderGuestOrderElements")
+    
     public List<IsiorderGuestElementNote> isiorderGuestElementNotes;
 
 }

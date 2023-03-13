@@ -4,16 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApplicationList {
 
-    @SerializedName("Id")
+    
     public int id;
-    @SerializedName("Name")
+    
     public String name;
-    public String Package;
-    @SerializedName("Description")
-    public String Description;
-    @SerializedName("Ut")
+    @SerializedName("package")
+    public String packages;
+    
+    public String description;
+    
     public int ut;
-    @SerializedName("Canone")
+    
     public int canone;
 
 }
