@@ -83,7 +83,7 @@ public class HttpRequest {
 
         this.commercial = commercial;
 
-        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
 
     }
 
