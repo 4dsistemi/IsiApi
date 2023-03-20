@@ -22,8 +22,8 @@ public class    IsiorderOrdersProductElement {
     public void addElementToSent(Product product, int exit){
 
         IsiorderElementOrder isiorderElementOrder = new IsiorderElementOrder(product.id,exit, orders.id, 1);
-        isiorderElementOrder.newName = product.name;
-        isiorderElementOrder.newPrice = product.price;
+        isiorderElementOrder.new_name = product.name;
+        isiorderElementOrder.new_price = product.price;
 
         elementOrderAndProducts.add(new IsiorderElementOrderAndProducts(isiorderElementOrder, product));
     }

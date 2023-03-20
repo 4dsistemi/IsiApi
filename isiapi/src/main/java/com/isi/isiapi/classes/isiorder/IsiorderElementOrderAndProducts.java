@@ -20,7 +20,7 @@ public class IsiorderElementOrderAndProducts {
 
     public double getTotal(){
 
-        double total = elementOrder.newPrice * elementOrder.quantity;
+        double total = elementOrder.new_price * elementOrder.quantity;
 
         for (IsiorderNotesAndNoteOrder isiorderNotesAndNoteOrder : notesAndNoteOrders){
 

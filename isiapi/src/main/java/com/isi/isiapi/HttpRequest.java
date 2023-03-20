@@ -1252,8 +1252,8 @@ public class HttpRequest {
 
             json.addData("commercial", this.commercial.local_id);
             json.addData("id", element.id);
-            json.addData("newName", element.newName);
-            json.addData("newPrice", element.newPrice);
+            json.addData("newName", element.new_name);
+            json.addData("newPrice", element.new_price);
 
             MakeHttpPost post = new MakeHttpPost("changeElementAlreadySent", json.getData(), apiKey, WebControllers.isiorder);
 
