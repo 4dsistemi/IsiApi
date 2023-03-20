@@ -28,6 +28,6 @@ public class IsiorderGeneralInfo extends LastModifiedTables {
     public float coperto = 0;
 
     
-    public boolean FreeDraw = false;
+    public boolean free_draw = false;
 
 }

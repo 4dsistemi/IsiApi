@@ -49,7 +49,7 @@ public class Customer extends LastModifiedTables {
     
     public String docExpire;
     
-    public boolean commercialComunication;
+    public boolean commercial_comunication;
     
     public int active = 1;
 
@@ -69,6 +69,6 @@ public class Customer extends LastModifiedTables {
         this.birthday = birthday;
         this.society = society;
         this.fiscal = fiscal;
-        this.commercialComunication = commercialComunication;
+        this.commercial_comunication = commercialComunication;
     }
 }

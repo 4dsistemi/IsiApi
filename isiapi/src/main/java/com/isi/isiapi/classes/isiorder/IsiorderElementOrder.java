@@ -37,10 +37,10 @@ public class IsiorderElementOrder extends LastModifiedTables {
     public Long payed_account_id;
 
     
-    public String newName = null;
+    public String new_name = null;
 
     
-    public float newPrice = -1;
+    public float new_price = -1;
 
     
     public int quantity = 1;
