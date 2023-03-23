@@ -1,6 +1,7 @@
 package com.isi.isiapi;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -20,7 +21,8 @@ public class HttpJson {
             if(variable instanceof JsonElement){
                 json.add(name, (JsonElement)variable);
             }else{
-                json.add(name, new Gson().toJsonTree(variable));
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
+                json.add(name, gson.toJsonTree(variable));
             }
         }
 
