@@ -75,13 +75,10 @@ public class HttpRequest {
     private final Gson gson;
 
 
-    public HttpRequest(String apiKey, Commercial commercial) {
+    public HttpRequest(String apiKey, String ip, Commercial commercial) {
         this.apiKey = apiKey;
-        String myIp = getIPAddress(true);
-        String substr = myIp.substring(0, myIp.lastIndexOf("."));
-        serverIpAddress = substr + ".2";
-
         this.commercial = commercial;
+        serverIpAddress = ip;
 
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
 
