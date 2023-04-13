@@ -1,7 +1,5 @@
 package com.isi.isiapi.classes.isimaga;
 
-import com.google.gson.annotations.SerializedName;
-
 public class OrderToFornitureElement {
 
     

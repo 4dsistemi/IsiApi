@@ -1,8 +1,6 @@
 package com.isi.isiapi.classes.isishop;
 
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
 public class IsicoinMovement {

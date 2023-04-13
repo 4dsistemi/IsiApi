@@ -1,7 +1,6 @@
 package com.isi.isiapi.classes.isimaga;
 
 
-import com.google.gson.annotations.SerializedName;
 import com.isi.isiapi.classes.LastModifiedTables;
 
 public class ProductForniture extends LastModifiedTables {

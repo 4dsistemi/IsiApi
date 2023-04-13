@@ -1,6 +1,5 @@
 package com.isi.isiapi.classes;
 
-import com.google.gson.annotations.SerializedName;
 import com.isi.isiapi.classes.ctzon.CtzPoint;
 
 import java.util.Date;

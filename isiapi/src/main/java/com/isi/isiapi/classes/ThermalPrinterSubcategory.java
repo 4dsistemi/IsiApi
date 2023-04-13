@@ -1,8 +1,6 @@
 package com.isi.isiapi.classes;
 
 
-import com.google.gson.annotations.SerializedName;
-
 public class ThermalPrinterSubcategory extends LastModifiedTables{
 
     

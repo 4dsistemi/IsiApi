@@ -1,7 +1,7 @@
 package com.isi.isiapi.classes.isiorder;
 
 import androidx.annotation.NonNull;
-import com.google.gson.annotations.SerializedName;
+
 import com.isi.isiapi.classes.LastModifiedTables;
 
 public class IsiorderTableCategory extends LastModifiedTables {

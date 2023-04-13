@@ -1,5 +1,4 @@
 package com.isi.isiapi.classes.isiorder;
-import com.google.gson.annotations.SerializedName;
 
 public class IsiorderPrinterTableCategory {
 

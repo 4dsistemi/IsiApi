@@ -2,8 +2,6 @@ package com.isi.isiapi.classes;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
 public class Commercial extends LastModifiedTables{

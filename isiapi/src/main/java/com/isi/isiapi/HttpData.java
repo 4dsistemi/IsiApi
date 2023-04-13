@@ -3,7 +3,6 @@ package com.isi.isiapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.SerializedName;
 
 public class HttpData {
 

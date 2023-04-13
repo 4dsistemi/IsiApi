@@ -1,7 +1,6 @@
 package com.isi.isiapi.classes.ctzon;
 
 
-import com.google.gson.annotations.SerializedName;
 import com.isi.isiapi.classes.Account;
 
 import java.util.ArrayList;
