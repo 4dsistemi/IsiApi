@@ -6,10 +6,10 @@ public class CtzPoint {
     public int id;
 
     
-    public int accountId;
+    public int account_id;
 
     
-    public String commercialLocalId;
+    public String commercial_local_id;
 
     
     public int points;
