@@ -2377,6 +2377,29 @@ public class HttpRequest {
 
     }
 
+    public List<Ingredients> getProductIngredients(Product p) {
+
+        try {
+
+            HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
+            json.addData("product", gson.toJsonTree(p));
+
+            MakeHttpPost post = new MakeHttpPost("getProductIngredients", json.getData(), "", WebControllers.isiorder);
+
+            String result = post.post();
+            return gson.fromJson(result, new TypeToken<List<Ingredients>>() {
+            }.getType());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
+    }
+
     //ISIMAGA
 
     public ArrayList<ProductForniture> isimagaGetProductForniture() {
