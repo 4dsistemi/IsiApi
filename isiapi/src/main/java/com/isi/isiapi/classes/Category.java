@@ -12,7 +12,7 @@ public class Category extends LastModifiedTables{
 
     public int guest = 1;
 
-    public int proprity;
+    public int priority;
     
     public String image;
 
@@ -21,6 +21,6 @@ public class Category extends LastModifiedTables{
         this.name = name;
         this.color = color;
         this.image = image;
-        this.proprity = priority;
+        this.priority = priority;
     }
 }
