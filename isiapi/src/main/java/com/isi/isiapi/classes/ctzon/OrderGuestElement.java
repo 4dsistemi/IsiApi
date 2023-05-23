@@ -1,7 +1,5 @@
 package com.isi.isiapi.classes.ctzon;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 
 public class OrderGuestElement {

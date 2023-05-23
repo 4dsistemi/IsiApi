@@ -1,8 +1,5 @@
 package com.isi.isiapi;
 
-
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -261,8 +258,6 @@ public class HttpRequest {
 
         try {
             String response = post.post();
-
-            Log.e("TAG", "updateApplicationActivePriority: " + response);
 
             return response.trim().equals("ok");
 
@@ -552,8 +547,6 @@ public class HttpRequest {
         try {
             String response = post.post();
 
-            Log.e("TAG", "getCategories: " + response);
-
             return gson.fromJson(response, new TypeToken<ArrayList<CategoryAndProduct>>() {
             }.getType());
 
@@ -773,8 +766,6 @@ public class HttpRequest {
 
         try {
             String response = post.post();
-
-            Log.e("TAG", "getFatture: " + response);
 
             return gson.fromJson(response, new TypeToken<ArrayList<BillAndFattura>>() {
             }.getType());
@@ -2374,6 +2365,29 @@ public class HttpRequest {
         }
 
         return false;
+
+    }
+
+    public List<Ingredients> getProductIngredients(Product p) {
+
+        try {
+
+            HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
+            json.addData("product", gson.toJsonTree(p));
+
+            MakeHttpPost post = new MakeHttpPost("getProductIngredients", json.getData(), "", WebControllers.isiorder);
+
+            String result = post.post();
+            return gson.fromJson(result, new TypeToken<List<Ingredients>>() {
+            }.getType());
+
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
 
     }
 

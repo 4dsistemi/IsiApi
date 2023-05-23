@@ -3,7 +3,6 @@ package com.isi.isiapi.classes.isiorder;
 import com.isi.isiapi.classes.Category;
 import com.isi.isiapi.classes.Product;
 
-
 import java.util.List;
 
 public class IsiorderCategoriesProductsNotes {

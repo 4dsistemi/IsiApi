@@ -1,7 +1,5 @@
 package com.isi.isiapi.classes;
 
-import com.google.gson.annotations.SerializedName;
-
 public class FiscalPrinter extends LastModifiedTables{
 
     
