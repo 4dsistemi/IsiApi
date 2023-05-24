@@ -22,6 +22,6 @@ public class IsiorderGeneralInfo extends LastModifiedTables {
 
     public boolean free_draw = false;
 
-    public boolean print_daily_number = false;
+    public int print_daily_number = 0;
 
 }
