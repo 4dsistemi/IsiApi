@@ -1,5 +1,7 @@
 package com.isi.isiapi.classes.isiorder;
 
+import androidx.annotation.NonNull;
+
 import com.isi.isiapi.classes.LastModifiedTables;
 
 import java.util.Date;
@@ -40,5 +42,11 @@ public class IsiorderAccount extends LastModifiedTables {
         this.privilege = privilege;
         this.email = email;
         this.account_id = account_id;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name + " " + (surname != null ? surname : "");
     }
 }
