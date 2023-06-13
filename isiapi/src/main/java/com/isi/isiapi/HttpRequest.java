@@ -41,7 +41,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderChat;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
 import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
-import com.isi.isiapi.classes.isiorder.IsiorderGuestOrderElementNote;
+import com.isi.isiapi.classes.isiorder.IsiorderGuestOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderInformationOrders;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
@@ -2150,7 +2150,7 @@ public class HttpRequest {
         return false;
     }
 
-    public ArrayList<IsiorderGuestOrderElementNote> getIsiorderGuestOrder() {
+    public ArrayList<IsiorderGuestOrder> getIsiorderGuestOrder() {
 
         try {
             HttpJson json = new HttpJson();
@@ -2161,7 +2161,7 @@ public class HttpRequest {
 
             String result = post.post();
 
-            return gson.fromJson(result, new TypeToken<ArrayList<IsiorderGuestOrderElementNote>>() {
+            return gson.fromJson(result, new TypeToken<ArrayList<IsiorderGuestOrder>>() {
             }.getType());
         } catch (Exception ignored) {
 
