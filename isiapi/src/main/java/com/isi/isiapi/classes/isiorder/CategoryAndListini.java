@@ -7,6 +7,6 @@ import java.util.List;
 
 public class CategoryAndListini {
 
-    List<Category> categories = new ArrayList<>();
-    List<IsiorderListini> listini = new ArrayList<>();
+    public List<Category> categories = new ArrayList<>();
+    public List<IsiorderListini> listini = new ArrayList<>();
 }
