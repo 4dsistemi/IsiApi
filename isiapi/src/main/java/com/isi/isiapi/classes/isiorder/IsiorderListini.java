@@ -1,5 +1,7 @@
 package com.isi.isiapi.classes.isiorder;
 
+import androidx.annotation.NonNull;
+
 import com.isi.isiapi.classes.LastModifiedTables;
 
 import java.util.ArrayList;
@@ -16,5 +18,11 @@ public class IsiorderListini extends LastModifiedTables {
     public IsiorderListini(String name, ArrayList<Integer> products) {
         this.name = name;
         this.products = products;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }
