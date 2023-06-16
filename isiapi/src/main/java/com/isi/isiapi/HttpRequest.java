@@ -539,24 +539,27 @@ public class HttpRequest {
 
     }
 
-    public List<CategoryAndProduct> getCategories() {
-        HttpJson json = new HttpJson();
+    public List<CategoryAndListini> getCategories() {
 
-        json.addData("commercial", this.commercial.local_id);
-
-        MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey, WebControllers.isicashier);
+        ArrayList<CategoryAndListini> ctageories = new ArrayList<>();
 
         try {
-            String response = post.post();
+            HttpJson json = new HttpJson();
 
-            return gson.fromJson(response, new TypeToken<ArrayList<CategoryAndProduct>>() {
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey, WebControllers.isiorder);
+
+            String result = post.post();
+
+            ctageories = gson.fromJson(result, new TypeToken<ArrayList<CategoryAndListini>>() {
             }.getType());
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+
         }
 
-        return null;
+        return ctageories;
     }
 
     public List<FiscalPrinter> getFiscalPrinter() {
@@ -1017,30 +1020,6 @@ public class HttpRequest {
         }
 
         return null;
-    }
-
-    public ArrayList<CategoryAndListini> getElements() {
-
-        ArrayList<CategoryAndListini> ctageories = new ArrayList<>();
-
-        try {
-            HttpJson json = new HttpJson();
-
-            json.addData("commercial", this.commercial.local_id);
-
-            MakeHttpPost post = new MakeHttpPost("needToUpdate", json.getData(), apiKey, WebControllers.isiorder);
-
-            String result = post.post();
-
-            ctageories = gson.fromJson(result, new TypeToken<ArrayList<CategoryAndListini>>() {
-            }.getType());
-
-        } catch (Exception ignored) {
-
-        }
-
-        return ctageories;
-
     }
 
     public boolean cancelOrderGuest(int id) {
