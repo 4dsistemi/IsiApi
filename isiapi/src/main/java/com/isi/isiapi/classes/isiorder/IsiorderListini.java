@@ -11,7 +11,7 @@ public class IsiorderListini extends LastModifiedTables {
     public String name;
     public ArrayList<Integer> products;
     public Date creation;
-    public int acitve = 1;
+    public int active = 1;
 
     public IsiorderListini(String name, ArrayList<Integer> products) {
         this.name = name;
