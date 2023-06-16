@@ -7,10 +7,10 @@ import java.util.Date;
 
 public class IsiorderListini extends LastModifiedTables {
 
-    int id;
-    String name;
-    ArrayList<Integer> products;
-    Date creation;
+    public int id;
+    public String name;
+    public ArrayList<Integer> products;
+    public Date creation;
 
     public IsiorderListini(String name, ArrayList<Integer> products) {
         this.name = name;
