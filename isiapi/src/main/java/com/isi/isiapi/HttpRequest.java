@@ -2,6 +2,7 @@ package com.isi.isiapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -33,9 +34,9 @@ import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
 import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.CategoriesTableResponse;
+import com.isi.isiapi.classes.isiorder.CategoryAndListini;
 import com.isi.isiapi.classes.isiorder.DevicesAuthorization;
 import com.isi.isiapi.classes.isiorder.IsiorderAccount;
-import com.isi.isiapi.classes.isiorder.IsiorderCategoriesProductsNotes;
 import com.isi.isiapi.classes.isiorder.IsiorderCategoryAndTables;
 import com.isi.isiapi.classes.isiorder.IsiorderChat;
 import com.isi.isiapi.classes.isiorder.IsiorderChatAccounts;
@@ -43,6 +44,7 @@ import com.isi.isiapi.classes.isiorder.IsiorderElementOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderGeneralInfo;
 import com.isi.isiapi.classes.isiorder.IsiorderGuestOrder;
 import com.isi.isiapi.classes.isiorder.IsiorderInformationOrders;
+import com.isi.isiapi.classes.isiorder.IsiorderListini;
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 import com.isi.isiapi.classes.isiorder.IsiorderOrdersProductElement;
 import com.isi.isiapi.classes.isiorder.IsiorderPrinterRulesAndCategories;
@@ -1017,9 +1019,9 @@ public class HttpRequest {
         return null;
     }
 
-    public ArrayList<IsiorderCategoriesProductsNotes> getElements() {
+    public ArrayList<CategoryAndListini> getElements() {
 
-        ArrayList<IsiorderCategoriesProductsNotes> ctageories = new ArrayList<>();
+        ArrayList<CategoryAndListini> ctageories = new ArrayList<>();
 
         try {
             HttpJson json = new HttpJson();
@@ -1030,7 +1032,7 @@ public class HttpRequest {
 
             String result = post.post();
 
-            ctageories = gson.fromJson(result, new TypeToken<ArrayList<IsiorderCategoriesProductsNotes>>() {
+            ctageories = gson.fromJson(result, new TypeToken<ArrayList<CategoryAndListini>>() {
             }.getType());
 
         } catch (Exception ignored) {
@@ -2499,6 +2501,48 @@ public class HttpRequest {
             json.addData("product", gson.toJsonTree(f));
 
             MakeHttpPost post = new MakeHttpPost("addProductForniture", json.getData(), apiKey, WebControllers.isimaga);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean createListino(IsiorderListini listino){
+        try {
+
+            HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
+            json.addData("listino", gson.toJsonTree(listino));
+
+            MakeHttpPost post = new MakeHttpPost("createListino", json.getData(), apiKey, WebControllers.isiorder);
+
+            String result = post.post();
+
+            return result.trim().equals("ok");
+
+        } catch (Exception ignored) {
+
+        }
+
+        return false;
+    }
+
+    public boolean editListino(IsiorderListini listino){
+        try {
+
+            HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
+            json.addData("listino", gson.toJsonTree(listino));
+
+            MakeHttpPost post = new MakeHttpPost("editListino", json.getData(), apiKey, WebControllers.isiorder);
 
             String result = post.post();
 

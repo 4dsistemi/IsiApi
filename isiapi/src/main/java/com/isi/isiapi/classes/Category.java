@@ -1,5 +1,9 @@
 package com.isi.isiapi.classes;
 
+import com.isi.isiapi.classes.isiorder.IsiorderNote;
+
+import java.util.List;
+
 public class Category extends LastModifiedTables{
 
     public int id;
@@ -15,6 +19,10 @@ public class Category extends LastModifiedTables{
     public int priority;
     
     public String image;
+
+    public List<Product> products;
+
+    public List<IsiorderNote> notes;
 
     public Category(int id, String name, Integer color, String image, int priority) {
         this.id = id;
