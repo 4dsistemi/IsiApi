@@ -1,5 +1,7 @@
 package com.isi.isiapi.classes;
 
+import androidx.annotation.NonNull;
+
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 
 import java.util.ArrayList;
@@ -31,5 +33,11 @@ public class Category extends LastModifiedTables{
         this.color = color;
         this.image = image;
         this.priority = priority;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }
