@@ -2,7 +2,6 @@ package com.isi.isiapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -10,7 +9,6 @@ import com.isi.isiapi.classes.Account;
 import com.isi.isiapi.classes.AppActivation;
 import com.isi.isiapi.classes.AppAndAppActivation;
 import com.isi.isiapi.classes.Category;
-import com.isi.isiapi.classes.CategoryAndProduct;
 import com.isi.isiapi.classes.Commercial;
 import com.isi.isiapi.classes.Customer;
 import com.isi.isiapi.classes.Fattura;
@@ -548,7 +546,7 @@ public class HttpRequest {
 
             json.addData("commercial", this.commercial.local_id);
 
-            MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey, WebControllers.isiorder);
+            MakeHttpPost post = new MakeHttpPost("getCategories", json.getData(), apiKey, WebControllers.isicashier);
 
             String result = post.post();
 
