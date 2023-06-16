@@ -22,7 +22,7 @@ public class Category extends LastModifiedTables{
 
     public List<Product> products;
 
-    public List<IsiorderNote> notes;
+    public List<IsiorderNote> isiorder_notes;
 
     public Category(int id, String name, Integer color, String image, int priority) {
         this.id = id;
