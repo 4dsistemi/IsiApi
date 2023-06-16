@@ -2,6 +2,7 @@ package com.isi.isiapi.classes;
 
 import com.isi.isiapi.classes.isiorder.IsiorderNote;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category extends LastModifiedTables{
@@ -20,9 +21,9 @@ public class Category extends LastModifiedTables{
     
     public String image;
 
-    public List<Product> products;
+    public List<Product> products = new ArrayList<>();
 
-    public List<IsiorderNote> isiorder_notes;
+    public List<IsiorderNote> isiorder_notes = new ArrayList<>();
 
     public Category(int id, String name, Integer color, String image, int priority) {
         this.id = id;
