@@ -539,9 +539,9 @@ public class HttpRequest {
 
     }
 
-    public List<CategoryAndListini> getCategories() {
+    public CategoryAndListini getCategories() {
 
-        ArrayList<CategoryAndListini> ctageories = new ArrayList<>();
+        CategoryAndListini ctageories = new CategoryAndListini();
 
         try {
             HttpJson json = new HttpJson();
@@ -552,8 +552,7 @@ public class HttpRequest {
 
             String result = post.post();
 
-            ctageories = gson.fromJson(result, new TypeToken<ArrayList<CategoryAndListini>>() {
-            }.getType());
+            ctageories = gson.fromJson(result, CategoryAndListini.class);
 
         } catch (Exception ignored) {
 
