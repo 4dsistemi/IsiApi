@@ -57,6 +57,7 @@ import com.isi.isiapi.classes.isishop.OpeningHours;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HttpRequest {
 
@@ -77,7 +78,7 @@ public class HttpRequest {
 
     }
 
-    public List<Commercial> getCommercials(){
+    public List<Commercial> getCommercials() {
         HttpJson json = new HttpJson();
 
         MakeHttpPost post = new MakeHttpPost("getCommercials", json.getData(), apiKey, WebControllers.commercial);
@@ -94,7 +95,7 @@ public class HttpRequest {
         return null;
     }
 
-    public Commercial getCommercial(){
+    public Commercial getCommercial() {
 
         HttpJson json = new HttpJson();
         json.addData("commercial", this.commercial.local_id);
@@ -2404,6 +2405,27 @@ public class HttpRequest {
         }
     }
 
+    public String transformIsimagaUnity(int unity, float quantity) {
+
+        String k = "";
+
+        if (quantity > 1000) {
+            quantity = quantity / 1000;
+            k = "K";
+        }
+
+        String s = String.format(Locale.getDefault(), "%.03f", quantity) + " " + k;
+
+        switch (unity) {
+            case 0:
+                return s + "L";
+            case 1:
+                return s + "g";
+            default:
+                return s + "U";
+        }
+    }
+
     public boolean editProductForniture(ProductForniture f) {
         try {
 
@@ -2489,7 +2511,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean createListino(IsiorderListini listino){
+    public boolean createListino(IsiorderListini listino) {
         try {
 
             HttpJson json = new HttpJson();
@@ -2510,7 +2532,7 @@ public class HttpRequest {
         return false;
     }
 
-    public boolean editListino(IsiorderListini listino){
+    public boolean editListino(IsiorderListini listino) {
         try {
 
             HttpJson json = new HttpJson();

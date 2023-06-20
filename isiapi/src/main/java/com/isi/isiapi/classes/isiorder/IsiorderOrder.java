@@ -1,5 +1,6 @@
 package com.isi.isiapi.classes.isiorder;
 
+import com.isi.isiapi.classes.Account;
 import com.isi.isiapi.classes.LastModifiedTables;
 
 import java.util.Date;
@@ -63,6 +64,8 @@ public class IsiorderOrder extends LastModifiedTables {
 
     
     public String isiorder_note;
+
+    public Account account;
 
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
         this.isiorder_table_element_id = isiorder_table_element_id;
