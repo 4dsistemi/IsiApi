@@ -65,7 +65,7 @@ public class IsiorderOrder extends LastModifiedTables {
     
     public String isiorder_note;
 
-    public Account account;
+    public Account isiorder_account;
 
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
         this.isiorder_table_element_id = isiorder_table_element_id;
