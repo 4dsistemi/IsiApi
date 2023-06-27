@@ -30,6 +30,7 @@ import com.isi.isiapi.classes.isimaga.IsimagaPorductMovement;
 import com.isi.isiapi.classes.isimaga.OrderToForniture;
 import com.isi.isiapi.classes.isimaga.OrderToFornitureElement;
 import com.isi.isiapi.classes.isimaga.OrdersAndForniture;
+import com.isi.isiapi.classes.isimaga.ProductAndCost;
 import com.isi.isiapi.classes.isimaga.ProductForniture;
 import com.isi.isiapi.classes.isiorder.CategoriesTableResponse;
 import com.isi.isiapi.classes.isiorder.CategoryAndListini;
@@ -2551,6 +2552,27 @@ public class HttpRequest {
         }
 
         return false;
+    }
+
+    public ArrayList<ProductAndCost> getProductAndCost() {
+
+        try {
+            HttpJson json = new HttpJson();
+
+            json.addData("commercial", this.commercial.local_id);
+
+            MakeHttpPost post = new MakeHttpPost("getProductsFoodCost", json.getData(), apiKey, WebControllers.isimaga);
+
+            String result = post.post();
+
+            return gson.fromJson(result, new TypeToken<ArrayList<ProductAndCost>>() {
+            }.getType());
+        } catch (Exception ignored) {
+
+        }
+
+        return null;
+
     }
 
     //ISICHAIN
