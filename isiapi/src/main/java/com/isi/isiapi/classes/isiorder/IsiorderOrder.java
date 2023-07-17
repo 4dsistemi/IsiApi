@@ -65,6 +65,8 @@ public class IsiorderOrder extends LastModifiedTables {
     
     public String isiorder_note;
 
+    public int customer_type = 0;
+
     public Account isiorder_account;
 
     public IsiorderOrder(Integer isiorder_table_element_id, int account_id, int coperti) {
